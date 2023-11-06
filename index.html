@@ -16,7 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="stylesheet.css" />
 	<link href="https://fonts.googleapis.com/css?family=Exo:600i|Open+Sans" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Righteous" />
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		$(document).ready(function() {
 
 			/*
@@ -55,7 +55,7 @@
 			$('html').click(function(){
 				$('#examplesList').hide();
 			}); */
-	    });
+	    }); -->
     </script>
 	<style>
 a:link {
@@ -103,11 +103,13 @@ a:active {
 	color: #ffffff;
 }
 #section0{
-	/*background-image: url("me(rounded corners).png");*/
-	background-size: auto 50%;
+	background-image: url("top-bg-fractal-1024x512.png");
+	background-size: 100% 20%;
 	background-attachment: auto;
 	background-repeat: no-repeat;
-	background-position: center center;
+	background-position: top center;
+	text-align: left;
+	color: #3700d4;
 }
 #text{
 	font-family: 'Exo', sans-serif;
@@ -206,30 +208,93 @@ a:active {
 	z-index:4;
 	color: white;
 }
+#topVideo{
+text-align: center;
+}
+.dropbtn {
+  background-color: #7752FE;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  align: 0;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 9;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  left: 0;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 9;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
 </style>
 
 </head>
 
 <body>
 
-<div id="header"><a href="mailto:Adam@AdamWykle.com" alt="Adam@AdamWykle.com"><i class="fa fa-envelope" ></i> Email me!</a></div>
-<ul id="menu">
+<!-- <div id="header">
+<a href="mailto:Adam@AdamWykle.com" alt="Adam@AdamWykle.com"><i class="fa fa-envelope" ></i> Email me!</a></div> -->
+<!-- <ul id="menu">
 		<li data-menuanchor="page1" class="active"><a href="#page1">Videos</a></li>
 		<li data-menuanchor="page2"><a href="#page2">About me</a></li>
 		<li data-menuanchor="page3"><a href="#page3">More!</a></li>
 		<li data-menuanchor="page4"><a href="#page1">Top</a></li>
-	</ul>
+	</ul> -->
+
+
 
 <div id="fullpage" class="fullpage-wrapper">
 
-	<div class="section active" id="section0" data-anchor="page1"> 
-		<div id="ttl">Adam David Wykle<br></div>
+<div class="section active" id="section0" data-anchor="page1">
+	
+	
+<!-- Drop Down Menu	 -->
+<div class="dropdown">
+  <button class="dropbtn"><i class="fa fa-bars"> Menu</i></button>
+  <div class="dropdown-content" >
+  <a href="#page1">Top</a>
+  <a href="#page2">About me</a>
+  <a href="#page3">More!</a>
+</div>
+
+
+</div>
+
+<div id="topVideo" style="padding-top: 20%;">
+		<div id="ttl" style="color: #b9c49e; padding-bottom: 2em">Adam David Wykle<br></div>
 		
-		<br><br><br>
 		<iframe width="560" height="315" src="https://www.youtube.com/embed/q4iVKhBLOXU?si=h2081k08XJDvUain" title="YouTube video player" frameborder="0" 
-			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-		<h2><a href="https://www.youtube.com/@Spirit_Universe-ity">
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen ></iframe>
+		<h2/><a href="https://www.youtube.com/@Spirit_Universe-ity" style="color: #b9c49e">
 		My Spirit University Youtube channel</a></h2>
+	</div>
 	</div>
 
 
@@ -264,7 +329,7 @@ a:active {
 <script type="text/javascript" src="fullpage.js"></script>
 <script type="text/javascript">
 	var myFullpage = new fullpage('#fullpage', {
-		sectionsColor: ['#307267', '#91C9C0', '#195C51', '#084238', '#ccddff']
+		sectionsColor: ['#190482', '#91C9C0', '#195C51', '#084238', '#ccddff']
 	});
 </script>
 </body>
