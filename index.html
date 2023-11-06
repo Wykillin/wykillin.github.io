@@ -212,18 +212,22 @@ a:active {
 text-align: center;
 }
 .dropbtn {
-  background-color: #7752FE;
+  background-color: #7C83BC;
   color: white;
-  padding: 16px;
-  font-size: 16px;
+  padding: 20px;
+  font-size: 24px;
   border: none;
   cursor: pointer;
   align: 0;
+  border-radius: 4px;
+  margin: 5px;
 }
 
 .dropdown {
   position: relative;
   display: inline-block;
+  font-size: 24px;
+  padding: 20px;
   z-index: 9;
 }
 
@@ -235,6 +239,8 @@ text-align: center;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 9;
+  margin: 5px;
+  padding: 20px;
 }
 
 .dropdown-content a {
@@ -252,6 +258,45 @@ text-align: center;
 
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
+}
+.emailButton {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 24px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.emailButton span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.emailButton span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.emailButton:hover span {
+  padding-right: 20px;
+}
+
+.emailButton:hover span:after {
+  opacity: 1;
+  right: 0;
 }
 </style>
 
@@ -277,7 +322,7 @@ text-align: center;
 	
 <!-- Drop Down Menu	 -->
 <div class="dropdown">
-  <button class="dropbtn"><i class="fa fa-bars"> Menu</i></button>
+  <emailButton class="dropbtn"><i class="fa fa-bars"> Menu</i></emailButton>
   <div class="dropdown-content" >
   <a href="#page1">Top</a>
   <a href="#page2">About me</a>
@@ -286,6 +331,10 @@ text-align: center;
 
 
 </div>
+<a href="mailto:Adam@AdamWykle.com" alt="Adam@AdamWykle.com" style="float:right;">
+<button class="emailButton" style="vertical-align:middle"><span>
+	<i class="fa fa-envelope" ></i> Email me!
+</span></button></a>
 
 <div id="topVideo" style="padding-top: 20%;">
 		<div id="ttl" style="color: #b9c49e; padding-bottom: 2em">Adam David Wykle<br></div>
@@ -329,7 +378,7 @@ text-align: center;
 <script type="text/javascript" src="fullpage.js"></script>
 <script type="text/javascript">
 	var myFullpage = new fullpage('#fullpage', {
-		sectionsColor: ['#190482', '#91C9C0', '#195C51', '#084238', '#ccddff']
+		sectionsColor: ['#190482', '#282B3D', '#195C51', '#084238', '#ccddff']
 	});
 </script>
 </body>
