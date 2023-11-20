@@ -3,6 +3,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 	<title>Adam Wykle</title>
 	<meta name="author" content="Adam David Wykle" />
 	<meta name="description" content="Adam David Wykle's website!" />
@@ -93,7 +94,7 @@ a:active {
 }
 #ttl{
 	font-family: 'Righteous';
-	font-size:0.36rem;
+	font-size:2.25em;
 	position: relative;
 	text-align: center;
 	top: 3vh;
@@ -103,8 +104,8 @@ a:active {
 	color: #ffffff;
 }
 #section0{
-	background-image: url("top-bg-fractal-1024x512.png");
-	background-size: 100% 20%;
+	background-image: url("fractal spiral bg.png");/*FoL gold.png");/*top-bg-fractal-1024x512.png");*/
+	background-size:100% auto;
 	background-attachment: auto;
 	background-repeat: no-repeat;
 	background-position: top center;
@@ -112,13 +113,18 @@ a:active {
 	color: #3700d4;
 }
 #section1{
+	font-family: 'Righteous';
+	font-size:1.5em;
+	text-align: left;
+	padding-top: 2.25em;
+	padding-right: 1.5em;
+	padding-left: 1.5em;
 
 }
 #text{
 	font-family: 'Exo', sans-serif;
 	position: absolute;
-	font-size: 0.36rem;
-	font-size: 4vh;
+	font-size: 2.25em;
 	padding-bottom: 5vh;
 	bottom:0;
 	left: 0;
@@ -128,20 +134,19 @@ a:active {
 }
 #fixedHeader{
 	position: fixed;
-	padding-top: 5vh;
-	font-size: 0.4rem;
-	font-size: 5vh;
+	padding: 5vh;
+	font-size: 2.5em;
 	bottom:0;
 	right:0;
 	left:0;
 	color: ffffff;
 }
 #slide1-text{
-	font-size:0.36rem;
-	font-size:4vh;
+	font-size:2.25em;
+
 	color:#ffffff;
-	top: 50%;
-	padding:50vh 5vh 0 5vh;
+	/* top: 50%; */
+	/* padding:50vh 5vh 0 5vh; */
 	bottom:0;
 	left: 0;
 	right: 0;
@@ -151,9 +156,9 @@ a:active {
 	background:#89BEB6;
 }
 #slide2-text{
-	font-size:0.36rem;
-	font-size:4vh;
-	padding:50vh 5vh 0 5vh;
+	font-size:2.25em;
+
+	/* padding:50vh 5vh 0 5vh; */
 	color:#ffffff;
 	bottom:0;
 	left: 0;
@@ -165,8 +170,8 @@ a:active {
 }
 #slide3-text{
 	font: size 1.5em;
-	font-size:4vh;
-	padding:50vh 5vh 0 5vh;
+
+	/* padding:50vh 5vh 0 5vh; */
 	bottom:0;
 	left: 0;
 	right: 0;
@@ -179,8 +184,8 @@ a:active {
 }
 #slide4-text{
 	font-size:2.25em;
-	font-size:4vh;
-	padding:50vh 5vh 0 5vh;
+
+	/* padding:50vh 5vh 0 5vh; */
 	bottom:0;
 	left: 0;
 	right: 0;
@@ -189,7 +194,7 @@ a:active {
 }
 #section2{
 	font-size:3vh;
-	padding:5vh 5vh 0 5vh;
+	/* padding:5vh 5vh 0 5vh; */
 	bottom:0;
 	left: 0;
 	right: 0;
@@ -203,7 +208,6 @@ a:active {
 	position:relative;
 	font-family: 'Exo', sans-serif;
 	font-size:1em;
-	font-size:3vh;
 	text-align: center;
 	left: 0;
 	right: 0;
@@ -217,20 +221,20 @@ text-align: center;
 .dropbtn {
   background-color: #7C83BC;
   color: white;
-  padding: .75em;
+  padding: .5vh;
   font-size: 1.5em;
   border: none;
   cursor: pointer;
   align: 0;
-  border-radius: 0.25rem;
-  margin: 0.3125em;
+  border-radius: 1.5625em;
+  margin: .5vh;
 }
 
 .dropdown {
   position: relative;
   display: inline-block;
   font-size: 1.5em;
-  padding: 1.25em;
+  padding-top: .5vh;
   z-index: 9;
 }
 
@@ -239,8 +243,8 @@ text-align: center;
   position: absolute;
   background-color: #f9f9f9;
   left: 0;
-  min-width: 1.6rem;
-  box-shadow: 0px 0.08rem 0.16rem 0px rgba(0,0,0,0.2);
+  min-width: 10em;
+  box-shadow: 0em 0.5em 1em 0em rgba(0,0,0,0.2);
   z-index: 9;
   margin: 0.3125em;
   padding: 1.25em;
@@ -248,7 +252,7 @@ text-align: center;
 
 .dropdown-content a {
   color: black;
-  padding: 0.12rem 0.16rem;
+  padding: 0.75em 1em;
   text-decoration: none;
   display: block;
 }
@@ -264,17 +268,17 @@ text-align: center;
 }
 .emailButton {
   display: inline-block;
-  min-width: 1.2rem;
-  border-radius: 0.04rem;
+  /* min-width: 7.5em; */
+  border-radius: 0.25em;
   background-color: #f4511e;
   border: none;
   color: #FFFFFF;
   text-align: center;
   font-size: 1.5em;
-  padding: 1.25em;
+  padding: .5vh;
   transition: all 0.5s;
   cursor: pointer;
-  margin: 0.3125em;
+  margin: 0.5vh;
 }
 
 .emailButton span {
@@ -339,8 +343,8 @@ text-align: center;
 <button class="emailButton" style="vertical-align:middle"><span>
 	<i class="fa fa-envelope" ></i> Email me!</span></button></a>
 
-<div id="topVideo" style="padding-top: 20%;">
-		<div id="ttl" style="color: #b9c49e; padding-bottom: 2em">Adam David Wykle<br></div>
+<div id="topVideo" style="padding-top: 20vh;">
+		<div id="ttl" style="color: #b9c49e; padding-bottom: 2em;font-family: 'Righteous';">Adam David Wykle<br></div>
 
 		<iframe width="560" height="315" src="https://www.youtube.com/embed/q4iVKhBLOXU?si=h2081k08XJDvUain" title="YouTube video player" frameborder="0"
 			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen ></iframe>
@@ -351,13 +355,28 @@ text-align: center;
 
 
 	<!-- Page 2 -->
-	<div class="section" id="section1" data-anchor="page2">
+	<div class="section" id="section1" data-anchor="page2" style="padding-top: 20%;">
+		<h2 >My name is Adam David, and I am a computer scientist by trade, but I've come to realize that my journey has been more of a crystal science exploration.
+			<br>It's been quite a fascinating journey, and here's a little bit about me and what you can expect from my work.<br><br>
 
+			Over time, I've had the opportunity to delve into the intersection of science and esoteric subjects, uncovering their fascinating connections in the real world.
+			<br><br>
+			Through the works of visionaries like Dan Winter, Roger Penrose, Stuart Hammeroff, and Michael Levin, alongside ancient teachings from Egypt, Native American tribes, 
+			and European traditions, a remarkable thread weaves through human history.
+			<br><br>
+			This thread reveals a congruent and comprehensible narrative, reaching back into ancient times. It encompasses not only forgotten histories but also potential cataclysmic 
+			events like floods or meteorological impacts. My work aims to unravel this tapestry, exploring a variety of topics, such as galactic history, the true history of humanity, 
+			the mysteries of objects impacting the Earth, the nature of the soul, the enigma of UFO propulsion, the possibilities of warp gates, the existence of natural magnetic portals, 
+			and much more!
+			<br><br>
+			Join me on this exciting journey as we bridge the gap between science and the esoteric, revealing a world of interconnected knowledge that has been hidden in plain sight.</h2>
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/nJsDQ2vw-iE?si=BkJ-TFHhyb2JdLoa" title="YouTube video player"
+				frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="padding-top: 1em;left: 50%;"></iframe>
+				
 	<!-- Page 2 Slide 1 -->
 		<div class="slide active" id="slide1">
 
-			<div id="slide1-text"><iframe width="560" height="315" src="https://www.youtube.com/embed/nJsDQ2vw-iE?si=BkJ-TFHhyb2JdLoa" title="YouTube video player"
-			frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+			<div id="slide1-text">
 			</div>
 		</div>
 	</div>
@@ -381,7 +400,7 @@ text-align: center;
 <script type="text/javascript" src="fullpage.js"></script>
 <script type="text/javascript">
 	var myFullpage = new fullpage('#fullpage', {
-		sectionsColor: ['#190482', '#282B3D', '#195C51', '#084238', '#ccddff']
+		sectionsColor: ['#47376e', '#282B3D', '#195C51', '#084238', '#ccddff']
 	});
 </script>
 </body>
