@@ -59,18 +59,19 @@
 	    }); 
     </script>-->
 	<style>
+		@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 a:link {
-    color: white;
+    color: #404040;
     background-color: transparent;
     text-decoration: none;
 }
 a:visited {
-    color: white;
+    /* color: #5A6FC4; */
     background-color: transparent;
     text-decoration: none;
-}
+} 
 a:hover {
-    color: #307267;
+    color: goldenrod;
     background-color: transparent;
     text-decoration: bold;
 }
@@ -107,22 +108,51 @@ a:active {
 	display:inline; 
 }
 #section0{
-	background-image: url("thoth_header.jpg");/*"fractal spiral bg.png");FoL gold.png");/*top-bg-fractal-1024x512.png");*/
-	background-size:85% auto;
+	background-image: url("image(10).png");/*"thoth_header.jpg");"fractal spiral bg.png");FoL gold.png");/*top-bg-fractal-1024x512.png");*/
+	background-size:100% auto;
 	background-attachment: auto;
 	background-repeat: no-repeat;
 	background-position: top center;
-	color: #3700d4;
+	border-style: solid;
+	border-top-width: 0;
+	border-bottom-width: 0;
+	border-left-width: 1.5em;
+	border-right-width: 1.5em;
+	color: #292545;/*rgb(67, 69, 194)*/
 	
+
 }
-#section1{
-	font-family: 'Righteous';
+ #section1{
+	/* font-family: 'Righteous';
 	font-size:1.5em;
 	text-align: left;
 	padding-top: 2.25em;
 	padding-right: 1.5em;
-	padding-left: 1.5em;
-
+	padding-left: 1.5em; */
+	border-style: solid;
+	border-top-width: 0;
+	border-bottom-width: 0;
+	border-left-width: 1.5em;
+	border-right-width: 1.5em;
+	color: #292545;/*rgb(67, 69, 194)*/
+	
+} 
+#section2{
+	/*font-size:3vh;
+	 padding:5vh 5vh 0 5vh; */
+	/* bottom:0;
+	left: 0;
+	right: 0; */
+	font-size:1em;
+	border-style: solid;
+	border-top-width: 0;
+	border-bottom-width: 0;
+	border-left-width: 1.5em;
+	border-right-width: 1.5em;
+	color: #292545;/*rgb(67, 69, 194)*/
+}
+#section3{
+	background:#559E54;
 }
 #text{
 	font-family: 'Exo', sans-serif;
@@ -133,7 +163,7 @@ a:active {
 	left: 0;
 	right: 0;
 	margin: 0 auto;
-	color: #ffffff;
+	color: black;
 }
 #fixedHeader{
 	position: fixed;
@@ -145,7 +175,7 @@ a:active {
 	color: ffffff;
 }
 #slide1-text{
-	font-size:2.25em;
+	font-size:1em;
 
 	color:#ffffff;
 	/* top: 50%; */
@@ -195,18 +225,6 @@ a:active {
 	margin: 0 auto;
 	color:#ffffff;
 }
-#section2{
-	font-size:3vh;
-	/* padding:5vh 5vh 0 5vh; */
-	bottom:0;
-	left: 0;
-	right: 0;
-	margin: 0 auto;
-	color:#ffffff;
-}
-#section3{
-	background:#559E54;
-}
 #footerText{
 	position:relative;
 	font-family: 'Exo', sans-serif;
@@ -228,7 +246,6 @@ text-align: center;
   font-size: 1.5em;
   border: none;
   cursor: pointer;
-  align: 0;
   border-radius: 1.5625em;
   margin: .5vh;
 }
@@ -309,7 +326,168 @@ text-align: center;
   right: 0;
 }
 h2 span{
+	display: inline;
+	width: 65%;
 background-color:rgba(255,255,255,.5);
+}
+.youtube-video-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.youtube-video-container::after {
+  display: block;
+  content: "";
+  padding-top: 56.25%;
+}
+
+.youtube-video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.youtube-video-container2 {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.youtube-video-container2::after {
+  display: block;
+  content: "";
+  padding-top: 56.25%;
+}
+
+.youtube-video-container2 iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.YTLink{
+	color: #000000;
+}
+.YTLink:hover{
+	color: goldenrod;
+}
+ul {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  margin:0;
+  padding:0;
+  display:flex;
+}
+ul li {
+  list-style:none;
+}
+ul li a {
+  display:block;
+  position:relative;
+  width:85%;
+  height:85%;
+  line-height:100px;
+  font-size:40px;
+  text-align:center;
+  text-decoration:none;
+  color:#404040;
+  margin: 0 30px; 
+  transition:.5s;
+}
+ul li a span {
+  position:absolute;
+  transition: transform .5s;
+}
+ul li a span:nth-child(1),
+ul li a span:nth-child(3){
+  width:100%;
+  height:3px;
+  background:#404040;
+}
+ul li a span:nth-child(1) {
+  top:0;
+  left:0;
+  transform-origin: right;
+}
+ul li a:hover span:nth-child(1) {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition:transform .5s;
+}
+
+ul li a span:nth-child(3) {
+  bottom:0;
+  left:0;
+  transform-origin: left;
+}
+ul li a:hover span:nth-child(3) {
+  transform: scaleX(0);
+  transform-origin: right;
+  transition:transform .5s;
+}
+
+ul li a span:nth-child(2),
+ul li a span:nth-child(4){
+  width:3px;
+  height:100%;
+  background:#404040;
+}
+ul li a span:nth-child(2) {
+  top:0;
+  left:0;
+  transform:scale(0);
+  transform-origin: bottom;
+}
+ul li a:hover span:nth-child(2) {
+  transform: scale(1);
+  transform-origin: top;
+  transition:transform .5s;
+}
+ul li a span:nth-child(4) {
+  top:0;
+  right:0;
+  transform:scale(0);
+  transform-origin: top;
+}
+ul li a:hover span:nth-child(4) {
+  transform: scale(1);
+  transform-origin: bottom;
+  transition:transform .5s;
+}
+.youtube:hover {
+  color: #ff0000;
+}
+.youtube:hover span { 
+  background: #868686;
+}
+.twitter:hover {
+  color: #1da1f2;
+}
+.twitter:hover span { 
+  background: #1da1f2;
+}
+.instagram:hover {
+  color: #c32aa3;
+}
+.instagram:hover span { 
+  background: #c32aa3;
+}
+ul li a .twitter {
+  color: #1da1f2;
+}
+ul li a:hover:nth-child(3) {
+  color: #ff0000;
+}
+ul li a:hover:nth-child(4) {
+  color: #dd4b39;
+}
+h2 br{
+	margin-bottom: 1em;
 }
 </style>
 
@@ -331,6 +509,7 @@ background-color:rgba(255,255,255,.5);
 <div id="fullpage" class="fullpage-wrapper">
 
 <div class="section active" id="section0" data-anchor="page1">
+
 
 <div>
 <!-- Drop Down Menu	 -->
@@ -354,20 +533,77 @@ background-color:rgba(255,255,255,.5);
 </div>
 <div id="topVideo" style="">
 		
-
+	<div class="youtube-video-container">
 		<iframe padding-top="5" width="560" height="315" 
 		src="https://www.youtube.com/embed/MnaeUiVl_KE?si=0kL2Bd4mhg85V_y6"
 		title="YouTube video player" frameborder="0"
 			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen ></iframe>
-		<h2/><a href="https://www.youtube.com/@Spirit_Universe-ity" style="color: #b9c49e">
-		My Spirit University YouTube channel</a></h2>
-	</div> 
+	
+			
 	</div>
+	 <h3 id="YTLink" style="padding-top: 2em;padding-bottom:10em;"><a href="https://www.youtube.com/@AdamDavidSpiritU" >
+		My Spirit University YouTube channel</a>
+	</h3>
+	</div>
+
+	<div style="position:relative">
+		<ul style=" ">
+			<li>
+			  <a class="twitter" href="https://twitter.com/Wykillin">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<i class="fa fa-twitter" aria-hidden="true"></i>
+			  </a>
+			</li>
+			<li>
+			  <a class="youtube" href="https://www.youtube.com/@AdamDavidSpiritU">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<i class="fa fa-youtube" aria-hidden="true"></i>
+			  </a>
+			</li>
+			<li>
+			  <a class="instagram" href="https://www.instagram.com/Wykillin2">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<i class="fa fa-instagram" aria-hidden="true"></i>
+			  </a>
+			</li>
+		  </ul>
+		</div>
+
+</div>
+
 
 
 	<!-- Page 2 -->
-	<div class="section" id="section1" data-anchor="page2" style="padding-top: 1vh;">
-		<h3 >My name is Adam David, and I am a computer scientist by trade, but I've come to realize that my journey has been more of a crystal science exploration.
+	<div class="section" id="section1" data-anchor="page2">
+
+		<div>
+			<!-- Drop Down Menu	 -->
+			<div class="dropdown">
+			  <emailButton class="dropbtn"><i class="fa fa-bars"> Menu</i></emailButton>
+			  <div class="dropdown-content" >
+			  <a href="#page1">Top</a>
+			  <a href="#page2">About me</a>
+			  <a href="#page3">More!</a>
+			</div>
+			
+			
+			</div>
+			<!-- Email Button -->
+			<a href="mailto:Adam@AdamWykle.com" alt="Adam@AdamWykle.com" style="float:right;">
+			<button class="emailButton" style="vertical-align:middle"><span>
+				<i class="fa fa-envelope" ></i> Email me!</span></button></a>
+			</div>
+
+		<h2 style="padding-top: 15vh;padding: 1em;font-size: 1em;" >My name is Adam David, and I am a computer scientist by trade, but I've come to realize that my journey has been more of a crystal science exploration.
 			<br>It's been quite a fascinating journey, and here's a little bit about me and what you can expect from my work.<br>
 
 			Over time, I've had the opportunity to delve into the intersection of science and esoteric subjects, uncovering their fascinating connections in the real world.
@@ -376,11 +612,13 @@ background-color:rgba(255,255,255,.5);
 			and European traditions, a remarkable thread weaves through human history.
 			<br>
 			This thread reveals a congruent and comprehensible narrative, reaching back into ancient times. It encompasses not only forgotten histories but also potential cataclysmic 
-			events like floods or meteorological impacts. My work aims to unravel this tapestry, exploring a variety of topics, such as galactic history, the true history of humanity, 
+			events like floods or meteorological impacts. 
+			<br>
+			My work aims to unravel this tapestry, exploring a variety of topics, such as galactic history, the true history of humanity, 
 			the mysteries of objects impacting the Earth, the nature of the soul, the enigma of UFO propulsion, the possibilities of warp gates, the existence of natural magnetic portals, 
 			and much more!
 			<br>
-			Join me on this exciting journey as we bridge the gap between science and the esoteric, revealing a world of interconnected knowledge that has been hidden in plain sight.</h3>
+			Join me on this exciting journey as we bridge the gap between science and the esoteric, revealing a world of interconnected knowledge that has been hidden in plain sight.</h2>
 				
 	<!-- Page 2 Slide 1 -->
 		<div class="slide active" id="slide1">
@@ -389,8 +627,25 @@ background-color:rgba(255,255,255,.5);
 		</div>
 	</div>
 	<div class="section" id="section2" data-anchor="page3">
+		<div class="dropdown">
+			<emailButton class="dropbtn"><i class="fa fa-bars"> Menu</i></emailButton>
+			<div class="dropdown-content" >
+			<a href="#page1">Top</a>
+			<a href="#page2">About me</a>
+			<a href="#page3">More!</a>
+		  </div>
+		</div>
 		<div class="slide" id="slide2">
-		<div id="slide2-text">Esoteric research combined with background in "traditional" sciences offers me unconventional insights into ancient "mysteries"</div>
+		<div id="slide2-text" style="text-align: center;">
+			<div class="youtube-video-container2">
+			<iframe width="560" height="315" 
+				src="https://www.youtube.com/embed/MnaeUiVl_KE?si=XNgrfYK7s7TMgoVn" 
+				title="YouTube video player" frameborder="0" 
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+				allowfullscreen>
+			</iframe>
+		</div>
+		</div>
 		</div>
 		<div class="slide" id="slide3">
 		<div id="slide3-text">I offer knowledge of practical mystical practices, techniques to connect with Spirit, science behind alchemy, and understandings of Earth and humanity's true history</div>
@@ -413,7 +668,7 @@ background-color:rgba(255,255,255,.5);
 <script type="text/javascript" src="fullpage.js"></script>
 <script type="text/javascript">
 	var myFullpage = new fullpage('#fullpage', {
-		sectionsColor: ['#47376e', '#282B3D', '#195C51', '#084238', '#ccddff']
+		sectionsColor: ['#F5F3F3', '#F5F3F3', '#195C51', '#084238', '#ccddff']
 	});
 </script>
 </body>
