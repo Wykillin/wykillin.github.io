@@ -330,10 +330,12 @@ h2 span{
 	width: 65%;
 background-color:rgba(255,255,255,.5);
 }
-.youtube-video-container {
+/* .youtube-video-container {
   position: relative;
   overflow: hidden;
-  width: 100%;
+  width: 75%;
+  height: 25%;
+  margin-left: 10%;
 }
 
 .youtube-video-container::after {
@@ -348,7 +350,7 @@ background-color:rgba(255,255,255,.5);
   left: 0;
   width: 100%;
   height: 100%;
-}
+} */
 .youtube-video-container2 {
   position: relative;
   overflow: hidden;
@@ -374,7 +376,7 @@ background-color:rgba(255,255,255,.5);
 .YTLink:hover{
 	color: goldenrod;
 }
-ul {
+#socialBtns {
   position:absolute;
   top:50%;
   left:50%;
@@ -383,10 +385,10 @@ ul {
   padding:0;
   display:flex;
 }
-ul li {
+#socialBtns li {
   list-style:none;
 }
-ul li a {
+#socialBtns ul li a {
   display:block;
   position:relative;
   width:85%;
@@ -399,62 +401,62 @@ ul li a {
   margin: 0 30px; 
   transition:.5s;
 }
-ul li a span {
+#socialBtns ul li a span {
   position:absolute;
   transition: transform .5s;
 }
-ul li a span:nth-child(1),
-ul li a span:nth-child(3){
+#socialBtns ul li a span:nth-child(1),
+#socialBtns ul li a span:nth-child(3){
   width:100%;
   height:3px;
   background:#404040;
 }
-ul li a span:nth-child(1) {
+#socialBtns ul li a span:nth-child(1) {
   top:0;
   left:0;
   transform-origin: right;
 }
-ul li a:hover span:nth-child(1) {
+#socialBtns ul li a:hover span:nth-child(1) {
   transform: scaleX(0);
   transform-origin: left;
   transition:transform .5s;
 }
 
-ul li a span:nth-child(3) {
+#socialBtns ul li a span:nth-child(3) {
   bottom:0;
   left:0;
   transform-origin: left;
 }
-ul li a:hover span:nth-child(3) {
+#socialBtns ul li a:hover span:nth-child(3) {
   transform: scaleX(0);
   transform-origin: right;
   transition:transform .5s;
 }
 
-ul li a span:nth-child(2),
-ul li a span:nth-child(4){
+#socialBtns ul li a span:nth-child(2),
+#socialBtns ul li a span:nth-child(4){
   width:3px;
   height:100%;
   background:#404040;
 }
-ul li a span:nth-child(2) {
+#socialBtns ul li a span:nth-child(2) {
   top:0;
   left:0;
   transform:scale(0);
   transform-origin: bottom;
 }
-ul li a:hover span:nth-child(2) {
+#socialBtns ul li a:hover span:nth-child(2) {
   transform: scale(1);
   transform-origin: top;
   transition:transform .5s;
 }
-ul li a span:nth-child(4) {
+#socialBtns ul li a span:nth-child(4) {
   top:0;
   right:0;
   transform:scale(0);
   transform-origin: top;
 }
-ul li a:hover span:nth-child(4) {
+#socialBtns ul li a:hover span:nth-child(4) {
   transform: scale(1);
   transform-origin: bottom;
   transition:transform .5s;
@@ -497,12 +499,12 @@ h2 br{
 
 <!-- <div id="header">
 <a href="mailto:Adam@AdamWykle.com" alt="Adam@AdamWykle.com"><i class="fa fa-envelope" ></i> Email me!</a></div> -->
-<!-- <ul id="menu">
+<ul id="menu">
 		<li data-menuanchor="page1" class="active"><a href="#page1">Videos</a></li>
 		<li data-menuanchor="page2"><a href="#page2">About me</a></li>
 		<li data-menuanchor="page3"><a href="#page3">More!</a></li>
 		<li data-menuanchor="page4"><a href="#page1">Top</a></li>
-	</ul> -->
+	</ul>
 
 
 
@@ -511,8 +513,8 @@ h2 br{
 <div class="section active" id="section0" data-anchor="page1">
 
 
-<div>
-<!-- Drop Down Menu	 -->
+<!-- <div>
+<-- Drop Down Menu	 >
 <div class="dropdown">
   <emailButton class="dropbtn"><i class="fa fa-bars"> Menu</i></emailButton>
   <div class="dropdown-content" >
@@ -523,11 +525,11 @@ h2 br{
 
 
 </div>
-<!-- Email Button -->
-<a href="mailto:Adam@AdamWykle.com" alt="Adam@AdamWykle.com" style="float:right;">
+ Email Button -->
+<!-- <a href="mailto:Adam@AdamWykle.com" alt="Adam@AdamWykle.com" style="float:right;">
 <button class="emailButton" style="vertical-align:middle"><span>
 	<i class="fa fa-envelope" ></i> Email me!</span></button></a>
-</div>
+</div> -->
 <div style="padding-top: 15%;padding-bottom:2vh;">
 	<h2 style="font-family: 'Exo';font-size:4vh;text-align:center;color: #000000; "><span>Adam David Wykle</span></h2>
 </div>
@@ -545,38 +547,39 @@ h2 br{
 		My Spirit University YouTube channel</a>
 	</h3>
 	</div>
-
-	<div style="position:relative">
+	
+	<!-- <div id="socialBtns" style=""">
 		<ul style=" ">
 			<li>
-			  <a class="twitter" href="https://twitter.com/Wykillin">
-				<span></span>
-				<span></span>
-				<span></span>
-				<span></span>
-				<i class="fa fa-twitter" aria-hidden="true"></i>
-			  </a>
+				<a class="twitter" href="https://twitter.com/Wykillin">
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+					<i class="fa fa-twitter" aria-hidden="true"></i>
+				</a>
 			</li>
 			<li>
-			  <a class="youtube" href="https://www.youtube.com/@AdamDavidSpiritU">
-				<span></span>
-				<span></span>
-				<span></span>
-				<span></span>
-				<i class="fa fa-youtube" aria-hidden="true"></i>
-			  </a>
+				<a class="youtube" href="https://www.youtube.com/@AdamDavidSpiritU">
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+					<i class="fa fa-youtube" aria-hidden="true"></i>
+				</a>
 			</li>
 			<li>
 			  <a class="instagram" href="https://www.instagram.com/Wykillin2">
-				<span></span>
-				<span></span>
-				<span></span>
-				<span></span>
-				<i class="fa fa-instagram" aria-hidden="true"></i>
-			  </a>
+				  <span></span>
+				  <span></span>
+				  <span></span>
+				  <span></span>
+				  <i class="fa fa-instagram" aria-hidden="true"></i>
+				</a>
 			</li>
-		  </ul>
-		</div>
+		</ul>
+	</div> -->
+
 
 </div>
 
@@ -584,24 +587,6 @@ h2 br{
 
 	<!-- Page 2 -->
 	<div class="section" id="section1" data-anchor="page2">
-
-		<div>
-			<!-- Drop Down Menu	 -->
-			<div class="dropdown">
-			  <emailButton class="dropbtn"><i class="fa fa-bars"> Menu</i></emailButton>
-			  <div class="dropdown-content" >
-			  <a href="#page1">Top</a>
-			  <a href="#page2">About me</a>
-			  <a href="#page3">More!</a>
-			</div>
-			
-			
-			</div>
-			<!-- Email Button -->
-			<a href="mailto:Adam@AdamWykle.com" alt="Adam@AdamWykle.com" style="float:right;">
-			<button class="emailButton" style="vertical-align:middle"><span>
-				<i class="fa fa-envelope" ></i> Email me!</span></button></a>
-			</div>
 
 		<h2 style="padding-top: 15vh;padding: 1em;font-size: 1em;" >My name is Adam David, and I am a computer scientist by trade, but I've come to realize that my journey has been more of a crystal science exploration.
 			<br>It's been quite a fascinating journey, and here's a little bit about me and what you can expect from my work.<br>
@@ -627,14 +612,7 @@ h2 br{
 		</div>
 	</div>
 	<div class="section" id="section2" data-anchor="page3">
-		<div class="dropdown">
-			<emailButton class="dropbtn"><i class="fa fa-bars"> Menu</i></emailButton>
-			<div class="dropdown-content" >
-			<a href="#page1">Top</a>
-			<a href="#page2">About me</a>
-			<a href="#page3">More!</a>
-		  </div>
-		</div>
+		
 		<div class="slide" id="slide2">
 		<div id="slide2-text" style="text-align: center;">
 			<div class="youtube-video-container2">
@@ -668,7 +646,22 @@ h2 br{
 <script type="text/javascript" src="fullpage.js"></script>
 <script type="text/javascript">
 	var myFullpage = new fullpage('#fullpage', {
-		sectionsColor: ['#F5F3F3', '#F5F3F3', '#195C51', '#084238', '#ccddff']
+		sectionsColor: ['#F5F3F3', '#F5F3F3', '#195C51', '#084238', '#ccddff'],
+		anchors: ['page1', 'page2', 'page3'],
+ 		menu: '#menu',
+		responsiveWidth: 0,
+	responsiveHeight: 0,
+	responsiveSlides: false,
+	css3: true,
+	controlArrows: true,
+	controlArrowsHTML: [
+		'<div class="fp-arrow"></div>', 
+		'<div class="fp-arrow"></div>'
+	],
+	verticalCentered: true,
+	paddingTop: '3em',
+	paddingBottom: '3em',
+	afterResponsive: function(isResponsive){},
 	});
 </script>
 </body>
