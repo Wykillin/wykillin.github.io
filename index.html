@@ -330,18 +330,18 @@ h2 span{
 	width: 65%;
 background-color:rgba(255,255,255,.5);
 }
-/* .youtube-video-container {
+.youtube-video-container {
   position: relative;
+  width: 100%;
+  max-width: 560px; /* Optional: Limit maximum width */
+  margin: 0 auto;
   overflow: hidden;
-  width: 75%;
-  height: 25%;
-  margin-left: 10%;
 }
 
 .youtube-video-container::after {
-  display: block;
   content: "";
-  padding-top: 56.25%;
+  display: block;
+  padding-top: 56.25%; /* Aspect ratio for 16:9 videos */
 }
 
 .youtube-video-container iframe {
@@ -350,7 +350,7 @@ background-color:rgba(255,255,255,.5);
   left: 0;
   width: 100%;
   height: 100%;
-} */
+}
 .youtube-video-container2 {
   position: relative;
   overflow: hidden;
@@ -606,7 +606,7 @@ h2 br{
 		<div class="slide active" id="slide1">
 		</div>
 			<div id="slide1-text">
-				<div class="youtube-video-container2">
+				<div class="youtube-video-container">
 					<iframe width="560" height="315" 
 						src="https://www.youtube.com/embed/MnaeUiVl_KE?si=XNgrfYK7s7TMgoVn" 
 						title="YouTube video player" frameborder="0" 
