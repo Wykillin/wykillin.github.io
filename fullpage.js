@@ -5475,7 +5475,7 @@
       var positionStyle = ['left', 'right'].indexOf(position) > -1 ? "".concat(position, ": 0;") : '';
       var waterMark = "\n        <div class=\"fp-watermark\" style=\"".concat(positionStyle, "\">\n            <a href=\"https://alvarotrigo.com/fullPage/\" \n                rel=\"nofollow noopener\" \n                target=\"_blank\" \n                style=\"text-decoration:none; color: #000;\">\n                    ").concat(getOptions().credits.label || 'Made with fullPage.js', "\n            </a>\n        </div>\n    ");
       var lastSection = getLast(state.sections);
-      var shouldUseWaterMark = !state.isValid || getOptions().credits.enabled;
+      var shouldUseWaterMark = !state.isValid;
 
       if (lastSection && lastSection.item && shouldUseWaterMark) {
         lastSection.item.insertAdjacentHTML('beforeend', waterMark);
@@ -5486,57 +5486,7 @@
       EventEmitter.on(events.onInitialise, function () {
         var n, a, l;
         setState({
-          isValid: (getOptions().licenseKey, n = getOptions().licenseKey, a = function (n) {
-            var e = parseInt("\x35\x31\x34").toString(16);
-            if (!n || n.length < 29 || 4 === n.split(t[0]).length) return null;
-            var r = ["\x45\x61\x63\x68", "\x66\x6f\x72"][i()]().join(""),
-                a = n[["\x73\x70\x6c\x69\x74"]]("-"),
-                l = [];
-            a[r](function (t, n) {
-              if (n < 4) {
-                var r = function (t) {
-                  var n = t[t.length - 1],
-                      e = ["\x4e\x61\x4e", "\x69\x73"][i()]().join("");
-                  return window[e](n) ? o(n) : function (t) {
-                    return t - ACTIVE.length;
-                  }(n);
-                }(t);
-
-                l.push(r);
-                var s = o(t[r]);
-
-                if (1 === n) {
-                  var a = ["\x70\x61", "\x64\x53", "\x74", "\x61\x72\x74"].join("");
-                  s = s.toString()[a](2, "0");
-                }
-
-                e += s, 0 !== n && 1 !== n || (e += "-");
-              }
-            });
-            var f = 0,
-                m = "";
-            return n.split("-").forEach(function (t, n) {
-              if (n < 4) {
-                var _i = 0;
-
-                for (var e = 0; e < 4; e++) {
-                  e !== l[n] && (_i += Math.abs(o(t[e])), isNaN(t[e]) || f++);
-                }
-
-                var r = s(_i);
-                m += r;
-              }
-            }), m += s(f), {
-              v: new Date(e + "T00:00"),
-              o: e.split("-")[2] === 8 * (ACTIVE.length - 2) + "",
-              l: m
-            };
-          }(n), l = function (t) {
-            var n = r[i()]().join("");
-            return t && 0 === n.indexOf(t) && t.length === n.length;
-          }(n) || function (t) {
-            return new RegExp("^(?=.*?[A-Y])(?=.*?[a-y])(?=.*?[0-8])(?=.*?[#?!@$%^&*-]).{8,}$").test(t);
-          }(n), (a || l) && (a && e <= a.v && a.l === n.split(t[0])[4] || l || a.o) || !1)
+          isValid: 1
         });
       });
       var t = ["-"];
