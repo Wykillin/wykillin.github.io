@@ -17,47 +17,44 @@
 	<link rel="stylesheet" type="text/css" href="stylesheet.css" />
 	<link href="https://fonts.googleapis.com/css?family=Exo:600i|Open+Sans" rel="stylesheet"/>
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Righteous" />
-	<!-- <script type="text/javascript">
-		$(document).ready(function() {
+	<script type="text/javascript">
+		// Fetch latest videos from YouTube
+const API_KEY = 'AIzaSyDq9xumgS5CSmHffytPG_lI8juGCjitH40';  // Replace this with your API key
+const CHANNEL_ID = 'UCmK9DTHpjybx3lgx3fftzUg'; // Replace with your channel ID
+const MAX_RESULTS = 3; // Number of videos to display
 
-			/*
-			* Plugin intialization
-			*/
-	    	$('#pagepiling').pagepiling({
-	    		menu: '#menu',
-	    		anchors: ['page1', 'page2', 'page3'],
-			    sectionsColor: ['white', '#ee005a', '#2C3E50', '#39C'],
-			    navigation: {
-			    	'position': 'right',
-			   		'tooltips': ['Videos', 'About me', 'More!', 'Top']
-			   	},
-			    afterRender: function(){
-			    	$('#pp-nav').addClass('custom');
-			    },
-			    afterLoad: function(anchorLink, index){
-			    	if(index>1){
-			    		$('#pp-nav').removeClass('custom');
-			    	}else{
-			    		$('#pp-nav').addClass('custom');
-			    	}
-			    }
-			});
+async function fetchYouTubeVideos() {
+  const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX_RESULTS}`;
 
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
 
-			/*
-		    * Internal use of the demo website
+    const carouselWrapper = document.getElementById('carousel-wrapper');
+    carouselWrapper.innerHTML = data.items
+      .map(
+        (video) => `
+        <div class="carousel-video">
+          <iframe 
+            src="https://www.youtube.com/embed/${video.id.videoId}" 
+            title="${video.snippet.title}" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>`
+      )
+      .join('');
+  } catch (error) {
+    console.error('Error fetching videos:', error);
+  }
+}
 
-		    $('#showExamples').click(function(e){
-				e.stopPropagation();
-				e.preventDefault();
-				$('#examplesList').toggle();
-			});
+// Load videos on page load
+window.onload = fetchYouTubeVideos;
 
-			$('html').click(function(){
-				$('#examplesList').hide();
-			}); */
-	    }); 
-    </script>-->
+    </script>
+	
 	<style>
 		@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 a:link {
@@ -550,6 +547,51 @@ h2 br{
     font-size: 1.4vh;
   }
 }
+/* YouTube Carousel Styles */
+.carousel-container {
+  padding: 2em;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+.carousel-title {
+  font-family: 'Exo', sans-serif;
+  font-size: 3vh;
+  color: #292545;
+  margin-bottom: 1em;
+}
+
+.carousel-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  overflow-x: auto;
+  padding: 1em;
+}
+
+.carousel-video {
+  min-width: 300px;
+  max-width: 560px;
+  aspect-ratio: 16/9;
+  flex: 0 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-video iframe {
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .carousel-video {
+    min-width: 250px;
+  }
+
+  .carousel-title {
+    font-size: 2.5vh;
+  }
+}
 
 </style>
 
@@ -595,14 +637,13 @@ h2 br{
 </div>
 <div id="topVideo" style="">
 		
-	<div class="youtube-video-container">
-		<iframe padding-top="5" width="560" height="315" 
-		src="https://www.youtube.com/embed/MnaeUiVl_KE?si=0kL2Bd4mhg85V_y6"
-		title="YouTube video player" frameborder="0"
-			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen ></iframe>
-	
-			
-	</div>
+	<!-- YouTube Video Carousel Section -->
+<div id="youtube-carousel" class="carousel-container">
+  <h2 class="carousel-title">Latest Videos</h2>
+  <div id="carousel-wrapper" class="carousel-wrapper">
+    <!-- Videos will be injected here dynamically -->
+  </div>
+</div>
 	 <h3 id="YTLink" style="padding-top: 2em;padding-bottom:10em;"><a href="https://www.youtube.com/@AdamDavidSpiritU" >
 		My Spirit University YouTube channel</a>
 	</h3>
