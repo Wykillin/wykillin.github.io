@@ -808,6 +808,8 @@ button:hover {
 	  
 			<label for="message">Additional Details</label>
 			<textarea id="message" name="message" placeholder="Write your message or specific requests here..."></textarea>
+
+      <input type="text" name="honeypot" id="honeypot" style="display: none;">
 	  
 			<button type="submit">Send Request</button>
 		  </form>
@@ -885,6 +887,13 @@ button:hover {
   document.getElementById("contact-form").addEventListener("submit", function(event) {
     event.preventDefault();
 
+     // Check honeypot field
+     const honeypot = document.getElementById("honeypot").value;
+      if (honeypot) {
+        alert("Bot detected! Submission rejected.");
+        return; // Stop form submission
+      }
+      
     // Send form data via EmailJS
     emailjs.sendForm("service_h7aa0dm", "template_vgds77o", this)
       .then(function(response) {
