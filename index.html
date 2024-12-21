@@ -87,7 +87,7 @@ async function fetchYouTubeVideos() {
 }
 
 
-</script>
+
 
 // Load videos on page load
 window.onload = fetchYouTubeVideos;
@@ -893,7 +893,7 @@ button:hover {
         alert("Bot detected! Submission rejected.");
         return; // Stop form submission
       }
-      
+
     // Send form data via EmailJS
     emailjs.sendForm("service_h7aa0dm", "template_vgds77o", this)
       .then(function(response) {
