@@ -17,6 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="stylesheet.css" />
 	<link href="https://fonts.googleapis.com/css?family=Exo:600i|Open+Sans" rel="stylesheet"/>
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Righteous" />
+	<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 	<script type="text/javascript">
 		// Fetch latest videos from YouTube
 const API_KEY = 'AIzaSyDq9xumgS5CSmHffytPG_lI8juGCjitH40';  // Replace this with your API key
@@ -75,6 +76,25 @@ async function fetchYouTubeVideos() {
     console.error("Error fetching videos:", error);
   }
 }
+
+  // Initialize EmailJS
+  (function() {
+    emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS User ID
+  })();
+
+  // Handle Form Submission
+  document.getElementById("contact-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    // Send form data via EmailJS
+    emailjs.sendForm("jddl9EJMdW6B23YW_", "template_vgds77o", this)
+      .then(function(response) {
+        alert("Message sent successfully!");
+      }, function(error) {
+        alert("Failed to send message. Please try again later.");
+      });
+  });
+</script>
 
 // Load videos on page load
 window.onload = fetchYouTubeVideos;
@@ -618,6 +638,40 @@ h2 br{
   }
 }
 
+.form-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+label, input, select, textarea, button {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  background-color: #292545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #404080;
+}
+
+
 </style>
 
 </head>
@@ -629,7 +683,7 @@ h2 br{
 <ul id="menu">
 		<li data-menuanchor="page1" class="active"><a href="#page1">Videos</a></li>
 		<li data-menuanchor="page2"><a href="#page2">Services</a></li>
-		<li data-menuanchor="page3"><a href="#page3">Videos</a></li>
+		<!-- <li data-menuanchor="page3"><a href="#page3">Videos</a></li> -->
 		<li data-menuanchor="page4"><a href="#page1">Top</a></li>
 	</ul>
 
@@ -714,7 +768,7 @@ h2 br{
 	<!-- Page 2 -->
 	<div class="section" id="section1" data-anchor="page2">
 		<div class="services-container">
-		  <h2 class="services-title">Services I Offer</h2>
+		  <h2 class="services-title">Services Offered</h2>
 		  
 		  <div class="service-card">
 		    <h3>Spiritual/Personal Coaching</h3>
@@ -735,8 +789,38 @@ h2 br{
 		    <h3>Spiritual/Plasma Science Consulting</h3>
 		    <p>Learn about longitudinal waves, scalar fields, and their potential applications in mystical sciences, including energy healing and teleportation theories.</p>
 		  </div>
+		  
+		 
 		</div>	
 	</div>
+
+	<div class="section" id="section2" data-anchor="page3">
+		<div class="form-container">
+		  <h2>Contact Me</h2>
+		  <form id="contact-form">
+			<label for="name">Name</label>
+			<input type="text" id="name" name="name" placeholder="Your Name" required>
+	  
+			<label for="email">Email</label>
+			<input type="email" id="email" name="email" placeholder="Your Email" required>
+	  
+			<label for="service">Select a Service</label>
+			<select id="service" name="service" required>
+			  <option value="" disabled selected>Choose a Service</option>
+			  <option value="Spiritual/Personal Coaching">Spiritual/Personal Coaching</option>
+			  <option value="Tarot Reading">Tarot Reading</option>
+			  <option value="Astrology Reading">Astrology Reading</option>
+			  <option value="Plasma Science Consulting">Plasma Science Consulting</option>
+			</select>
+	  
+			<label for="message">Additional Details</label>
+			<textarea id="message" name="message" placeholder="Write your message or specific requests here..."></textarea>
+	  
+			<button type="submit">Send Request</button>
+		  </form>
+		</div>
+	  </div>
+	  
 				
 	<!-- Page 2 Slide 1 -->
 		<div class="slide active" id="slide1">
