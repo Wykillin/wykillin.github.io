@@ -91,6 +91,20 @@ async function fetchYouTubeVideos() {
 
 // Load videos on page load
 window.onload = fetchYouTubeVideos;
+
+function navigateToContact(service) {
+  // Navigate to Page 3 (Contact Form)
+  fullpage_api.moveTo('page3');
+
+  // Wait for the page to load, then set the dropdown value
+  setTimeout(() => {
+    const serviceDropdown = document.getElementById('service');
+    if (serviceDropdown) {
+      serviceDropdown.value = service; // Set the dropdown to the selected service
+    }
+  }, 500); // Delay to ensure the dropdown is available
+}
+
     </script>
 	
 	<style>
@@ -760,32 +774,29 @@ button:hover {
 
 	<!-- Page 2 -->
 	<div class="section" id="section1" data-anchor="page2">
-		<div class="services-container">
-		  <h2 class="services-title">Services Offered</h2>
-		  
-		  <div class="service-card">
-		    <h3>Spiritual/Personal Coaching</h3>
-		    <p>I offer intuitive 1-on-1 coaching, providing guidance on meditation, energy movement, life structuring, and spiritual advice through communication with spirit guides.</p>
-		  </div>
-		
-		  <div class="service-card">
-		    <h3>Tarot Card Reading</h3>
-		    <p>Receive a unique tarot reading focused on messages from spirit guides and understanding universal forces.</p>
-		  </div>
-		
-		  <div class="service-card">
-		    <h3>Esoteric Astrology Reading</h3>
-		    <p>Discover your soul's purpose through a customized astrology reading using higher planetary and zodiac energies. Birth time required.</p>
-		  </div>
-		
-		  <div class="service-card">
-		    <h3>Spiritual/Plasma Science Consulting</h3>
-		    <p>Learn about longitudinal waves, scalar fields, and their potential applications in mystical sciences, including energy healing and teleportation theories.</p>
-		  </div>
-		  
-		 
-		</div>	
-	</div>
+    <h3>The services I’m currently offering are:</h3><br>
+    
+    <div class="service-card" onclick="navigateToContact('Spiritual/Personal Coaching')">
+      <h3>Spiritual/Personal Coaching</h3>
+      <p>I offer intuitive 1-on-1 coaching, providing guidance on meditation, energy movement, life structuring, and spiritual advice through communication with spirit guides.</p>
+    </div>
+  
+    <div class="service-card" onclick="navigateToContact('Tarot Reading')">
+      <h3>Tarot Card Reading</h3>
+      <p>Receive a unique tarot reading focused on messages from spirit guides and understanding universal forces.</p>
+    </div>
+  
+    <div class="service-card" onclick="navigateToContact('Astrology Reading')">
+      <h3>Esoteric Astrology Reading</h3>
+      <p>Discover your soul's purpose through a customized astrology reading using higher planetary and zodiac energies. Birth time required.</p>
+    </div>
+  
+    <div class="service-card" onclick="navigateToContact('Plasma Science Consulting')">
+      <h3>Spiritual/Plasma Science Consulting</h3>
+      <p>Learn about longitudinal waves, scalar fields, and their potential applications in mystical sciences, including energy healing and teleportation theories.</p>
+    </div>
+  </div>
+  
 
 	<div class="section" id="section2" data-anchor="page3">
 		<div class="form-container">
