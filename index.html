@@ -974,7 +974,7 @@ button:hover {
   });
 </script>
 <script>
-  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbztaYfyjhlwEIa5STx8Q_ZW7hQQ94jOtO3ayhFZScUkMQ6zdpOS40zuy5EoE3zRsTrQ/exec';
+  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwTK4ZM8ZGdejB5qWXX9Idjdi1vhv1cuWd_zB7JYgCCi66iE3iVvZNZBY9xsKqs_7To/exec';
 
   window.addEventListener('DOMContentLoaded', ()=> {
     const form = document.getElementById('subscribe-form');
@@ -997,7 +997,9 @@ button:hover {
         console.log('GAS returned', json);
         if (json.status === 'OK') {
           msg.textContent = '✅ You’re in! Thank you.';
-        } else {
+        }else if (json.status === 'DUPLICATE') {
+          msg.textContent = '⚠️ You’re already on the list.'; 
+        }else {
           msg.textContent = '⚠️ That doesn’t look like a valid email.';
         }
       } catch(err) {
