@@ -108,34 +108,6 @@ function navigateToContact(service) {
 }
 
     </script>
-
-<script>
-  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyF-BnQw2blMtgwd_v4l6KHG4jgOnpzMFb1B1tSLE_K4EHDb7yrrCX7LR3-0GoRPBWj/exec';  // ← your URL
-  
-  document.getElementById('subscribe-form')
-    .addEventListener('submit', async e => {
-      e.preventDefault();
-      const f = e.target;
-      // simple honeypot
-      if (f.hp.value) return alert('Bot detected');
-      const data = new FormData(f);
-      try {
-        const res = await fetch(WEB_APP_URL, { method:'POST', body: data });
-        const json = await res.json();
-        const msg = document.getElementById('subscribe-msg');
-        if (json.status === 'OK') {
-          msg.textContent = '✅ You’re in! Thank you.';
-          msg.style.display = 'block';
-          f.reset();
-        } else {
-          msg.textContent = '⚠️ Invalid email.';
-          msg.style.display = 'block';
-        }
-      } catch(err) {
-        alert('Network error—please try again.');
-      }
-    });
-  </script>
 	
 <style>
 		@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
@@ -1001,7 +973,7 @@ button:hover {
       });
   });
 </script>
-<!-- <script> -->
+<script>
   window.addEventListener('DOMContentLoaded', ()=> {
     const form = document.getElementById('subscribe-form');
     const msg  = document.getElementById('subscribe-msg');
