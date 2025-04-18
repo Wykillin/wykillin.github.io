@@ -137,7 +137,7 @@ function navigateToContact(service) {
     });
   </script> -->
 	
-	<style>
+<style>
 		@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 a:link {
     color: #8e8722;
@@ -738,7 +738,22 @@ button:hover {
   background-color: #404080;
   transform: scale(1.05);
 }
-
+.services-button {
+  background-color: #292545;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 2vh;
+  padding: 1em 2em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+.services-button:hover {
+  background-color: #404080;
+  transform: scale(1.05);
+}
 
 
 </style>
@@ -785,6 +800,9 @@ button:hover {
   <button class="email-signup-button" onclick="fullpage_api.moveTo('page3')">
     ✨ Join the Email List ✨
   </button>
+  <button class="services-button" onclick="fullpage_api.moveTo('page2')">
+    🌀 Book a Service! 🌀
+  </button>
 </div>
 <div id="topVideo">
 		
@@ -803,9 +821,9 @@ button:hover {
  		<i class="fa fa-envelope"></i> Adam@AdamWykle.com
 	</a>
 	</h3>
-</div>
+<!-- </div>
   <div id="footer"><a href="#page2"><i class="fa fa-caret-down"></i>Services</a></div>
-	</div>
+	</div> -->
 	
 	<!-- <div id="socialBtns" style=""">
 		<ul style=" ">
@@ -920,9 +938,9 @@ button:hover {
 		</h2>	
 		</div>
 	  </div>
-</div>
-
-
+  </div>
+ </div> 
+</div> <-- end of fullpage div -->
 
 <script type="text/javascript" src="fullpage.js"></script>
 <script type="text/javascript">
