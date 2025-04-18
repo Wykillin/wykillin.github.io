@@ -993,6 +993,40 @@ button:hover {
       });
   });
 </script>
-
+<script>
+  window.addEventListener('DOMContentLoaded', ()=> {
+    const form = document.getElementById('subscribe-form');
+    const msg  = document.getElementById('subscribe-msg');
+    if (!form) {
+      console.error('No subscribe-form on page!');
+      return;
+    }
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+  
+      // trap bots
+      if (form.hp.value) return alert('Bot detected');
+  
+      console.log('🤞 submitting to Google Apps Script…');
+      const data = new FormData(form);
+      try {
+        const res  = await fetch(WEB_APP_URL, { method:'POST', body: data });
+        const json = await res.json();
+        console.log('GAS returned', json);
+        if (json.status === 'OK') {
+          msg.textContent = '✅ You’re in! Thank you.';
+        } else {
+          msg.textContent = '⚠️ That doesn’t look like a valid email.';
+        }
+      } catch(err) {
+        console.error(err);
+        msg.textContent = '⚠️ Network error—please try again.';
+      }
+      msg.style.display = 'block';
+      form.reset();
+    });
+  });
+  </script>
+  
 </body>
 </html>
