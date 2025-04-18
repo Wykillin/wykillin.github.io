@@ -20,6 +20,34 @@
 	<script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
 </script>
+<script>
+  const WEB_APP_URL = 'https://script.google.com/macros/s/16iJdpVFMCmh8vGXfQ5PhEGO6CyzO2I73W8onNoM-u14/exec';  // ← your URL
+  
+  document.getElementById('subscribe-form')
+    .addEventListener('submit', async e => {
+      e.preventDefault();
+      const f = e.target;
+      // simple honeypot
+      if (f.hp.value) return alert('Bot detected');
+      const data = new FormData(f);
+      try {
+        const res = await fetch(WEB_APP_URL, { method:'POST', body: data });
+        const json = await res.json();
+        const msg = document.getElementById('subscribe-msg');
+        if (json.status === 'OK') {
+          msg.textContent = '✅ You’re in! Thank you.';
+          msg.style.display = 'block';
+          f.reset();
+        } else {
+          msg.textContent = '⚠️ Invalid email.';
+          msg.style.display = 'block';
+        }
+      } catch(err) {
+        alert('Network error—please try again.');
+      }
+    });
+  </script>
+  
 <script type="text/javascript">
    (function(){
       emailjs.init({
@@ -734,6 +762,16 @@ button:hover {
 </div> -->
 <div style="padding-top: 15%;padding-bottom:2vh;">
 	<h2 style="font-family: 'Exo';font-size:4vh;text-align:center;color: #000000; "><span>Adam David Wykle</span></h2>
+</div>
+<div class="form-container" id="subscribe-section">
+  <h2>Join the List</h2>
+  <form id="subscribe-form">
+    <input type="email" name="email" placeholder="Your best email" required>
+    <!-- honeypot to trap bots -->
+    <input type="text" name="hp" style="display:none">
+    <button type="submit">Subscribe</button>
+  </form>
+  <p id="subscribe-msg" style="display:none"></p>
 </div>
 <div id="topVideo">
 		
