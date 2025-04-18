@@ -720,6 +720,23 @@ button {
 button:hover {
   background-color: #404080;
 }
+.email-signup-button {
+  background-color: #292545;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 2vh;
+  padding: 1em 2em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.email-signup-button:hover {
+  background-color: #404080;
+  transform: scale(1.05);
+}
 
 
 </style>
@@ -764,7 +781,11 @@ button:hover {
 <div style="padding-top: 15%;padding-bottom:2vh;">
 	<h2 style="font-family: 'Exo';font-size:4vh;text-align:center;color: #000000; "><span>Adam David Wykle</span></h2>
 </div>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfYUrGesoLyv4Ln_d7a4SodfDgkrXp3jHjscIIbrQrUd4nwyA/viewform?embedded=true" width="640" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+<div style="text-align: center; margin: 2em 0;">
+  <button class="email-signup-button" onclick="fullpage_api.moveTo('page3')">
+    ✨ Join the Email List ✨
+  </button>
+</div>
 <div id="topVideo">
 		
 	<!-- YouTube Video Carousel Section -->
@@ -896,6 +917,10 @@ button:hover {
 		</h2>	
 		</div>
 	  </div>
+
+    <div class="section" id="section3" data-anchor="page4">
+      <iframe style="align-content: center;" src="https://docs.google.com/forms/d/e/1FAIpQLSfYUrGesoLyv4Ln_d7a4SodfDgkrXp3jHjscIIbrQrUd4nwyA/viewform?embedded=true" width="640" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    </div>
 	  
 				
 	<!-- Page 2 Slide 1 -->
