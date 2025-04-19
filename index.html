@@ -1031,5 +1031,19 @@ window.addEventListener('resize', () => {
   });
   </script>
   
+		<script>
+// Reset zoom on blur or resize
+function resetViewport() {
+  const viewport = document.querySelector("meta[name=viewport]");
+  if (viewport) {
+    viewport.setAttribute(
+      "content",
+      "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    );
+  }
+}
+window.addEventListener('resize', resetViewport);
+document.addEventListener('focusout', resetViewport);
+</script>
 </body>
 </html>
