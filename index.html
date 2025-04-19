@@ -675,6 +675,7 @@ label, input, select, textarea, button {
   display: block;
   width: 100%;
   margin-bottom: 15px;
+		font-size: 16px;  /* prevent mobile auto-zoom */
 }
 
 textarea {
@@ -960,6 +961,13 @@ button:hover {
 	paddingBottom: '3em',
 	afterResponsive: function(isResponsive){},
 	});
+	
+	// 🔥 Add this after initializing fullPage.js
+window.addEventListener('resize', () => {
+  if (typeof fullpage_api !== 'undefined') {
+    fullpage_api.reBuild();
+  }
+});
 </script>
 
 
