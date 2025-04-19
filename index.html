@@ -769,12 +769,22 @@ button:hover {
 	<h2 style="font-family: 'Exo';font-size:4vh;text-align:center;color: #000000; "><span>Adam David Wykle</span></h2>
 </div>
 <div style="text-align: center; margin: 2em 0;">
-  <button class="email-signup-button" onclick="fullpage_api.moveTo('page3')">
+  <!-- <button class="email-signup-button" onclick="fullpage_api.moveTo('page3')">
     ✨ Join the Email List ✨
-  </button>
+  </button> -->
   <button class="services-button" onclick="fullpage_api.moveTo('page2')">
     🌀 Book a Service! 🌀
   </button>
+  <div class="form-container" id="subscribe-section">
+    <h2>Join the List</h2>
+    <form id="subscribe-form">
+      <input type="email" name="email" placeholder="Your best email" required>
+      <!-- honeypot to trap bots -->
+      <input type="text" name="hp" style="display:none">
+      <button type="submit">Subscribe</button>
+    </form>
+    <p id="subscribe-msg" style="display:none"></p>
+  </div>
 </div>
 <div id="topVideo">
 		
