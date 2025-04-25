@@ -582,6 +582,7 @@ h2 br{
   margin: 1em auto;
   max-width: 800px;
   text-align: left;
+  cursor: pointer; /* 👈 This makes it show the hand cursor */
 }
 
 .service-card h3 {
@@ -596,6 +597,13 @@ h2 br{
   color: #333;
   line-height: 1;
 }
+
+.service-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+  transition: all 0.3s ease;
+}
+
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
