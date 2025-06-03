@@ -746,6 +746,21 @@ button:hover {
 
 
 </style>
+<!--Sender JS-->
+<script>
+  (function (s, e, n, d, er) {
+    s['Sender'] = er;
+    s[er] = s[er] || function () {
+      (s[er].q = s[er].q || []).push(arguments)
+    }, s[er].l = 1 * new Date();
+    var a = e.createElement(n),
+        m = e.getElementsByTagName(n)[0];
+    a.async = 1;
+    a.src = d;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://cdn.sender.net/accounts_resources/universal.js', 'sender');
+  sender('eeda3e532a6794')
+</script>
 
 </head>
 
@@ -792,15 +807,18 @@ button:hover {
   <button class="services-button" onclick="fullpage_api.moveTo('page2')">
     🌀 Book a Service! 🌀
   </button>
-  <div class="form-container" id="subscribe-section">
+<!--Sender Form-->
+  <div style="text-align: center" class="sender-form-field" data-sender-form-id="e0REQ5"></div>
+
+  <!-- <div class="form-container" id="subscribe-section">
     <h2>Signup For the Newsletter</h2>
     <form id="subscribe-form">
-      <input type="email" name="email" placeholder="Your best email" required>
+      <input type="email" name="email" placeholder="Your best email" required> -->
       <!-- honeypot to trap bots -->
-      <input type="text" name="hp" style="display:none">
+      <!-- <input type="text" name="hp" style="display:none">
       <button type="submit">Sign up!</button>
     </form>
-    <p id="subscribe-msg" style="display:none"></p>
+    <p id="subscribe-msg" style="display:none"></p> -->
   </div>
 </div>
 <div id="topVideo">
@@ -824,38 +842,7 @@ button:hover {
   <div id="footer"><a href="#page2"><i class="fa fa-caret-down"></i>Services</a></div>-->
 	</div> 
 	
-	<!-- <div id="socialBtns" style=""">
-		<ul style=" ">
-			<li>
-				<a class="twitter" href="https://twitter.com/Wykillin">
-					<span></span>
-					<span></span>
-					<span></span>
-					<span></span>
-					<i class="fa fa-twitter" aria-hidden="true"></i>
-				</a>
-			</li>
-			<li>
-				<a class="youtube" href="https://www.youtube.com/@AdamDavidSpiritU">
-					<span></span>
-					<span></span>
-					<span></span>
-					<span></span>
-					<i class="fa fa-youtube" aria-hidden="true"></i>
-				</a>
-			</li>
-			<li>
-			  <a class="instagram" href="https://www.instagram.com/Wykillin2">
-				  <span></span>
-				  <span></span>
-				  <span></span>
-				  <span></span>
-				  <i class="fa fa-instagram" aria-hidden="true"></i>
-				</a>
-			</li>
-		</ul>
-	</div> -->
-
+	
 </div>
 </div>
 
@@ -910,28 +897,6 @@ button:hover {
 
   </div>
   
-  
-    <!-- <div style="width: 100%; max-width: 640px;">
-      <iframe 
-        src="https://docs.google.com/forms/d/e/1FAIpQLSfYUrGesoLyv4Ln_d7a4SodfDgkrXp3jHjscIIbrQrUd4nwyA/viewform?embedded=true" 
-        style="width: 100%; height: 600px; border: none;"
-        frameborder="0" marginheight="0" marginwidth="0">
-        Loading…
-      </iframe>
-    </div> -->
-    <!-- <div class="section" id="section2" data-anchor="page3" style="display: flex; justify-content: center; align-items: center; height: 100%; flex-direction: column; padding: 1em;">
-      <div class="form-container" id="subscribe-section">
-      <h2>Join the List</h2>
-      <form id="subscribe-form">
-        <input type="email" name="email" placeholder="Your best email" required>
-         honeypot to trap bots 
-        <input type="text" name="hp" style="display:none">
-        <button type="submit">Subscribe</button>
-      </form>
-      <p id="subscribe-msg" style="display:none"></p>
-    </div>
-  </div> -->
-
 	<div class="section" id="section3" data-anchor="page3">
 		<div class="form-container">
 		  <h2>Contact Me</h2>
@@ -969,6 +934,37 @@ button:hover {
 		</div>
 		
 	  </div>
+    <!-- <div id="socialBtns" style=""">
+		<ul style=" ">
+			<li>
+				<a class="twitter" href="https://twitter.com/Wykillin">
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+					<i class="fa fa-twitter" aria-hidden="true"></i>
+				</a>
+			</li>
+			<li>
+				<a class="youtube" href="https://www.youtube.com/@AdamDavidSpiritU">
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+					<i class="fa fa-youtube" aria-hidden="true"></i>
+				</a>
+			</li>
+			<li>
+			  <a class="instagram" href="https://www.instagram.com/Wykillin2">
+				  <span></span>
+				  <span></span>
+				  <span></span>
+				  <span></span>
+				  <i class="fa fa-instagram" aria-hidden="true"></i>
+				</a>
+			</li>
+		</ul>
+	</div> -->
 </div><-- end of fullpage div -->
 
 <script type="text/javascript" src="fullpage.js"></script>
