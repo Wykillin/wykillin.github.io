@@ -1143,18 +1143,18 @@ function resetViewport() {
 window.addEventListener('resize', resetViewport);
 document.addEventListener('focusout', resetViewport);
 
-  fetch("https://dawn-bar-d75f.adam-40f.workers.dev/", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    email: "test@example.com",
-    firstname: "Test"
-  })
-})
-.then(res => res.json())
-.then(data => console.log(data));
+//   fetch("https://dawn-bar-d75f.adam-40f.workers.dev/", {
+//   method: "POST",
+//   headers: {
+//     "Content-Type": "application/json"
+//   },
+//   body: JSON.stringify({
+//     email: "test@example.com",
+//     firstname: "Test"
+//   })
+// })
+// .then(res => res.json())
+// .then(data => console.log(data));
 </script>
 </body>
 </html>
