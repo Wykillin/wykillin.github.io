@@ -760,6 +760,8 @@ button:hover {
     m.parentNode.insertBefore(a, m)
   })(window, document, 'script', 'https://cdn.sender.net/accounts_resources/universal.js', 'sender');
   sender('eeda3e532a6794')
+
+
 </script>
 
 </head>
@@ -779,6 +781,7 @@ button:hover {
 
 <div class="section active" id="section0" data-anchor="page1">
 
+  
 
 <!-- <div>
 <-- Drop Down Menu	 >
@@ -803,24 +806,28 @@ button:hover {
 <div style="text-align: center; margin: 1em 0;">
   <!-- <button class="email-signup-button" onclick="fullpage_api.moveTo('page3')">
     ✨ Join the Email List ✨
-  </button> -->
-  <!--Sender Form-->
-    <div style="text-align: center" class="sender-form-field" data-sender-form-id="e0REQ5"></div>
-  <button class="services-button" onclick="fullpage_api.moveTo('page2')">
-    🌀 Book a Service! 🌀
-  </button>
+  </button> -->    
 
-  <!-- <div class="form-container" id="subscribe-section">
-    <h2>Signup For the Newsletter</h2>
+<!--sign up-->
+  <div class="form-container" id="subscribe-section">
+    <h2>Signup For the Guide+Newsletter</h2>
     <form id="subscribe-form">
-      <input type="email" name="email" placeholder="Your best email" required> -->
+      <input type="email" name="email" placeholder="Your best email" required>
+      <input type="firstname" name="firstname" placeholder="First Name" required>
       <!-- honeypot to trap bots -->
-      <!-- <input type="text" name="hp" style="display:none">
+      <input type="text" name="hp" style="display:none">
       <button type="submit">Sign up!</button>
     </form>
     <p id="subscribe-msg" style="display:none"></p> 
-  </div>-->
+  </div>
+
+  <!--Services button -->
+    <button class="services-button" onclick="fullpage_api.moveTo('page2')">
+    🌀 Book a Service! 🌀
+  </button>
+
 </div>
+
 <div id="topVideo">
 		
 	<!-- YouTube Video Carousel Section -->
@@ -838,8 +845,6 @@ button:hover {
  		<i class="fa fa-envelope"></i> Adam@AdamWykle.com
 	</a>
 	</h3>
-<!-- </div>
-  <div id="footer"><a href="#page2"><i class="fa fa-caret-down"></i>Services</a></div>-->
 	</div> 
 	
 	
@@ -1019,44 +1024,111 @@ window.addEventListener('resize', () => {
   });
 </script>
 <script>
-  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyBh_2To1hitSKCrETthofcYTclxEYM6JyxExkZJFa1VIllrEtQ4K67PuX1Fvbbgjgz/exec';
+  //const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyBh_2To1hitSKCrETthofcYTclxEYM6JyxExkZJFa1VIllrEtQ4K67PuX1Fvbbgjgz/exec';
 
-  window.addEventListener('DOMContentLoaded', ()=> {
-    const form = document.getElementById('subscribe-form');
-    const msg  = document.getElementById('subscribe-msg');
-    if (!form) {
-      console.error('No subscribe-form on page!');
+  
+  // window.addEventListener('DOMContentLoaded', ()=> {
+  //   const form = document.getElementById('subscribe-form');
+  //   const msg  = document.getElementById('subscribe-msg');
+  //   if (!form) {
+  //     console.error('No subscribe-form on page!');
+  //     return;
+  //   }
+  //   form.addEventListener('submit', async e => {
+  //     e.preventDefault();
+  
+  //     // trap bots
+  //     if (form.hp.value) return alert('Bot detected');
+  
+  //     console.log('🤞 submitting to Google Apps Script…');
+  //     const data = new FormData(form);
+  //     try {
+  //       const res  = await fetch(WEB_APP_URL, { method:'POST', body: data });
+  //       const json = await res.json();
+  //       console.log('GAS returned', json);
+  //       if (json.status === 'success') {
+  //       msg.textContent = '✅ You’re in! Thank you.';
+  //     } else if (json.status === 'already_subscribed') {
+  //       msg.textContent = '⚡ You’re already subscribed!';
+  //     } else {
+  //       msg.textContent = '⚠️ That doesn’t look like a valid email.';
+  //     }
+  //     } catch(err) {
+  //       console.error(err);
+  //       msg.textContent = '⚠️ Network error—please try again.';
+  //     }
+  //     msg.style.display = 'block';
+  //     form.reset();
+  //   });
+  // });
+
+
+window.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('subscribe-form');
+  const msg  = document.getElementById('subscribe-msg');
+
+  if (!form) {
+    console.error('No subscribe-form on page!');
+    return;
+  }
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    // trap bots via honeypot
+    if (form.hp.value) {
+      alert('Bot detected');
       return;
     }
-    form.addEventListener('submit', async e => {
-      e.preventDefault();
-  
-      // trap bots
-      if (form.hp.value) return alert('Bot detected');
-  
-      console.log('🤞 submitting to Google Apps Script…');
-      const data = new FormData(form);
-      try {
-        const res  = await fetch(WEB_APP_URL, { method:'POST', body: data });
-        const json = await res.json();
-        console.log('GAS returned', json);
-        if (json.status === 'success') {
+
+    // grab the two fields
+    const firstname = form.firstname.value.trim();
+    const email     = form.email.value.trim();
+
+    // clear previous message
+    msg.textContent   = '';
+    msg.style.display = 'none';
+
+    console.log('🤞 submitting to Cloudflare Worker → Sender.net…');
+
+    try {
+      // POST JSON directly to your Worker endpoint
+      const res = await fetch('https://dawn-bar-d75f.adam-40f.workers.dev/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ firstname, email })
+      });
+
+      // parse Worker → Sender.net response
+      const json = await res.json();
+      console.log('Worker returned', json);
+
+      if (res.ok) {
+        // 200-level response means Sender.net accepted it
         msg.textContent = '✅ You’re in! Thank you.';
-      } else if (json.status === 'already_subscribed') {
-        msg.textContent = '⚡ You’re already subscribed!';
       } else {
-        msg.textContent = '⚠️ That doesn’t look like a valid email.';
+        // anything else → error or “already subscribed”
+        // You can inspect `json` for details: e.g. if Sender.net returns a specific error code for duplicates
+        if (json.title && /already subscribed/i.test(json.title)) {
+          msg.textContent = '⚡ You’re already subscribed!';
+        } else {
+          msg.textContent = '⚠️ That doesn’t look like a valid email or there was another error.';
+        }
       }
-      } catch(err) {
-        console.error(err);
-        msg.textContent = '⚠️ Network error—please try again.';
-      }
-      msg.style.display = 'block';
-      form.reset();
-    });
+    } catch (err) {
+      console.error(err);
+      msg.textContent = '⚠️ Network error—please try again.';
+    }
+
+    msg.style.display = 'block';
+    form.reset();
   });
+});
+</script>
+
   </script>
-  
 		<script>
 // Reset zoom on blur or resize
 function resetViewport() {
@@ -1070,6 +1142,19 @@ function resetViewport() {
 }
 window.addEventListener('resize', resetViewport);
 document.addEventListener('focusout', resetViewport);
+
+  fetch("https://dawn-bar-d75f.adam-40f.workers.dev/", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    email: "test@example.com",
+    firstname: "Test"
+  })
+})
+.then(res => res.json())
+.then(data => console.log(data));
 </script>
 </body>
 </html>
