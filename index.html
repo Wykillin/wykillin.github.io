@@ -116,17 +116,17 @@ function navigateToContact(service) {
 		@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 a:link {
     color: #8e8722;
-    background-color: transparent;
+    /* background-color: transparent; */
     text-decoration: none;
 }
 a:visited {
      color: #8e8722;
-    background-color: transparent;
+    /* background-color: transparent; */
     text-decoration: none;
 } 
 a:hover {
     color: #ffee00;
-    background-color: transparent;
+   
     text-decoration: bold;
 }
 a:active {
@@ -758,6 +758,10 @@ button:hover {
   background-color: #404080;
   transform: scale(1.05);
 }
+.services-button.full-width {
+  display: block;
+  width: 100%;
+}
 
 
 </style>
@@ -818,10 +822,20 @@ button:hover {
 <div>
 	<h2 style="font-family: 'Exo';font-size:3vh;text-align:center;color: #000000; "><span>Adam David Wykle</span></h2>
 </div>
+
+<!-- <button class="services-button" onclick="fullpage_api.moveTo('page2')">
+    📖Sign Up for Module 2! 📖
+  </button> -->
+
 <div style="text-align: center; margin: 1em 0;">
+  <a href="https://ko-fi.com/s/0e33969047" target="_blank" class="services-button full-width" style="display: inline-block; text-align: center; text-decoration: none;">
+  📖✨Sign Up for Module 2!✨📖
+</a>
+<br><br>
   <!-- <button class="email-signup-button" onclick="fullpage_api.moveTo('page3')">
     ✨ Join the Email List ✨
   </button> -->    
+  <!--Module Link Button-->
 
 <!--sign up-->
   <div class="form-container" id="subscribe-section">
@@ -835,6 +849,7 @@ button:hover {
     </form>
     <p id="subscribe-msg" style="display:none"></p> 
   </div>
+
 
   <!--Services button -->
     <button class="services-button" onclick="fullpage_api.moveTo('page2')">
