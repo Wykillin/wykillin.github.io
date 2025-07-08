@@ -1222,12 +1222,22 @@ button:hover {
   scrollOverflow: true, // allow inner scrolls to work
   touchSensitivity: 15,
   normalScrollElements: '.scrollable', // optional for nested scrollables
-  afterRender: function() {
-      const hash = window.location.hash.replace('#', '');
-      if (hash && typeof fullpage_api !== 'undefined') {
-        fullpage_api.silentMoveTo(hash);
+ afterRender: function () {
+  const hash = window.location.hash.replace('#', '');
+
+  if (hash && typeof fullpage_api !== 'undefined') {
+    // If autoScrolling is disabled (mobile), manually scroll
+    if (!fullpage_api.getFullpageData().options.autoScrolling) {
+      const sectionEl = document.querySelector(`[data-anchor="${hash}"]`);
+      if (sectionEl) {
+        sectionEl.scrollIntoView({ behavior: 'smooth' });
       }
-    },
+    } else {
+      fullpage_api.silentMoveTo(hash);
+    }
+  }
+  
+},
 	});
 
 
@@ -1238,12 +1248,6 @@ window.addEventListener('resize', () => {
   }
 });
 
-window.addEventListener('load', () => {
-  const hash = window.location.hash.replace('#', '');
-  if (hash) {
-    fullpage_api.moveTo(hash);
-  }
-});
 
 
 </script>
