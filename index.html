@@ -1222,7 +1222,6 @@ button:hover {
   scrollOverflow: true, // allow inner scrolls to work
   touchSensitivity: 15,
   normalScrollElements: '.scrollable', // optional for nested scrollables
- lockAnchors: false,
   afterRender: function() {
       const hash = window.location.hash.replace('#', '');
       if (hash && typeof fullpage_api !== 'undefined') {
@@ -1231,16 +1230,6 @@ button:hover {
     },
 	});
 
-    window.addEventListener('load', () => {
-    const hash = window.location.hash.replace('#', '');
-
-    // Wait until fullPage has initialized
-    setTimeout(() => {
-      if (hash && typeof fullpage_api !== 'undefined') {
-        fullpage_api.moveTo(hash);
-      }
-    }, 100);
-  });
 
 	// 🔥 Add this after initializing fullPage.js
 window.addEventListener('resize', () => {
