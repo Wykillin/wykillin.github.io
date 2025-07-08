@@ -906,6 +906,15 @@ button:hover {
   scroll-margin-top: 70px; /* adjust as needed */
 }
 
+.scrollable {
+  max-height: 100vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 1em;
+}
+
+
+
 
 </style>
 <!--Sender JS-->
@@ -1116,6 +1125,7 @@ button:hover {
    
   <!-- Workshop section -->
   <div class="section" id="workshop" data-anchor="workshop">
+    <div class="scrollable">
   <section class="workshop-landing fade-in">
     <div class="container">
       <div class="section hero-background">
@@ -1193,7 +1203,7 @@ button:hover {
       </div>
     </div>
   </section>
-
+</div>
 
 </div><!-- end of workshop section -->
 
@@ -1226,28 +1236,28 @@ new fullpage('#fullpage', {
   menu: '#menu',
   autoScrolling: !isMobile,
   fitToSection: !isMobile,
-  scrollOverflow: true,  // 👈 disable on mobile
+  scrollOverflow: !isMobile,  // 👈 disable on mobile
   css3: true,
   controlArrows: true,
   verticalCentered: true,
-  paddingTop: '3em',
+  paddingTop: '1em',
   responsiveWidth: 768,
   lockAnchors: true,
 
-  afterRender: function () {
-    const hash = window.location.hash.replace('#', '');
-    if (hash && typeof fullpage_api !== 'undefined') {
-      if (!isMobile) {
-        fullpage_api.silentMoveTo(hash);
-      } else {
-        // Manual scroll on mobile — avoid jerky jump
-        const sectionEl = document.querySelector(`[data-anchor=\"${hash}\"]`);
-        if (sectionEl) {
-          sectionEl.scrollIntoView({ behavior: 'instant' });
-        }
-      }
-    }
-  }
+  // afterRender: function () {
+  //   const hash = window.location.hash.replace('#', '');
+  //   if (hash && typeof fullpage_api !== 'undefined') {
+  //     if (!isMobile) {
+  //       fullpage_api.silentMoveTo(hash);
+  //     } else {
+  //       // Manual scroll on mobile — avoid jerky jump
+  //       const sectionEl = document.querySelector(`[data-anchor=\"${hash}\"]`);
+  //       if (sectionEl) {
+  //         sectionEl.scrollIntoView({ behavior: 'instant' });
+  //       }
+  //     }
+  //   }
+  // }
 });
 
 
