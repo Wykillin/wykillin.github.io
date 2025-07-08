@@ -1238,6 +1238,20 @@ window.addEventListener('load', () => {
     fullpage_api.moveTo(hash);
   }
 });
+
+
+</script>
+<script>
+  window.addEventListener('load', () => {
+    const hash = window.location.hash.replace('#', '');
+
+    // Wait until fullPage has initialized
+    setTimeout(() => {
+      if (hash && typeof fullpage_api !== 'undefined') {
+        fullpage_api.moveTo(hash);
+      }
+    }, 100);
+  });
 </script>
 
 
