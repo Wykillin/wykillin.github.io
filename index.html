@@ -1216,7 +1216,7 @@ button:hover {
 	paddingTop: '3em',
 	//paddingBottom: '3em',
 	afterResponsive: function(isResponsive){},
-    autoScrolling: false,
+    autoScrolling: true,
   fitToSection: true,
   responsiveWidth: 768, // below this, autoScrolling disables
   scrollOverflow: true, // allow inner scrolls to work
@@ -1224,6 +1224,17 @@ button:hover {
   normalScrollElements: '.scrollable', // optional for nested scrollables
  lockAnchors: false,
 	});
+
+    window.addEventListener('load', () => {
+    const hash = window.location.hash.replace('#', '');
+
+    // Wait until fullPage has initialized
+    setTimeout(() => {
+      if (hash && typeof fullpage_api !== 'undefined') {
+        fullpage_api.moveTo(hash);
+      }
+    }, 100);
+  });
 
 	// 🔥 Add this after initializing fullPage.js
 window.addEventListener('resize', () => {
@@ -1242,16 +1253,7 @@ window.addEventListener('load', () => {
 
 </script>
 <script>
-  window.addEventListener('load', () => {
-    const hash = window.location.hash.replace('#', '');
 
-    // Wait until fullPage has initialized
-    setTimeout(() => {
-      if (hash && typeof fullpage_api !== 'undefined') {
-        fullpage_api.moveTo(hash);
-      }
-    }, 100);
-  });
 </script>
 
 
