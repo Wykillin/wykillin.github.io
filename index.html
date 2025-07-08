@@ -853,6 +853,35 @@ button:hover {
   margin-top: 3rem;
 }
 
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-background {
+  background: linear-gradient(to bottom, #12003b, #0b0c10 50%, #000 100%);
+  color: white;
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  text-align: center;
+}
+
+.workshop-label {
+  display: inline-block;
+  background: linear-gradient(to right, #00ffc3, #0077ff);
+  color: #000;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  box-shadow: 0 0 10px rgba(0,255,195,0.3);
+}
+
 
 
 </style>
@@ -1064,10 +1093,12 @@ button:hover {
    
   <!-- Workshop section -->
   <div class="section" id="workshop" data-anchor="workshop">
-  <section class="workshop-landing">
+  <section class="workshop-landing fade-in">
     <div class="container">
+      <div class="section hero-background">>
       <h1>Living as a Modern Mystic</h1>
       <h2>4-Part Interactive Workshop · Begins July 19th @ 11AM CDT</h2>
+      </div>
 
       <p class="tagline">
         Reconnect with the intelligence of creation, master the architecture of consciousness, and activate your role as a conscious co-creator.
@@ -1094,18 +1125,19 @@ button:hover {
         <p>Over four live sessions, we'll explore:</p>
 
         <ul>
-          <li>⚡ Workshop 1: <strong>Foundations of Reality</strong><br>
+          <li><span class="workshop-label">Workshop 1:</span> <strong>Foundations of Reality</strong><br>
             Stillness as pure potential · Standing waves · Quantum truth · Intention as interface
-          </li>
-          <li>🌐 Workshop 2: <strong>Fields, Fractals & the Blueprint of Consciousness</strong><br>
+          </li><br>
+          <li><span class="workshop-label">Workshop 2:</span> <strong>Fields, Fractals & the Blueprint of Consciousness</strong><br>
             Fractal intelligence · One electron theory · Cellular resonance · Toroidal harmonics
-          </li>
-          <li>🔥 Workshop 3: <strong>Individuation & Christ Consciousness</strong><br>
+          </li><br>
+          <li><span class="workshop-label">Workshop 3:</span> <strong>Individuation & Christ Consciousness</strong><br>
             Your soul's geometry · Evolution of human consciousness · The cosmic archetype
-          </li>
-          <li>👁 Workshop 4: <strong>Future Human</strong><br>
+          </li><br>
+          <li><span class="workshop-label">Workshop 4:</span> <strong>Future Human</strong><br>
             Telepathy · Scalar awareness · Esoteric tech · Becoming a galactic citizen
           </li>
+
         </ul>
 
       </div>
@@ -1131,7 +1163,7 @@ button:hover {
           <li>✔ Bonus integration materials after the final session</li>
           <li>✔ Ask Adam questions directly during Q&A</li>
         </ul>
-        <p><strong>🎁 Early Bird: First 10 Registrants Get It All for $200</strong><br>
+        <p><strong>First 10 Registrants Get It All for $200</strong><br>
         (Over 80% off typical transformational workshops!)</p>
         <br>
         <a href="https://ko-fi.com/s/d1184b5528" target="_blank" class="btn vip">Claim Early Access</a>
@@ -1355,5 +1387,23 @@ document.addEventListener('focusout', resetViewport);
 // .then(res => res.json())
 // .then(data => console.log(data));
 </script>
+<script>
+  window.addEventListener('load', () => {
+    document.querySelector('.workshop-landing').classList.add('visible');
+  });
+
+  // OR use this if you want to trigger when scrolled into view:
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.4 });
+
+  const fadeEls = document.querySelectorAll('.fade-in');
+  fadeEls.forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
