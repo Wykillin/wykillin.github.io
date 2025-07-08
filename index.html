@@ -930,12 +930,12 @@ button:hover {
 
 <body>
 
-<ul id="menu">
+<!-- <ul id="menu">
 		<li data-menuanchor="page1" class="active"><a href="#page1">Videos</a></li>
 		<li data-menuanchor="page2"><a href="#page2">Services</a></li>
-		<!-- <li data-menuanchor="page3"><a href="#page3">Videos</a></li> -->
+		<li data-menuanchor="page3"><a href="#page3">Videos</a></li>
 		<li data-menuanchor="page4"><a href="#page1">Top</a></li>
-	</ul>
+	</ul> -->
 
 
 
@@ -1202,14 +1202,31 @@ button:hover {
 <script type="text/javascript" src="fullpage.js"></script>
 <script type="text/javascript">
   const isMobile = window.innerWidth < 768;
+// List your anchors
+  const anchors = ['page1', 'page2', 'page3', 'workshop'];
+  const hash = window.location.hash.replace('#', '');
 
+  // Only act if the hash is valid
+  if (anchors.includes(hash)) {
+    const fullpageEl = document.getElementById('fullpage');
+    const sections = Array.from(fullpageEl.querySelectorAll('.section'));
+    const targetSection = fullpageEl.querySelector(`[data-anchor="${hash}"]`);
+
+    if (targetSection) {
+      // Remove the target section
+      fullpageEl.removeChild(targetSection);
+
+      // Insert it at the top
+      fullpageEl.insertBefore(targetSection, sections[0]);
+    }
+  }
 
 new fullpage('#fullpage', {
   anchors: ['page1', 'page2', 'page3', 'workshop'],
   menu: '#menu',
   autoScrolling: !isMobile,
   fitToSection: !isMobile,
-  scrollOverflow: !isMobile,  // 👈 disable on mobile
+  scrollOverflow: true,  // 👈 disable on mobile
   css3: true,
   controlArrows: true,
   verticalCentered: true,
