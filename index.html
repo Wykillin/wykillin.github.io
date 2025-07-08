@@ -3,7 +3,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Adam David</title>
   <link rel="icon" href="/torus.ico" type="image/x-icon">
 	<meta name="author" content="Adam David Wykle" />
@@ -21,7 +21,12 @@
 	<script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
 </script>
-  
+<script>
+const path = window.location.pathname;
+if (path.includes('workshop')) {
+  window.location.hash = '#workshop';
+}
+</script>
 <script type="text/javascript">
    (function(){
       emailjs.init({
@@ -76,11 +81,11 @@ async function fetchYouTubeVideos() {
     const carouselWrapper = document.getElementById("carousel-wrapper");
     carouselWrapper.innerHTML = nonShortsVideos.slice(0, 3).map(video => `
       <div class="carousel-video">
-        <iframe 
-          src="https://www.youtube.com/embed/${video.id}" 
-          title="${video.snippet.title}" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        <iframe
+          src="https://www.youtube.com/embed/${video.id}"
+          title="${video.snippet.title}"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen>
         </iframe>
       </div>
@@ -111,7 +116,7 @@ function navigateToContact(service) {
 }
 
     </script>
-	
+
 <style>
 		@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 a:link {
@@ -123,10 +128,10 @@ a:visited {
      color: #8e8722;
     /* background-color: transparent; */
     text-decoration: none;
-} 
+}
 a:hover {
     color: #ffee00;
-   
+
     text-decoration: bold;
 }
 a:active {
@@ -152,14 +157,14 @@ a:active {
 	font-size:4vh;
 	position: relative;
 	text-align: center;
-	background-color: white; 
+	background-color: white;
 	top:5vh;
 	left: 0;
 	margin: auto auto;
 	right: 0;
 	bottom: 3vh;
 	color: #000000;
-	display:inline; 
+	display:inline;
 }
 #section0{
 	background-image: url("image(10).png");/*"thoth_header.jpg");"fractal spiral bg.png");FoL gold.png");/*top-bg-fractal-1024x512.png");*/
@@ -173,7 +178,7 @@ a:active {
 	border-left-width: 1.5em;
 	border-right-width: 1.5em;
 	color: #292545;/*rgb(67, 69, 194)*/
-	
+
 
 }
  #section1{
@@ -189,8 +194,8 @@ a:active {
 	border-left-width: 1.5em;
 	border-right-width: 1.5em;
 	color: #292545;/*rgb(67, 69, 194)*/
-	
-} 
+
+}
 #section2{
 	/*font-size:3vh;
 	 padding:5vh 5vh 0 5vh; */
@@ -457,7 +462,7 @@ background-color:rgba(255,255,255,.5);
   text-align:center;
   text-decoration:none;
   color:#404040;
-  margin: 0 30px; 
+  margin: 0 30px;
   transition:.5s;
 }
 #socialBtns ul li a span {
@@ -537,19 +542,19 @@ background-color:rgba(255,255,255,.5);
 .youtube:hover {
   color: #ff0000;
 }
-.youtube:hover span { 
+.youtube:hover span {
   background: #868686;
 }
 .twitter:hover {
   color: #1da1f2;
 }
-.twitter:hover span { 
+.twitter:hover span {
   background: #1da1f2;
 }
 .instagram:hover {
   color: #c32aa3;
 }
-.instagram:hover span { 
+.instagram:hover span {
   background: #c32aa3;
 }
 ul li a .twitter {
@@ -629,15 +634,15 @@ h2 br{
   .service-card {
     padding: 1em;
   }
-  
+
   .services-title {
     font-size: 2.5vh;
   }
-  
+
   .service-card h3 {
     font-size: 2vh;
   }
-  
+
   .service-card p {
     font-size: 1.4vh;
   }
@@ -703,7 +708,7 @@ label, input, select, textarea, button {
   width: 100%;
   margin-bottom: 15px;
 	font-size: 16px;  /* prevent mobile auto-zoom */
-  
+
 }
 
 label {
@@ -762,6 +767,86 @@ button:hover {
   display: block;
   width: 100%;
 }
+.workshop-landing {
+  padding: 5vh 10vw;
+  background: #0b0c10;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  color: #ccc;
+}
+
+.cta-buttons .btn {
+  padding: 1em 2em;
+  margin: 0.5em;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn.primary {
+  background: #00ffcc;
+  color: #000;
+}
+
+.btn.secondary {
+  background: transparent;
+  border: 2px solid #00ffcc;
+  color: #00ffcc;
+}
+
+.btn.vip {
+  background: #ff0080;
+  color: #fff;
+}
+
+.countdown {
+  margin: 2rem 0;
+  font-size: 1.5rem;
+}
+
+.why-when-where {
+  text-align: left;
+  margin-top: 3rem;
+}
+
+.why-when-where ul {
+  list-style-type: square;
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+.testimonials {
+  margin-top: 4rem;
+  background: #141414;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.testimonials blockquote {
+  margin: 1rem auto;
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+.vip-offer {
+  background: #1a1a1a;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-top: 3rem;
+}
+
 
 
 </style>
@@ -779,7 +864,7 @@ button:hover {
     m.parentNode.insertBefore(a, m)
   })(window, document, 'script', 'https://cdn.sender.net/accounts_resources/universal.js', 'sender');
   sender('eeda3e532a6794')
- 
+
 
 </script>
 
@@ -800,7 +885,7 @@ button:hover {
 
 <div class="section active" id="section0" data-anchor="page1">
 
-  
+
 
 <!-- <div>
 <-- Drop Down Menu	 >
@@ -834,7 +919,7 @@ button:hover {
 <br><br>
   <!-- <button class="email-signup-button" onclick="fullpage_api.moveTo('page3')">
     ✨ Join the Email List ✨
-  </button> -->    
+  </button> -->
   <!--Module Link Button-->
 
 <!--sign up-->
@@ -847,7 +932,7 @@ button:hover {
       <input type="text" name="hp" style="display:none">
       <button type="submit">Sign up!</button>
     </form>
-    <p id="subscribe-msg" style="display:none"></p> 
+    <p id="subscribe-msg" style="display:none"></p>
   </div>
 
 
@@ -859,7 +944,7 @@ button:hover {
 </div>
 
 <div id="topVideo">
-		
+
 	<!-- YouTube Video Carousel Section -->
 <div id="youtube-carousel" class="carousel-container">
   <h2 class="carousel-title">Latest Videos</h2>
@@ -875,9 +960,9 @@ button:hover {
  		<i class="fa fa-envelope"></i> Adam@AdamWykle.com
 	</a>
 	</h3>
-	</div> 
-	
-	
+	</div>
+
+
 </div>
 </div>
 
@@ -890,7 +975,7 @@ button:hover {
     <!-- <div class="service-card" onclick="window.open('https://ko-fi.com/c/d9e32849bf', 'koFiWindow', 'width=600,height=1024,scrollbars=yes')">  onclick="navigateToContact('Soul Blueprint')">
       <h3>Soul Blueprint</h3>
       <p style="color:green;font-weight: bold;">$100</p>
-      <p>I'll gather up your Soul Blueprint markers, and write up a brief report of the indicators of your soul's intention in this life. This service is aimed to give you 
+      <p>I'll gather up your Soul Blueprint markers, and write up a brief report of the indicators of your soul's intention in this life. This service is aimed to give you
         all the tools you need to begin your journey of self-discovery and empowerment by having all of the different divinations of your soul in one place.
         Please allow 2-3 days to complete this reading and provide your Full name, time, date, and location of birth.
       </p>
@@ -921,9 +1006,9 @@ button:hover {
       <p>We'll look at all the esoteric markers of your soul and rationalize where you are in your spiritual journey.</p>
         <p>This free consultation will be a 30-45 minute session to see if we are a good fit for each other, what to expect, and how I can help you on your journey.</p>
         <br><p><b>30-45 Mins initial session</b></p>
-      
+
     </div>
-  
+
     <!-- <div class="service-card" onclick="navigateToContact('Tarot Reading')">
       <h3>Tarot Card Reading</h3>
       <p style="color:green;font-weight: bold;">$50</p>
@@ -932,17 +1017,17 @@ button:hover {
     </div> -->
 
   </div>
-  
+
 	<div class="section" id="section3" data-anchor="page3">
 		<div class="form-container">
 		  <h2>Contact Me</h2>
 		  <form id="contact-form">
 			<label for="name">Name</label>
 			<input type="text" id="name" name="name" placeholder="Your Name" required>
-	  
+
 			<label for="email">Email</label>
 			<input type="email" id="email" name="email" placeholder="Your Email" required>
-	  
+
 			<label for="service">Select a Service</label>
 			<select id="service" name="service" required>
 			  <option value="" disabled selected>Choose a Service</option>
@@ -952,13 +1037,13 @@ button:hover {
 			  <option value="Plasma Science Consulting">Plasma Science Consulting</option>
 			  <option value="Just Contacting">Just Contacting</option>
 			</select>
-	  
+
 			<label for="message"><b>Additional Details. For Soul Blueprint - please include time, date, and location of birth along with Full name</b></label>
 			<textarea id="message" name="message" placeholder="Please enter your information amd any dates you are available..."></textarea>
       <
 
       <input type="text" name="honeypot" id="honeypot" style="display: none;">
-	  
+
 			<button type="submit">Send Request</button>
 		  </form>
 		<h2>
@@ -966,42 +1051,70 @@ button:hover {
 		<a href="mailto:Adam@AdamWykle.com">
 	   	 <i class="fa fa-envelope"></i> Adam@AdamWykle.com
 		</a>
-		</h2>	
+		</h2>
 		</div>
-		
+
 	  </div>
-    <!-- <div id="socialBtns" style=""">
-		<ul style=" ">
-			<li>
-				<a class="twitter" href="https://twitter.com/Wykillin">
-					<span></span>
-					<span></span>
-					<span></span>
-					<span></span>
-					<i class="fa fa-twitter" aria-hidden="true"></i>
-				</a>
-			</li>
-			<li>
-				<a class="youtube" href="https://www.youtube.com/@AdamDavidSpiritU">
-					<span></span>
-					<span></span>
-					<span></span>
-					<span></span>
-					<i class="fa fa-youtube" aria-hidden="true"></i>
-				</a>
-			</li>
-			<li>
-			  <a class="instagram" href="https://www.instagram.com/Wykillin2">
-				  <span></span>
-				  <span></span>
-				  <span></span>
-				  <span></span>
-				  <i class="fa fa-instagram" aria-hidden="true"></i>
-				</a>
-			</li>
-		</ul>
-	</div> -->
-</div><-- end of fullpage div -->
+   
+  <!-- Workshop section -->
+  <div class="section" id="workshop" data-anchor="workshop">
+  <section class="workshop-landing">
+    <div class="container">
+      <h1>Initiation into Modern Mysticism</h1>
+      <h3>LIVE ONLINE: July 19, 2025 · 11AM-1PM CST</h3>
+
+      <p class="tagline">An immersive weekend exploring wave mechanics, Christ consciousness, and your cosmic potential.</p>
+
+      <div class="cta-buttons">
+        <a href="#register" class="btn primary">Register for General Access</a>
+        <!-- <a href="#vip" class="btn secondary">Upgrade to VIP Masterclass</a> -->
+      </div>
+
+      <div class="countdown">
+        <h4>Your Portal Opens In:</h4>
+        <div id="countdown-timer">Loading countdown...</div>
+      </div>
+
+      <div class="why-when-where">
+        <h2>Why You Should Attend</h2>
+        <ul>
+          <li>Decode the hidden structure of reality through plasma and field theory</li>
+          <li>Discover your soul's blueprint and the arc of human evolution</li>
+          <li>Learn how mysticism and science are converging in this era of awakening</li>
+        </ul>
+
+        <p><strong>WHEN:</strong> July 19, 2025 <br>
+           <strong>WHERE:</strong> Live via Private Link <br>
+           <strong>WHY:</strong> To activate the next octave of your spiritual evolution</p>
+      </div>
+
+      <div class="testimonials">
+        <h2>What People Are Saying</h2>
+        <blockquote>
+          “This experience changed how I see myself and the world. It's like I finally *remembered* who I am.”<br>
+          <span>— Previous Attendee</span>
+        </blockquote>
+        <blockquote>
+          “Deep, real, beautifully curated. This isn't just information — it's transformation.”<br>
+          <span>— Spiritual Coach</span>
+        </blockquote>
+      </div>
+
+      <div class="vip-offer" id="vip">
+        <h3>Want Lifetime Access + VIP Bonuses?</h3>
+        <ul>
+          <li>Lifetime access to all recordings</li>
+          <li>Bonus workshop: *Quantum Stillness & the Fifth Density Field*</li>
+          <li>Private Q&A and behind-the-scenes masterclass</li>
+        </ul>
+        <p><strong>Only $200 — Limited Spaces Available</strong></p>
+        <!-- <a href="#register" class="btn vip">Claim VIP Access</a> -->
+      </div>
+    </div>
+  </section>
+</div><!-- end of workshop section -->
+
+</div><!-- end of fullpage div -->
 
 <script type="text/javascript" src="fullpage.js"></script>
 <script type="text/javascript">
@@ -1015,7 +1128,7 @@ button:hover {
 	css3: true,
 	controlArrows: true,
 	controlArrowsHTML: [
-		'<div class="fp-arrow"></div>', 
+		'<div class="fp-arrow"></div>',
 		'<div class="fp-arrow"></div>'
 	],
 	verticalCentered: true,
@@ -1023,7 +1136,7 @@ button:hover {
 	//paddingBottom: '3em',
 	afterResponsive: function(isResponsive){},
 	});
-	
+
 	// 🔥 Add this after initializing fullPage.js
 window.addEventListener('resize', () => {
   if (typeof fullpage_api !== 'undefined') {
@@ -1057,7 +1170,7 @@ window.addEventListener('resize', () => {
 <script>
   //const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyBh_2To1hitSKCrETthofcYTclxEYM6JyxExkZJFa1VIllrEtQ4K67PuX1Fvbbgjgz/exec';
 
-  
+
   // window.addEventListener('DOMContentLoaded', ()=> {
   //   const form = document.getElementById('subscribe-form');
   //   const msg  = document.getElementById('subscribe-msg');
@@ -1067,10 +1180,10 @@ window.addEventListener('resize', () => {
   //   }
   //   form.addEventListener('submit', async e => {
   //     e.preventDefault();
-  
+
   //     // trap bots
   //     if (form.hp.value) return alert('Bot detected');
-  
+
   //     console.log('🤞 submitting to Google Apps Script…');
   //     const data = new FormData(form);
   //     try {
@@ -1159,7 +1272,34 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-  </script>
+  <script>
+  function updateCountdown() {
+    const targetDate = new Date("2025-07-19T11:00:00-05:00"); // CST
+    const now = new Date();
+    const diff = targetDate - now;
+
+    if (diff <= 0) {
+      document.getElementById("countdown-timer").innerHTML = "We're Live!";
+      clearInterval(countdownInterval);
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    const pad = (n) => (n < 10 ? "0" + n : n);
+
+    document.getElementById("countdown-timer").innerHTML = 
+      `${pad(days)} Days : ${pad(hours)} Hours : ${pad(minutes)} Minutes : ${pad(seconds)} Seconds`;
+  }
+
+  // Run immediately and then every second
+  updateCountdown();
+  const countdownInterval = setInterval(updateCountdown, 1000);
+</script>
+
 		<script>
 // Reset zoom on blur or resize
 function resetViewport() {
