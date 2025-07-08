@@ -939,7 +939,8 @@ button:hover {
 
 <div id="fullpage" class="fullpage-wrapper">
 
-<div class="section active" id="section0" data-anchor="page1">
+<div class="section active" id="section0" >
+  <!--data-anchor="page1">-->
 
 
 
@@ -1201,7 +1202,7 @@ button:hover {
 <script type="text/javascript">
 	var myFullpage = new fullpage('#fullpage', {
 		sectionsColor: ['#F5F3F3', '#F5F3F3', '#195C51', '#084238', '#ccddff'],
-		anchors: ['page1', 'page2', 'page3'],
+		anchors: ['page1', 'page2', 'page3', 'workshop'],
  		menu: '#menu',
 		responsiveWidth: 0,
 	responsiveHeight: 0,
@@ -1222,6 +1223,7 @@ button:hover {
   scrollOverflow: true, // allow inner scrolls to work
   touchSensitivity: 15,
   normalScrollElements: '.scrollable', // optional for nested scrollables
+  lockanchor: true,
 	});
 
 	// 🔥 Add this after initializing fullPage.js
