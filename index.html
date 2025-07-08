@@ -1236,13 +1236,14 @@ new fullpage('#fullpage', {
   menu: '#menu',
   autoScrolling: !isMobile,
   fitToSection: !isMobile,
-  scrollOverflow: !isMobile,  // 👈 disable on mobile
+  scrollOverflow: true,  // 👈 disable on mobile
   css3: true,
   controlArrows: true,
   verticalCentered: true,
   paddingTop: '1em',
   responsiveWidth: 768,
   lockAnchors: true,
+  normalScrollElements: '.scrollable', // allow inner scrolls to work
 
   // afterRender: function () {
   //   const hash = window.location.hash.replace('#', '');
