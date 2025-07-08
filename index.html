@@ -1201,33 +1201,35 @@ button:hover {
 <script type="text/javascript">
   const isMobile = window.innerWidth < 768;
 
-  var myFullpage = new fullpage('#fullpage', {
+
+new fullpage('#fullpage', {
   anchors: ['page1', 'page2', 'page3', 'workshop'],
   menu: '#menu',
   autoScrolling: !isMobile,
   fitToSection: !isMobile,
-  scrollOverflow: !isMobile,
-  responsiveWidth: 768,
+  scrollOverflow: !isMobile,  // 👈 disable on mobile
   css3: true,
   controlArrows: true,
   verticalCentered: true,
   paddingTop: '3em',
-  touchSensitivity: 15,
-  lockAnchors: isMobile, // 🛑 prevent hash rewriting on mobile
+  responsiveWidth: 768,
 
   afterRender: function () {
     const hash = window.location.hash.replace('#', '');
-
     if (hash && typeof fullpage_api !== 'undefined') {
-      if (isMobile) {
-        const sectionEl = document.querySelector(`[data-anchor=\"${hash}\"]`);
-        if (sectionEl) sectionEl.scrollIntoView({ behavior: 'smooth' });
-      } else {
+      if (!isMobile) {
         fullpage_api.silentMoveTo(hash);
+      } else {
+        // Manual scroll on mobile — avoid jerky jump
+        const sectionEl = document.querySelector(`[data-anchor=\"${hash}\"]`);
+        if (sectionEl) {
+          sectionEl.scrollIntoView({ behavior: 'instant' });
+        }
       }
     }
   }
 });
+
 
 // 	var myFullpage = new fullpage('#fullpage', {
 // 		sectionsColor: ['#F5F3F3', '#F5F3F3', '#195C51', '#084238'],
