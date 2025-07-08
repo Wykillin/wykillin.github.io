@@ -1199,41 +1199,36 @@ button:hover {
 
 <script type="text/javascript" src="fullpage.js"></script>
 <script type="text/javascript">
-   var myFullpage = new fullpage('#fullpage', {
-    sectionsColor: ['#F5F3F3', '#F5F3F3', '#195C51', '#084238'],
-    anchors: ['page1', 'page2', 'page3', 'workshop'],
-    menu: '#menu',
-    responsiveWidth: 768,
-    scrollOverflow: true,
-    touchSensitivity: 15,
-    css3: true,
-    controlArrows: true,
-    verticalCentered: true,
-    paddingTop: '3em',
-    autoScrolling: true,
-    fitToSection: true,
+  const isMobile = window.innerWidth < 768;
 
-    afterRender: function () {
-      const hash = window.location.hash.replace('#', '');
+  var myFullpage = new fullpage('#fullpage', {
+  anchors: ['page1', 'page2', 'page3', 'workshop'],
+  menu: '#menu',
+  autoScrolling: !isMobile,
+  fitToSection: !isMobile,
+  scrollOverflow: true,
+  responsiveWidth: 768,
+  css3: true,
+  controlArrows: true,
+  verticalCentered: true,
+  paddingTop: '3em',
+  touchSensitivity: 15,
+  lockAnchors: isMobile, // 🛑 prevent hash rewriting on mobile
 
-      if (hash && typeof fullpage_api !== 'undefined') {
-        if (!fullpage_api.getFullpageData().options.autoScrolling) {
-          const sectionEl = document.querySelector(`[data-anchor="${hash}"]`);
-          if (sectionEl) {
-            sectionEl.scrollIntoView({ behavior: 'smooth' });
-          }
-        } else {
-          fullpage_api.silentMoveTo(hash);
-        }
-      }
-    },
+  afterRender: function () {
+    const hash = window.location.hash.replace('#', '');
 
-    afterLoad: function(origin, destination, direction){
-      if (!fullpage_api.getFullpageData().options.autoScrolling) {
-        history.replaceState(null, null, `#${destination.anchor}`);
+    if (hash && typeof fullpage_api !== 'undefined') {
+      if (isMobile) {
+        const sectionEl = document.querySelector(`[data-anchor=\"${hash}\"]`);
+        if (sectionEl) sectionEl.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        fullpage_api.silentMoveTo(hash);
       }
     }
-  });
+  }
+});
+
 // 	var myFullpage = new fullpage('#fullpage', {
 // 		sectionsColor: ['#F5F3F3', '#F5F3F3', '#195C51', '#084238'],
 // 		anchors: ['page1', 'page2', 'page3', 'workshop'],
@@ -1286,10 +1281,6 @@ button:hover {
 
 
 </script>
-<script>
-
-</script>
-
 
 <script>
   // Handle Form Submission
