@@ -939,7 +939,7 @@ button:hover {
 
 <div id="fullpage" class="fullpage-wrapper">
 
-<div class="section active" id="section0" >
+<div class="section active" id="section0" data-anchor="page1">
 
 
 
@@ -1222,7 +1222,13 @@ button:hover {
   scrollOverflow: true, // allow inner scrolls to work
   touchSensitivity: 15,
   normalScrollElements: '.scrollable', // optional for nested scrollables
- lockAnchors: true,
+ lockAnchors: false,
+  afterRender: function() {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && typeof fullpage_api !== 'undefined') {
+        fullpage_api.silentMoveTo(hash);
+      }
+    },
 	});
 
     window.addEventListener('load', () => {
