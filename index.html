@@ -988,7 +988,7 @@ button:hover {
 
 
 </head>
-
+<div id="recaptcha-root"></div>
 <body>
 
 <!-- <ul id="menu">
@@ -1250,17 +1250,7 @@ button:hover {
       
       <input type="text" name="honeypot" id="honeypot" style="display: none;">
       
-    <div id="recaptcha"
-     class="g-recaptcha"
-     data-sitekey="6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km"
-     data-size="invisible"
-     data-callback="onRecaptchaSuccess">
-    </div>
-
-
 <!-- <button type="submit">Send Request</button> -->
-
-      
 
 			<button type="submit">Send Request</button>
 		  </form>
@@ -1317,12 +1307,13 @@ new fullpage('#fullpage', {
 
 <script>
   let recaptchaWidgetId = null;
+  const form = document.getElementById('contact-form');
 
-  // Render the widget if the API is ready; return true when ready
+  // Render into the STABLE container outside fullpage sections
   function renderIfReady() {
     if (!window.grecaptcha || !grecaptcha.render) return false;
     if (recaptchaWidgetId === null) {
-      recaptchaWidgetId = grecaptcha.render('recaptcha', {
+      recaptchaWidgetId = grecaptcha.render('recaptcha-root', {
         sitekey: '6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km',
         size: 'invisible',
         callback: onRecaptchaSuccess
@@ -1331,38 +1322,37 @@ new fullpage('#fullpage', {
     return true;
   }
 
-  const form = document.getElementById('contact-form');
+  // Try to render shortly after load (covers Firefox onload quirks)
+  let tries = 0;
+  (function warmUp() {
+    if (!renderIfReady() && tries++ < 30) setTimeout(warmUp, 150);
+  })();
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-
-    // Honeypot
     if (document.getElementById('honeypot').value) return;
 
-    // Try until the API is ready (max ~3s)
-    let tries = 0;
-    (function tryExec() {
-      if (renderIfReady()) {
-        grecaptcha.execute(recaptchaWidgetId);
-      } else if (tries++ < 20) {
-        setTimeout(tryExec, 150);
-      } else {
-        alert('reCAPTCHA failed to load—please refresh and try again.');
-      }
-    })();
+    // Ensure widget exists before executing
+    if (!renderIfReady()) {
+      console.warn('reCAPTCHA not ready, retrying…');
+      setTimeout(() => renderIfReady() && grecaptcha.execute(recaptchaWidgetId), 250);
+      return;
+    }
+
+    grecaptcha.execute(recaptchaWidgetId);
   });
 
-  // Called by Google when the challenge succeeds
   function onRecaptchaSuccess(token) {
-    // ensure token is in the serialized form
+    // Make sure the token is in the form EmailJS serializes
     let old = form.querySelector('input[name="g-recaptcha-response"]');
     if (old) old.remove();
-
     const hidden = document.createElement('input');
-    hidden.type  = 'hidden';
-    hidden.name  = 'g-recaptcha-response';
+    hidden.type = 'hidden';
+    hidden.name = 'g-recaptcha-response';
     hidden.value = token;
     form.appendChild(hidden);
+
+    // DEBUG (optional): console.log('token:', token);
 
     emailjs.sendForm('service_h7aa0dm', 'template_vgds77o', form)
       .then(() => {
@@ -1377,6 +1367,7 @@ new fullpage('#fullpage', {
       });
   }
 </script>
+
 
 <!-- IMPORTANT: ask for explicit render, include ONLY ONCE -->
 <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
