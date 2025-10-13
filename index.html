@@ -1396,31 +1396,35 @@ new fullpage('#fullpage', {
   });
 
   // Called automatically after successful reCAPTCHA
-  function onRecaptchaSuccess(token) {
-    const form = document.getElementById("contact-form");
+ function onRecaptchaSuccess(token) {
+  const form = document.getElementById("contact-form");
 
-    // Optional: attach the token to the form (for EmailJS validation)
-    const captchaInput = document.createElement("input");
-    captchaInput.type = "hidden";
-    captchaInput.name = "g-recaptcha-response";
-    captchaInput.value = token;
-    form.appendChild(captchaInput);
+  // Remove old tokens (avoid duplicates)
+  const oldToken = form.querySelector('input[name="g-recaptcha-response"]');
+  if (oldToken) oldToken.remove();
 
-    // Send email via EmailJS
-    emailjs.sendForm("service_h7aa0dm", "template_vgds77o", form)
-      .then(
-        function (response) {
-          alert("Message sent successfully!");
-          form.reset();
-          grecaptcha.reset();
-        },
-        function (error) {
-          alert("Failed to send message. Please try again later.");
-          console.error(error);
-          grecaptcha.reset();
-        }
-      );
-  }
+  // Inject the token into the form
+  const captchaInput = document.createElement("input");
+  captchaInput.type = "hidden";
+  captchaInput.name = "g-recaptcha-response";
+  captchaInput.value = token;
+  form.appendChild(captchaInput);
+
+  // Send form to EmailJS
+  emailjs.sendForm("service_h7aa0dm", "template_vgds77o", form)
+    .then(
+      (res) => {
+        alert("Message sent successfully!");
+        form.reset();
+        grecaptcha.reset();
+      },
+      (err) => {
+        alert("Failed to send message. Please try again later.");
+        console.error(err);
+        grecaptcha.reset();
+      }
+    );
+}
 </script>
 
 //<script>
