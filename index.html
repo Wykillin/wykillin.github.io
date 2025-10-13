@@ -1312,67 +1312,68 @@ new fullpage('#fullpage', {
 
 
 </script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<script>
-  let recaptchaWidgetId = null;
+<script
+  src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaApiLoaded"
+  async
+  defer>
+</script>
 
-  // Render the widget explicitly once the API is ready
-  window.onRecaptchaApiLoaded = function() {
-    recaptchaWidgetId = grecaptcha.render('recaptcha', {
-      sitekey: '6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km',
-      size: 'invisible',
+<script>
+  let recaptchaWidgetId;
+  const form = document.getElementById("contact-form");
+
+  // Called when the API finishes loading
+  function onRecaptchaApiLoaded() {
+    recaptchaWidgetId = grecaptcha.render("recaptcha", {
+      sitekey: "6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km",
+      size: "invisible",
       callback: onRecaptchaSuccess
     });
-  };
+  }
 
-  // The API will call onload= if we pass it in the script URL, but since we’re async/defer,
-  // we can also poll for readiness:
-  const waitForRecaptcha = setInterval(() => {
-    if (window.grecaptcha && grecaptcha.render && !recaptchaWidgetId) {
-      clearInterval(waitForRecaptcha);
-      window.onRecaptchaApiLoaded();
-    }
-  }, 100);
-
-  const form = document.getElementById('contact-form');
-
-  form.addEventListener('submit', function (e) {
+  // When user presses Send
+  form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // Honeypot
-    if (document.getElementById('honeypot').value) return;
+    // Honeypot check
+    if (document.getElementById("honeypot").value) return;
 
-    // Execute the *specific* widget we rendered
+    if (typeof grecaptcha === "undefined" || recaptchaWidgetId === undefined) {
+      alert("reCAPTCHA not ready — please wait a second and try again.");
+      return;
+    }
+
     grecaptcha.execute(recaptchaWidgetId);
   });
 
-  // Called when Google returns a token for this widget
+  // When Google validates and returns a token
   function onRecaptchaSuccess(token) {
-    // Ensure the token is in the form EmailJS serializes
-    const existing = form.querySelector('input[name="g-recaptcha-response"]');
-    if (existing) existing.remove();
+    // Remove any old token
+    const old = form.querySelector('input[name="g-recaptcha-response"]');
+    if (old) old.remove();
 
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'g-recaptcha-response';
-    input.value = token;
-    form.appendChild(input);
-console.log('token:', token);
+    // Inject new token
+    const hidden = document.createElement("input");
+    hidden.type = "hidden";
+    hidden.name = "g-recaptcha-response";
+    hidden.value = token;
+    form.appendChild(hidden);
+
     // Send via EmailJS
-    emailjs.sendForm('service_h7aa0dm', 'template_vgds77o', form)
+    emailjs.sendForm("service_h7aa0dm", "template_vgds77o", form)
       .then(() => {
-        alert('Message sent successfully!');
+        alert("Message sent successfully!");
         form.reset();
         grecaptcha.reset(recaptchaWidgetId);
       })
       .catch((err) => {
-        console.error(err);
-        alert('Failed to send message. Please try again later.');
+        console.error("EmailJS error:", err);
+        alert("Failed to send message. Please try again later.");
         grecaptcha.reset(recaptchaWidgetId);
       });
-      
   }
 </script>
+
 
 
 //<script>
