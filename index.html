@@ -1378,21 +1378,22 @@ new fullpage('#fullpage', {
 </script>
 
 <script>
-  // Handle Form Submission
-  document.getElementById("contact-form").addEventListener("submit", function(event) {
+  // Form submission handler
+  const form = document.getElementById("contact-form");
+
+  form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-     // Check honeypot field
-     const honeypot = document.getElementById("honeypot").value;
-      if (honeypot) {
-        alert("Bot detected! Submission rejected.");
-        return; // Stop form submission
-      }
+    // Honeypot check
+    const honeypot = document.getElementById("honeypot").value;
+    if (honeypot) {
+      console.warn("Bot detected!");
+      return;
+    }
 
-      // Trigger the invisible reCAPTCHA
-  grecaptcha.execute();
-
-});
+    // Trigger invisible reCAPTCHA
+    grecaptcha.execute();
+  });
 
   // Called automatically after successful reCAPTCHA
   function onRecaptchaSuccess(token) {
