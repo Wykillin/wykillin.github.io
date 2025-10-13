@@ -1248,6 +1248,8 @@ button:hover {
 			<label for="message"><b>Additional Details. For Soul Blueprint - please include time, date, and location of birth along with Full name</b></label>
 			<textarea id="message" name="message" placeholder="Please enter your information amd any dates you are available..."></textarea>
       
+      <input type="text" name="honeypot" id="honeypot" style="display: none;">
+      
       <div class="g-recaptcha"
           data-sitekey="6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km"
           data-callback="onRecaptchaSuccess"
@@ -1256,7 +1258,7 @@ button:hover {
 
 <!-- <button type="submit">Send Request</button> -->
 
-      <input type="text" name="honeypot" id="honeypot" style="display: none;">
+      
 
 			<button type="submit">Send Request</button>
 		  </form>
@@ -1306,126 +1308,71 @@ new fullpage('#fullpage', {
   responsiveWidth: 768,
   lockAnchors: true,
   normalScrollElements: '.scrollable', // allow inner scrolls to work
-
-  // afterRender: function () {
-  //   const hash = window.location.hash.replace('#', '');
-  //   if (hash && typeof fullpage_api !== 'undefined') {
-  //     if (!isMobile) {
-  //       fullpage_api.silentMoveTo(hash);
-  //     } else {
-  //       // Manual scroll on mobile — avoid jerky jump
-  //       const sectionEl = document.querySelector(`[data-anchor=\"${hash}\"]`);
-  //       if (sectionEl) {
-  //         sectionEl.scrollIntoView({ behavior: 'instant' });
-  //       }
-  //     }
-  //   }
-  // }
 });
-
-
-// 	var myFullpage = new fullpage('#fullpage', {
-// 		sectionsColor: ['#F5F3F3', '#F5F3F3', '#195C51', '#084238'],
-// 		anchors: ['page1', 'page2', 'page3', 'workshop'],
-//  		menu: '#menu',
-// 		responsiveWidth: 0,
-// 	responsiveHeight: 0,
-// 	responsiveSlides: false,
-// 	css3: true,
-// 	controlArrows: true,
-// 	controlArrowsHTML: [
-// 		'<div class="fp-arrow"></div>',
-// 		'<div class="fp-arrow"></div>'
-// 	],
-// 	verticalCentered: true,
-// 	paddingTop: '3em',
-// 	//paddingBottom: '3em',
-// 	afterResponsive: function(isResponsive){},
-//     autoScrolling: true,
-//   fitToSection: true,
-//   responsiveWidth: 768, // below this, autoScrolling disables
-//   scrollOverflow: true, // allow inner scrolls to work
-//   touchSensitivity: 15,
-//   normalScrollElements: '.scrollable', // optional for nested scrollables
-//  afterRender: function () {
-//   const hash = window.location.hash.replace('#', '');
-
-//   if (hash && typeof fullpage_api !== 'undefined') {
-//     // If autoScrolling is disabled (mobile), manually scroll
-//     if (!fullpage_api.getFullpageData().options.autoScrolling) {
-//       const sectionEl = document.querySelector(`[data-anchor="${hash}"]`);
-//       if (sectionEl) {
-//         sectionEl.scrollIntoView({ behavior: 'smooth' });
-//       }
-//     } else {
-//       fullpage_api.silentMoveTo(hash);
-//     }
-//   }
-  
-// },
-// 	});
-
-
-	// 🔥 Add this after initializing fullPage.js
-// window.addEventListener('resize', () => {
-//   if (typeof fullpage_api !== 'undefined') {
-//     fullpage_api.reBuild();
-//   }
-// });
-
 
 
 </script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
-  // Form submission handler
-  const form = document.getElementById("contact-form");
+  let recaptchaWidgetId = null;
 
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
+  // Render the widget explicitly once the API is ready
+  window.onRecaptchaApiLoaded = function() {
+    recaptchaWidgetId = grecaptcha.render('recaptcha', {
+      sitekey: '6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km',
+      size: 'invisible',
+      callback: onRecaptchaSuccess
+    });
+  };
 
-    // Honeypot check
-    const honeypot = document.getElementById("honeypot").value;
-    if (honeypot) {
-      console.warn("Bot detected!");
-      return;
+  // The API will call onload= if we pass it in the script URL, but since we’re async/defer,
+  // we can also poll for readiness:
+  const waitForRecaptcha = setInterval(() => {
+    if (window.grecaptcha && grecaptcha.render && !recaptchaWidgetId) {
+      clearInterval(waitForRecaptcha);
+      window.onRecaptchaApiLoaded();
     }
+  }, 100);
 
-    // Trigger invisible reCAPTCHA
-    grecaptcha.execute();
+  const form = document.getElementById('contact-form');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // Honeypot
+    if (document.getElementById('honeypot').value) return;
+
+    // Execute the *specific* widget we rendered
+    grecaptcha.execute(recaptchaWidgetId);
   });
 
-  // Called automatically after successful reCAPTCHA
- function onRecaptchaSuccess(token) {
-  const form = document.getElementById("contact-form");
+  // Called when Google returns a token for this widget
+  function onRecaptchaSuccess(token) {
+    // Ensure the token is in the form EmailJS serializes
+    const existing = form.querySelector('input[name="g-recaptcha-response"]');
+    if (existing) existing.remove();
 
-  // Remove old tokens (avoid duplicates)
-  const oldToken = form.querySelector('input[name="g-recaptcha-response"]');
-  if (oldToken) oldToken.remove();
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'g-recaptcha-response';
+    input.value = token;
+    form.appendChild(input);
 
-  // Inject the token into the form
-  const captchaInput = document.createElement("input");
-  captchaInput.type = "hidden";
-  captchaInput.name = "g-recaptcha-response";
-  captchaInput.value = token;
-  form.appendChild(captchaInput);
-
-  // Send form to EmailJS
-  emailjs.sendForm("service_h7aa0dm", "template_vgds77o", form)
-    .then(
-      (res) => {
-        alert("Message sent successfully!");
+    // Send via EmailJS
+    emailjs.sendForm('service_h7aa0dm', 'template_vgds77o', form)
+      .then(() => {
+        alert('Message sent successfully!');
         form.reset();
-        grecaptcha.reset();
-      },
-      (err) => {
-        alert("Failed to send message. Please try again later.");
+        grecaptcha.reset(recaptchaWidgetId);
+      })
+      .catch((err) => {
         console.error(err);
-        grecaptcha.reset();
-      }
-    );
-}
+        alert('Failed to send message. Please try again later.');
+        grecaptcha.reset(recaptchaWidgetId);
+      });
+  }
 </script>
+
 
 //<script>
   //const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyBh_2To1hitSKCrETthofcYTclxEYM6JyxExkZJFa1VIllrEtQ4K67PuX1Fvbbgjgz/exec';
