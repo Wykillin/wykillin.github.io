@@ -1250,11 +1250,13 @@ button:hover {
       
       <input type="text" name="honeypot" id="honeypot" style="display: none;">
       
-      <div class="g-recaptcha"
-          data-sitekey="6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km"
-          data-callback="onRecaptchaSuccess"
-          data-size="invisible">
-      </div>
+    <div id="recaptcha"
+     class="g-recaptcha"
+     data-sitekey="6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km"
+     data-size="invisible"
+     data-callback="onRecaptchaSuccess">
+    </div>
+
 
 <!-- <button type="submit">Send Request</button> -->
 
@@ -1319,61 +1321,73 @@ new fullpage('#fullpage', {
 </script>
 
 <script>
-  let recaptchaWidgetId;
-  const form = document.getElementById("contact-form");
+  let recaptchaWidgetId = null;
+  const form = document.getElementById('contact-form');
 
-  // Called when the API finishes loading
-  function onRecaptchaApiLoaded() {
-    recaptchaWidgetId = grecaptcha.render("recaptcha", {
-      sitekey: "6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km",
-      size: "invisible",
-      callback: onRecaptchaSuccess
-    });
+  // Render the widget if/when the API is ready.
+  function ensureRecaptchaRendered() {
+    if (typeof grecaptcha === 'undefined') return false;
+    if (recaptchaWidgetId === null) {
+      recaptchaWidgetId = grecaptcha.render('recaptcha', {
+        sitekey: '6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km',
+        size: 'invisible',
+        callback: onRecaptchaSuccess
+      });
+    }
+    return true;
   }
 
-  // When user presses Send
-  form.addEventListener("submit", function (e) {
+  // Called by Google's API when it finishes loading
+  function onRecaptchaApiLoaded() {
+    ensureRecaptchaRendered(); // pre-render so it's ready
+  }
+
+  // Submit handler
+  form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    // Honeypot check
-    if (document.getElementById("honeypot").value) return;
+    // Honeypot
+    if (document.getElementById('honeypot').value) return;
 
-    if (typeof grecaptcha === "undefined" || recaptchaWidgetId === undefined) {
-      alert("reCAPTCHA not ready — please wait a second and try again.");
+    // Make sure the widget exists before executing
+    if (!ensureRecaptchaRendered()) {
+      alert('reCAPTCHA is still loading. Please try again in a second.');
       return;
     }
 
+    // Execute the specific widget we rendered
     grecaptcha.execute(recaptchaWidgetId);
   });
 
-  // When Google validates and returns a token
+  // Google returns a token here
   function onRecaptchaSuccess(token) {
-    // Remove any old token
-    const old = form.querySelector('input[name="g-recaptcha-response"]');
+    // Ensure token is in the serialized form
+    let old = form.querySelector('input[name="g-recaptcha-response"]');
     if (old) old.remove();
 
-    // Inject new token
-    const hidden = document.createElement("input");
-    hidden.type = "hidden";
-    hidden.name = "g-recaptcha-response";
+    const hidden = document.createElement('input');
+    hidden.type = 'hidden';
+    hidden.name = 'g-recaptcha-response';
     hidden.value = token;
     form.appendChild(hidden);
 
-    // Send via EmailJS
-    emailjs.sendForm("service_h7aa0dm", "template_vgds77o", form)
+    // Send via EmailJS (assumes emailjs.init(...) already called elsewhere)
+    emailjs.sendForm('service_h7aa0dm', 'template_vgds77o', form)
       .then(() => {
-        alert("Message sent successfully!");
+        alert('Message sent successfully!');
         form.reset();
         grecaptcha.reset(recaptchaWidgetId);
       })
-      .catch((err) => {
-        console.error("EmailJS error:", err);
-        alert("Failed to send message. Please try again later.");
+      .catch(err => {
+        console.error('EmailJS error:', err);
+        alert('Failed to send message. Please try again later.');
         grecaptcha.reset(recaptchaWidgetId);
       });
   }
 </script>
 
+<!-- Load the reCAPTCHA API after the functions above are defined -->
+<script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaApiLoaded" async defer></script>
 
 
 //<script>
