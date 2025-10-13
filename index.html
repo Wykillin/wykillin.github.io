@@ -1317,64 +1317,69 @@ new fullpage('#fullpage', {
 
 <script>
   let recaptchaWidgetId = null;
-  let recaptchaReady = false;
 
-  function onRecaptchaApiLoaded() {
-    // Render the widget once the API is definitely ready
-    recaptchaWidgetId = grecaptcha.render("recaptcha", {
-      sitekey: "6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km",
-      size: "invisible",
-      callback: onRecaptchaSuccess
-    });
-    recaptchaReady = true;
+  // Render the widget if the API is ready; return true when ready
+  function renderIfReady() {
+    if (!window.grecaptcha || !grecaptcha.render) return false;
+    if (recaptchaWidgetId === null) {
+      recaptchaWidgetId = grecaptcha.render('recaptcha', {
+        sitekey: '6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km',
+        size: 'invisible',
+        callback: onRecaptchaSuccess
+      });
+    }
+    return true;
   }
 
-  const form = document.getElementById("contact-form");
+  const form = document.getElementById('contact-form');
 
-  form.addEventListener("submit", function (e) {
+  form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    if (document.getElementById("honeypot").value) return;
+    // Honeypot
+    if (document.getElementById('honeypot').value) return;
 
-    if (!recaptchaReady) {
-      // Wait and retry once
-      console.warn("reCAPTCHA not ready, retrying...");
-      setTimeout(() => {
-        if (recaptchaReady) grecaptcha.execute(recaptchaWidgetId);
-        else alert("reCAPTCHA failed to load—please refresh and try again.");
-      }, 1000);
-      return;
-    }
-
-    grecaptcha.execute(recaptchaWidgetId);
+    // Try until the API is ready (max ~3s)
+    let tries = 0;
+    (function tryExec() {
+      if (renderIfReady()) {
+        grecaptcha.execute(recaptchaWidgetId);
+      } else if (tries++ < 20) {
+        setTimeout(tryExec, 150);
+      } else {
+        alert('reCAPTCHA failed to load—please refresh and try again.');
+      }
+    })();
   });
 
+  // Called by Google when the challenge succeeds
   function onRecaptchaSuccess(token) {
+    // ensure token is in the serialized form
     let old = form.querySelector('input[name="g-recaptcha-response"]');
     if (old) old.remove();
 
-    const hidden = document.createElement("input");
-    hidden.type = "hidden";
-    hidden.name = "g-recaptcha-response";
+    const hidden = document.createElement('input');
+    hidden.type  = 'hidden';
+    hidden.name  = 'g-recaptcha-response';
     hidden.value = token;
     form.appendChild(hidden);
 
-    emailjs.sendForm("service_h7aa0dm", "template_vgds77o", form)
+    emailjs.sendForm('service_h7aa0dm', 'template_vgds77o', form)
       .then(() => {
-        alert("Message sent successfully!");
+        alert('Message sent successfully!');
         form.reset();
         grecaptcha.reset(recaptchaWidgetId);
       })
       .catch(err => {
-        console.error("EmailJS error:", err);
-        alert("Failed to send message. Please try again later.");
+        console.error('EmailJS error:', err);
+        alert('Failed to send message. Please try again later.');
         grecaptcha.reset(recaptchaWidgetId);
       });
   }
 </script>
 
-<!-- Load the reCAPTCHA API after the functions above are defined -->
-<script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaApiLoaded" async defer></script>
+<!-- IMPORTANT: ask for explicit render, include ONLY ONCE -->
+<script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
 
 
 //<script>
