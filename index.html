@@ -1394,20 +1394,32 @@ new fullpage('#fullpage', {
 
 });
 
-// Called automatically when reCAPTCHA verifies successfully
-function onRecaptchaSuccess(token) {
-  const form = document.getElementById("contact-form");
+  // Called automatically after successful reCAPTCHA
+  function onRecaptchaSuccess(token) {
+    const form = document.getElementById("contact-form");
 
-  emailjs.sendForm("service_h7aa0dm", "template_vgds77o", form)
-    .then(function(response) {
-      alert("Message sent successfully!");
-      form.reset();
-      grecaptcha.reset(); // reset for next submission
-    }, function(error) {
-      alert("Failed to send message. Please try again later.");
-      console.error(error);
-      grecaptcha.reset();
-    });
+    // Optional: attach the token to the form (for EmailJS validation)
+    const captchaInput = document.createElement("input");
+    captchaInput.type = "hidden";
+    captchaInput.name = "g-recaptcha-response";
+    captchaInput.value = token;
+    form.appendChild(captchaInput);
+
+    // Send email via EmailJS
+    emailjs.sendForm("service_h7aa0dm", "template_vgds77o", form)
+      .then(
+        function (response) {
+          alert("Message sent successfully!");
+          form.reset();
+          grecaptcha.reset();
+        },
+        function (error) {
+          alert("Failed to send message. Please try again later.");
+          console.error(error);
+          grecaptcha.reset();
+        }
+      );
+  }
 </script>
 
 //<script>
