@@ -21,6 +21,10 @@
 	<script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
 </script>
+<!--pageLoadTs Timer-->
+<script>
+   const pageLoadTs = Date.now();
+</script>
 <!--goatcounter-->
 <script data-goatcounter="https://adamdavid.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
@@ -963,9 +967,6 @@ button:hover {
   }
 }
 
-
-
-
 </style>
 <!--Sender JS-->
 <script>
@@ -1266,8 +1267,6 @@ button:hover {
 	  </div>
 </div><!-- end of fullpage div -->
 
-
-
 </script>
 
 <!-- 1) Load reCAPTCHA (explicit mode) -->
@@ -1435,11 +1434,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
-
+   
     // trap bots via honeypot
-    if (form.hp.value) {
+    if (form.hp.value || isFastSubmit()) {
       alert('Bot detected');
       return;
+    }
+    
+    // Basic client-side checks
+    function isFastSubmit() {
+    const delta = Date.now() - pageLoadTs;
+    return delta < 2500; // less than 2.5s = likely bot
     }
 
     // grab the two fields
@@ -1531,18 +1536,6 @@ function resetViewport() {
 window.addEventListener('resize', resetViewport);
 document.addEventListener('focusout', resetViewport);
 
-//   fetch("https://dawn-bar-d75f.adam-40f.workers.dev/", {
-//   method: "POST",
-//   headers: {
-//     "Content-Type": "application/json"
-//   },
-//   body: JSON.stringify({
-//     email: "test@example.com",
-//     firstname: "Test"
-//   })
-// })
-// .then(res => res.json())
-// .then(data => console.log(data));
 </script>
 <script>
   window.addEventListener('load', () => {
