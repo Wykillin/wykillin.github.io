@@ -1440,10 +1440,11 @@ window.addEventListener('DOMContentLoaded', () => {
       alert('Bot detected');
       return;
     }
-    console.log(pageLoadTs);
+    
     // Basic client-side checks
     function isFastSubmit() {
     const delta = Date.now() - pageLoadTs;
+    console.log(delta);
     return delta < 2500; // less than 2.5s = likely bot
     }
 
