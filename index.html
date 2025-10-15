@@ -1383,7 +1383,7 @@ new fullpage('#fullpage', {
 </script>
 
 
-//<script>
+<script>
   //const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyBh_2To1hitSKCrETthofcYTclxEYM6JyxExkZJFa1VIllrEtQ4K67PuX1Fvbbgjgz/exec';
 
 
@@ -1426,73 +1426,114 @@ new fullpage('#fullpage', {
 window.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('subscribe-form');
   const msg  = document.getElementById('subscribe-msg');
+  const RECAPTCHA_SITE_KEY = '6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km'; // 🧠 your site key
 
   if (!form) {
     console.error('No subscribe-form on page!');
     return;
   }
 
+  // 🧠 Render the invisible reCAPTCHA widget once the API loads
+  let recaptchaWidgetId = null;
+  function renderRecaptcha() {
+    if (window.grecaptcha && !recaptchaWidgetId) {
+      recaptchaWidgetId = grecaptcha.render('recaptcha-root', {
+        sitekey: RECAPTCHA_SITE_KEY,
+        size: 'invisible',
+        callback: onRecaptchaSuccess
+      });
+    }
+  }
+  // Poll until the reCAPTCHA library is ready
+  (function waitForRecaptcha(i = 0) {
+    if (window.grecaptcha && window.grecaptcha.render) return renderRecaptcha();
+    if (i < 50) setTimeout(() => waitForRecaptcha(i + 1), 100);
+  })();
+
+  // Store form data temporarily while we wait for the token
+  let pendingData = null;
+
   form.addEventListener('submit', async e => {
     e.preventDefault();
-   
-    // trap bots via honeypot
+
+    // trap bots via honeypot or speed
     if (form.hp.value || isFastSubmit()) {
       alert('Bot detected');
       return;
     }
-    
-    // Basic client-side checks
+
     function isFastSubmit() {
-    const delta = Date.now() - pageLoadTs;
-    console.log(delta);
-    return delta < 2500; // less than 2.5s = likely bot
+      const delta = Date.now() - pageLoadTs;
+      console.log('Time delta:', delta);
+      return delta < 2500; // less than 2.5s = likely bot
     }
 
-    // grab the two fields
     const firstname = form.firstname.value.trim();
-    const email     = form.email.value.trim();
+    const email = form.email.value.trim();
+    if (!email) {
+      msg.textContent = 'Please enter an email address.';
+      msg.style.display = 'block';
+      return;
+    }
 
-    // clear previous message
-    msg.textContent   = '';
+    // Clear previous message
+    msg.textContent = '';
     msg.style.display = 'none';
 
-    console.log('🤞 submitting to Cloudflare Worker → Sender.net…');
+    // 🧠 Save pending form data and trigger invisible reCAPTCHA
+    pendingData = { firstname, email };
+    if (recaptchaWidgetId !== null) {
+      grecaptcha.execute(recaptchaWidgetId);
+    } else {
+      msg.textContent = 'reCAPTCHA not ready—please refresh.';
+      msg.style.display = 'block';
+    }
+  });
+
+  // 🧠 Called automatically once Google returns a valid token
+  async function onRecaptchaSuccess(token) {
+    if (!pendingData) return;
+
+    console.log('🤞 Submitting to Cloudflare Worker → Sender.net…');
 
     try {
-      // POST JSON directly to your Worker endpoint
       const res = await fetch('https://dawn-bar-d75f.adam-40f.workers.dev/', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ firstname, email })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstname: pendingData.firstname,
+          email: pendingData.email,
+          'g-recaptcha-response': token // 🧠 include token
+        })
       });
 
-      // parse Worker → Sender.net response
       const json = await res.json();
       console.log('Worker returned', json);
 
       if (res.ok) {
-        // 200-level response means Sender.net accepted it
         msg.textContent = '✅ You’re in! Thank you.';
+      } else if (json.title && /already subscribed/i.test(json.title)) {
+        msg.textContent = '⚡ You’re already subscribed!';
+      } else if (json.error === 'Invalid reCAPTCHA') {
+        msg.textContent = '⚠️ reCAPTCHA failed—please try again.';
       } else {
-        // anything else → error or “already subscribed”
-        // You can inspect `json` for details: e.g. if Sender.net returns a specific error code for duplicates
-        if (json.title && /already subscribed/i.test(json.title)) {
-          msg.textContent = '⚡ You’re already subscribed!';
-        } else {
-          msg.textContent = '⚠️ That doesn’t look like a valid email or there was another error.';
-        }
+        msg.textContent = '⚠️ Could not subscribe—please retry later.';
       }
     } catch (err) {
       console.error(err);
       msg.textContent = '⚠️ Network error—please try again.';
+    } finally {
+      msg.style.display = 'block';
+      form.reset();
+      pendingData = null;
+      try { grecaptcha.reset(recaptchaWidgetId); } catch (_) {}
     }
+  }
 
-    msg.style.display = 'block';
-    form.reset();
-  });
+  // 🧠 Expose callback globally so reCAPTCHA can call it
+  window.onRecaptchaSuccess = onRecaptchaSuccess;
 });
+
 </script>
 
   <script>
