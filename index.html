@@ -1044,6 +1044,7 @@ button:hover {
 
 <!--sign up-->
   <div class="form-container" id="subscribe-section">
+    <div id="recaptcha-subscribe"></div>
     <h2>Signup For the Guide & Newsletter</h2>
     <form id="subscribe-form">
       <input type="email" name="email" placeholder="Your best email" required>
@@ -1437,7 +1438,7 @@ window.addEventListener('DOMContentLoaded', () => {
   let recaptchaWidgetId = null;
   function renderRecaptcha() {
     if (window.grecaptcha && !recaptchaWidgetId) {
-      recaptchaWidgetId = grecaptcha.render('recaptcha-root', {
+      recaptchaWidgetId = grecaptcha.render('recaptcha-subscribe', {
         sitekey: RECAPTCHA_SITE_KEY,
         size: 'invisible',
         callback: onRecaptchaSuccess
