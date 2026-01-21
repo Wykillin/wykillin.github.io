@@ -134,7 +134,17 @@ h1{
 #aboutMe p{
 	font-size: 1.2em;
 	line-height: 1.6em;
-	margin-bottom: 20px;
+	margin: 0 15px 0 15px;
+}
+#aboutMe h2{
+	margin: 0 15px 0 15px;
+}
+#aboutMe h3{
+	margin: 0 15px 0 15px;
+}
+
+#aboutMe li{
+	margin: 0 22px 0 15px;
 }
 
 /* Overwriting fullPage.js tooltip color
