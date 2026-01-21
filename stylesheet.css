@@ -132,19 +132,25 @@ h1{
 
 /* overwrite p in aboutMe  */
 #aboutMe p{
-	font-size: 1.2em;
-	line-height: 1.6em;
+	font-size: 16px;
 	margin: 0 15px 0 15px;
 }
 #aboutMe h2{
-	margin: 0 15px 0 15px;
+	margin: 0px 15px 0 15px;
 }
 #aboutMe h3{
 	margin: 0 15px 0 15px;
 }
-
+#aboutMe ul{
+	margin: 0 15px 0 15px;
+	padding: 10px 0 10px 0;
+}
 #aboutMe li{
 	margin: 0 22px 0 15px;
+}
+#aboutMe button{
+	width: 66%;
+	align-content: center;
 }
 
 /* Overwriting fullPage.js tooltip color
