@@ -54,7 +54,7 @@ h1{
 }
 /* p{
 	font-size: 2em;
-} */
+} 
 
 
 /* Menu
@@ -130,7 +130,12 @@ h1{
 	position:relative;
 }
 
-
+/* overwrite p in aboutMe  */
+#aboutMe p{
+	font-size: 1.2em;
+	line-height: 1.6em;
+	margin-bottom: 20px;
+}
 
 /* Overwriting fullPage.js tooltip color
 * --------------------------------------- */
