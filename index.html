@@ -229,6 +229,7 @@ a:active {
 	border-left-width: 1.5em;
 	border-right-width: 1.5em;
 	color: #292545;/*rgb(67, 69, 194)*/
+  align-items: center;
 }
 #section3{
 	background:#559E54;
@@ -718,12 +719,12 @@ h2 br{
   margin: auto;
   padding: 20px;
   background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0,0,0,.35);
+  box-shadow: 0 8px 20px rgba(0,0,0,.18);
   text-align: left;
 }
 
-label, input, select, textarea, button {
+label, input, select, textarea {
   display: block;
   width: 100%;
   margin-bottom: 15px;
@@ -745,6 +746,8 @@ button {
   border-radius: 5px;
   padding: 10px;
   cursor: pointer;
+  margin-top: 5px;
+  /* width: 25%; */
 }
 
 button:hover {
@@ -1050,16 +1053,7 @@ button:hover {
   <!-- <a href="https://adam-david-wykle.sender.site/" target="_blank" class="services-button full-width" style="display: inline-block; text-align: center; text-decoration: none;">
   📖✨Check out the Workshop!✨📖
 </a> -->
-<br><br>
-  <!-- <button class="email-signup-button" onclick="fullpage_api.moveTo('page3')">
-    ✨ Join the Email List ✨
-  </button> -->
-  <!--Module Link Button-->
-<!--Services button -->
-    <button class="services-button" onclick="fullpage_api.moveTo('page2')">
-    Book a Service!
-  </button>
-<br><br>
+
 <!--sign up-->
   <div class="form-container" id="subscribe-section">
     <div id="recaptcha-subscribe"></div>
@@ -1073,6 +1067,17 @@ button:hover {
     </form>
     <p id="subscribe-msg" style="display:none"></p>
   </div>
+<!-- email signup end-->
+<br><br>
+  <!-- <button class="email-signup-button" onclick="fullpage_api.moveTo('page3')">
+    ✨ Join the Email List ✨
+  </button> -->
+  <!--Module Link Button-->
+<!--Services button -->
+    <button class="services-button" onclick="fullpage_api.moveTo('page2')">
+    Book a Service!
+  </button>
+<br><br>
 
 
   
@@ -1299,7 +1304,7 @@ button:hover {
       trying to show you all along.
     </p>
     <br>
-    <button class="aboutMe-button" onclick="fullpage_api.moveTo('page2')">
+    <button class="services-button" onclick="fullpage_api.moveTo('page2')">
     Services
     </button>
   </div>
