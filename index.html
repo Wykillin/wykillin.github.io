@@ -10,6 +10,71 @@
         async src="//gc.zgo.at/count.js"></script>
 <script>
    const pageLoadTs = Date.now();
+      const YEK = 'AIzaSyDq9xumgS5CSmHffytPG_lI8juGCjitH40';  
+      const CHANNEL_ID = 'UCmK9DTHpjybx3lgx3fftzUg'; 
+      const MAX_RESULTS = 7; 
+
+// Function to parse ISO 8601 video duration into total seconds
+function parseISODuration(duration) {
+  const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+  if (!match) return 0; 
+  const hours = parseInt(match[1]) || 0;
+  const minutes = parseInt(match[2]) || 0;
+  const seconds = parseInt(match[3]) || 0;
+  return hours * 3600 + minutes * 60 + seconds;
+}
+
+
+async function fetchYouTubeVideos() {
+
+  const searchUrl = `https://www.googleapis.com/youtube/v3/search?key=${YEK}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX_RESULTS}`;
+
+  try {
+    const searchResponse = await fetch(searchUrl);
+    const searchData = await searchResponse.json();
+
+    // Extract video IDs from search results
+    const videoIds = searchData.items
+      .filter(video => video.id.kind === "youtube#video")
+      .map(video => video.id.videoId)
+      .join(",");
+
+    // Second API request: Get detailed video data
+    const videosUrl = `https://www.googleapis.com/youtube/v3/videos?key=${YEK}&id=${videoIds}&part=contentDetails,snippet`;
+    const videosResponse = await fetch(videosUrl);
+    const videosData = await videosResponse.json();
+
+    // Filter out Shorts (videos of 3 minutes or less)
+    const nonShortsVideos = videosData.items.filter(video => {
+      const duration = video.contentDetails.duration;
+      const isShort = parseISODuration(duration) <= 180; // 180 seconds = 3 minutes
+      return !isShort;  // Only keep non-Shorts
+    });
+
+    // Display the first 3 non-Shorts videos
+    const carouselWrapper = document.getElementById("carousel-wrapper");
+    carouselWrapper.innerHTML = nonShortsVideos.slice(0, 3).map(video => `
+      <div class="carousel-video">
+        <iframe
+          src="https://www.youtube.com/embed/${video.id}"
+          title="${video.snippet.title}"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    `).join("");
+
+  } catch (error) {
+    console.error("Error fetching videos:", error);
+  }
+}
+
+
+
+
+// Load videos on page load
+window.onload = fetchYouTubeVideos;
 </script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1151,35 +1216,7 @@ footer .copy {
 <section id="videos">
   <p class="section-label reveal">Latest from the Channel</p>
   <h2 class="section-title reveal">Modern Mysticism on <em>YouTube</em></h2>
-  <div class="videos-scroll">
-    <a href="#" class="video-card">
-      <div class="video-thumb"></div>
-      <div class="video-card-body">
-        <h4>The Age of Aquarius Is Being Held Back By This One Thing</h4>
-        <span>Recent</span>
-      </div>
-    </a>
-    <a href="#" class="video-card">
-      <div class="video-thumb"></div>
-      <div class="video-card-body">
-        <h4>Emotion as Soul Communication — Part 1</h4>
-        <span>Series</span>
-      </div>
-    </a>
-    <a href="#" class="video-card">
-      <div class="video-thumb"></div>
-      <div class="video-card-body">
-        <h4>Your Chakras Are Z-Pinches: The Plasma Body</h4>
-        <span>Core Teaching</span>
-      </div>
-    </a>
-    <a href="#" class="video-card">
-      <div class="video-thumb"></div>
-      <div class="video-card-body">
-        <h4>Why Tropical Astrology Measures Geometry, Not Stars</h4>
-        <span>Framework</span>
-      </div>
-    </a>
+  <div class="videos-scroll" id="videos-scroll">
   </div>
 </section>
 
