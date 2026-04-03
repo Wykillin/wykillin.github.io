@@ -969,16 +969,22 @@ footer .copy {
 </section>
 
 <!-- Lead Magnet -->
-<div class="lead-magnet reveal" id="subscribe-form">
+<div class="lead-magnet reveal">
   <div class="lead-magnet-content">
-    <h3>Signup For Free Video Course & Newsletter</em></h3>
-    <p></p>
-    <div id="subscribe-msg" class="subscribe-msg">
-      <input type="firstname" name="firstname" placeholder="First Name">
-      <input type="email" name="email" placeholder="your@email.com">
-      <input type="text" name="hp" style="display:none">
-      <button type="submit" class="btn btn-gold" style="padding: 0.8rem 1.5rem;">Get the Guide</button>
-    </div>
+    <h3>Signup For Free Video Course & Newsletter</h3>
+    <form id="subscribe-form">
+      <div class="subscribe-msg">
+        <input type="text" name="firstname" placeholder="First Name">
+        <input type="email" name="email" placeholder="your@email.com">
+        <input type="text" name="hp" style="display:none">
+        <button type="submit" class="btn btn-gold" style="padding: 0.8rem 1.5rem;">Get the Guide</button>
+      </div>
+      <div id="recaptcha-subscribe"></div>
+      <p id="subscribe-msg" style="display:none"></p>
+    </form>
+  </div>
+
+</div>
     
   </div>
   <div class="lead-magnet-visual">
