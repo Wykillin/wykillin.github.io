@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Outfit:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <script data-goatcounter="https://adamdavid.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
-<!--pageLoadTs Timer-->
 <script>
    const pageLoadTs = Date.now();
 </script>
@@ -451,6 +450,30 @@ section {
   white-space: nowrap;
 }
 
+/* subscribe form inputs stacked */
+#subscribe-form input[type="text"],
+#subscribe-form input[type="email"] {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  color: var(--text-primary);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  outline: none;
+  margin-bottom: 0.5rem;
+  transition: border-color 0.3s;
+}
+
+#subscribe-form input[type="text"]:focus,
+#subscribe-form input[type="email"]:focus {
+  border-color: var(--gold-dim);
+}
+
+#subscribe-form input::placeholder {
+  color: var(--text-dim);
+}
+
 /* ── FRAMEWORK ── */
 .framework-grid {
   display: grid;
@@ -763,6 +786,8 @@ section {
   border: 1px solid rgba(255,255,255,0.04);
   transition: all 0.3s;
   overflow: hidden;
+  text-decoration: none;
+  color: inherit;
 }
 
 .video-card:hover {
@@ -937,6 +962,7 @@ footer .copy {
 </head>
 <body>
 <div id="recaptcha-root" style="position:relative; z-index:9999;"></div>
+
 <!-- Stars -->
 <div class="cosmic-bg"></div>
 <div class="stars" id="stars"></div>
@@ -972,24 +998,18 @@ footer .copy {
   </div>
 </section>
 
-<!-- Lead Magnet -->
+<!-- Lead Magnet — FIXED: both columns now inside the grid container -->
 <div class="lead-magnet reveal">
   <div class="lead-magnet-content">
-    <h3>Signup For Free Video Course & Newsletter</h3>
+    <h3>Signup For Free Video Course &amp; Newsletter</h3>
     <form id="subscribe-form">
-      <div class="subscribe-msg">
-        <input type="text" name="firstname" placeholder="First Name">
-        <input type="email" name="email" placeholder="your@email.com">
-        <input type="text" name="hp" style="display:none">
-        <button type="submit" class="btn btn-gold" style="padding: 0.8rem 1.5rem;">Get the Guide</button>
-      </div>
+      <input type="text" name="firstname" placeholder="First Name">
+      <input type="email" name="email" placeholder="your@email.com">
+      <input type="text" name="hp" style="display:none">
+      <button type="submit" class="btn btn-gold" style="padding: 0.8rem 1.5rem; width: 100%; margin-top: 0.25rem;">Get the Guide</button>
       <div id="recaptcha-subscribe"></div>
-      <p id="subscribe-msg" style="display:none"></p>
+      <p id="subscribe-msg" style="display:none; margin-top: 0.75rem; font-size: 0.85rem;"></p>
     </form>
-  </div>
-
-</div>
-    
   </div>
   <div class="lead-magnet-visual">
     <div class="magnet-preview-item"><span class="icon">◈</span> Your rising sign as an electromagnetic field pattern</div>
@@ -1059,20 +1079,6 @@ footer .copy {
       <a href="https://ko-fi.com/c/c53289bab2" class="btn btn-gold">Get Your Blueprint</a>
     </div>
 
-    <!-- <div class="service-card reveal">
-      <span class="service-tag">Deep Dive — New</span>
-      <h3>Blueprint + Integration Session</h3>
-      <div class="service-price">$444</div>
-      <p>Everything in the Full Soul Blueprint, plus a 60-minute live Zoom session to walk through your chart together — ask questions, explore patterns in real time, and anchor the insights into your actual life.</p>
-      <div class="service-includes">
-        <span><span class="check">◈</span> Full Soul Blueprint PDF + video</span>
-        <span><span class="check">◈</span> 60-minute live integration call</span>
-        <span><span class="check">◈</span> Personalized alignment guidance</span>
-        <span><span class="check">◈</span> Follow-up summary notes</span>
-      </div>
-      <a href="#" class="btn btn-ghost">Book Deep Dive</a>
-    </div> -->
-
     <div class="service-card reveal">
       <span class="service-tag">Ongoing Container</span>
       <h3>Spiritual Alignment Coaching</h3>
@@ -1123,7 +1129,7 @@ footer .copy {
         <span>From $500 / session</span>
       </div>
     </div>
-    <a href="#contact" class="btn btn-ghost">Inquire</a>
+    <a href="mailto:Adam@AdamWykle.com" class="btn btn-ghost">Inquire</a>
   </div>
 </section>
 
@@ -1251,22 +1257,21 @@ const observer = new IntersectionObserver((entries) => {
 
 reveals.forEach(el => observer.observe(el));
 </script>
-<script>
 
+<script>
+// Subscribe form — single unified handler, no duplicate declarations
 window.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('subscribe-form');
   const msg  = document.getElementById('subscribe-msg');
-  const RECAPTCHA_SITE_KEY = '6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km'; // 🧠 your site key
+  const RECAPTCHA_SITE_KEY = '6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km';
 
-  if (!form) {
-    console.error('No subscribe-form on page!');
-    return;
-  }
+  if (!form) return;
 
-  // 🧠 Render the invisible reCAPTCHA widget once the API loads
   let recaptchaWidgetId = null;
+  let pendingData = null;
+
   function renderRecaptcha() {
-    if (window.grecaptcha && !recaptchaWidgetId) {
+    if (window.grecaptcha && recaptchaWidgetId === null) {
       recaptchaWidgetId = grecaptcha.render('recaptcha-subscribe', {
         sitekey: RECAPTCHA_SITE_KEY,
         size: 'invisible',
@@ -1274,29 +1279,19 @@ window.addEventListener('DOMContentLoaded', () => {
       });
     }
   }
-  // Poll until the reCAPTCHA library is ready
+
   (function waitForRecaptcha(i = 0) {
     if (window.grecaptcha && window.grecaptcha.render) return renderRecaptcha();
     if (i < 50) setTimeout(() => waitForRecaptcha(i + 1), 100);
   })();
 
-  // Store form data temporarily while we wait for the token
-  let pendingData = null;
-
-  form.addEventListener('submit', async e => {
+  form.addEventListener('submit', e => {
     e.preventDefault();
 
-    // trap bots via honeypot or speed
-    if (form.hp.value || isFastSubmit()) {
-      alert('Bot detected');
-      return;
-    }
+    if (form.hp && form.hp.value) return;
 
-    function isFastSubmit() {
-      const delta = Date.now() - pageLoadTs;
-      console.log('Time delta:', delta);
-      return delta < 2500; // less than 2.5s = likely bot
-    }
+    const delta = Date.now() - pageLoadTs;
+    if (delta < 2500) { alert('Bot detected'); return; }
 
     const firstname = form.firstname.value.trim();
     const email = form.email.value.trim();
@@ -1306,26 +1301,20 @@ window.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Clear previous message
     msg.textContent = '';
     msg.style.display = 'none';
-
-    // 🧠 Save pending form data and trigger invisible reCAPTCHA
     pendingData = { firstname, email };
+
     if (recaptchaWidgetId !== null) {
       grecaptcha.execute(recaptchaWidgetId);
     } else {
-      msg.textContent = 'reCAPTCHA not ready—please refresh.';
+      msg.textContent = 'reCAPTCHA not ready — please refresh.';
       msg.style.display = 'block';
     }
   });
 
-  // 🧠 Called automatically once Google returns a valid token
   async function onRecaptchaSuccess(token) {
     if (!pendingData) return;
-
-    console.log('🤞 Submitting to Cloudflare Worker → Sender.net…');
-
     try {
       const res = await fetch('https://dawn-bar-d75f.adam-40f.workers.dev/', {
         method: 'POST',
@@ -1333,25 +1322,22 @@ window.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify({
           firstname: pendingData.firstname,
           email: pendingData.email,
-          'g-recaptcha-response': token // 🧠 include token
+          'g-recaptcha-response': token
         })
       });
-
       const json = await res.json();
-      console.log('Worker returned', json);
-
       if (res.ok) {
-        msg.textContent = '✅ You’re in! Thank you.';
+        msg.textContent = '✅ You\'re in! Thank you.';
       } else if (json.title && /already subscribed/i.test(json.title)) {
-        msg.textContent = '⚡ You’re already subscribed!';
+        msg.textContent = '⚡ You\'re already subscribed!';
       } else if (json.error === 'Invalid reCAPTCHA') {
-        msg.textContent = '⚠️ reCAPTCHA failed—please try again.';
+        msg.textContent = '⚠️ reCAPTCHA failed — please try again.';
       } else {
-        msg.textContent = '⚠️ Could not subscribe—please retry later.';
+        msg.textContent = '⚠️ Could not subscribe — please retry later.';
       }
     } catch (err) {
       console.error(err);
-      msg.textContent = '⚠️ Network error—please try again.';
+      msg.textContent = '⚠️ Network error — please try again.';
     } finally {
       msg.style.display = 'block';
       form.reset();
@@ -1360,78 +1346,10 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 🧠 Expose callback globally so reCAPTCHA can call it
   window.onRecaptchaSuccess = onRecaptchaSuccess;
 });
 </script>
-<script>
-  let recaptchaWidgetId = null;
-  let recaptchaReady = false;
 
-  function renderRecaptchaIfReady() {
-    if (!window.grecaptcha || !grecaptcha.render) return false;
-    if (recaptchaWidgetId === null) {
-      recaptchaWidgetId = grecaptcha.render('recaptcha-root', {
-        sitekey: '6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km',
-        size: 'invisible',
-        badge: 'bottomright',               // keep badge visible
-        callback: onRecaptchaSuccess
-      });
-    }
-    recaptchaReady = true;
-    return true;
-  }
-
-  // Warm up: render ASAP, resilient to Firefox onload quirks
-  (function warmUp(i=0) {
-    if (renderRecaptchaIfReady()) return;
-    if (i < 40) setTimeout(() => warmUp(i+1), 100);
-  })();
-
-  const form = document.getElementById('contact-form');
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    // Honeypot
-    if (document.getElementById('honeypot').value) return;
-
-    // Ensure widget exists before executing
-    if (!recaptchaReady || recaptchaWidgetId === null) {
-      // one quick retry
-      setTimeout(() => {
-        if (renderRecaptchaIfReady()) grecaptcha.execute(recaptchaWidgetId);
-        else alert('reCAPTCHA failed to load—please refresh and try again.');
-      }, 250);
-      return;
-    }
-
-    grecaptcha.execute(recaptchaWidgetId);
-  });
-
-  function onRecaptchaSuccess(token) {
-    // Put the token into the form for EmailJS
-    const old = form.querySelector('input[name="g-recaptcha-response"]');
-    if (old) old.remove();
-    const hidden = document.createElement('input');
-    hidden.type = 'hidden';
-    hidden.name = 'g-recaptcha-response';
-    hidden.value = token;
-    form.appendChild(hidden);
-
-    emailjs.sendForm('service_h7aa0dm', 'template_vgds77o', form)
-      .then(() => {
-        alert('Message sent successfully!');
-        form.reset();
-        grecaptcha.reset(recaptchaWidgetId);
-      })
-      .catch(err => {
-        console.error('EmailJS error:', err);
-        alert('Failed to send message. Please try again later.');
-        grecaptcha.reset(recaptchaWidgetId);
-      });
-  }
-</script>
 <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
 </body>
 </html>
