@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Adam David</title>
+  <link rel="icon" href="/torus.ico" type="image/x-icon">
+	<meta name="author" content="Adam David Wykle" />
+	<meta name="description" content="Adam David - Spirit Universe!" />
+	<meta name="keywords"  content="Adam David Wykle, Wykle, Adam Wykle resume, Adam Wykle portfolio, Adam Wykle Site, Spiritual Science, Spiritualality, Spiritual Coaching, Plasma Physics, Channeling,
+		galactic historian" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="Resource-type" content="Document" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="fullpage.css" />
+	<link rel="stylesheet" type="text/css" href="stylesheet.css" />
+	<link href="https://fonts.googleapis.com/css?family=Exo:600i|Open+Sans" rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Righteous" />
+	<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<!--pageLoadTs Timer-->
+<script>
+   const pageLoadTs = Date.now();
+</script>
+<!--goatcounter-->
+<script data-goatcounter="https://adamdavid.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script>
+const path = window.location.pathname;
+if (path.includes('workshop')) {
+  window.location.hash = '#workshop';
+}
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "jddl9EJMdW6B23YW_",
+      });
+   })();
+</script>
+	<script type="text/javascript">
+		// Fetch latest videos from YouTube
+const API_KEY = 'AIzaSyDq9xumgS5CSmHffytPG_lI8juGCjitH40';  // Replace this with your API key
+const CHANNEL_ID = 'UCmK9DTHpjybx3lgx3fftzUg'; // Replace with your channel ID
+const MAX_RESULTS = 7; // Number of videos to display
+
+// Function to parse ISO 8601 video duration into total seconds
+function parseISODuration(duration) {
+  const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+  if (!match) return 0; // fail-safe fallback
+  const hours = parseInt(match[1]) || 0;
+  const minutes = parseInt(match[2]) || 0;
+  const seconds = parseInt(match[3]) || 0;
+  return hours * 3600 + minutes * 60 + seconds;
+}
+
+
+async function fetchYouTubeVideos() {
+  // First API request: Get latest videos
+  const searchUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX_RESULTS}`;
+
+  try {
+    const searchResponse = await fetch(searchUrl);
+    const searchData = await searchResponse.json();
+
+    // Extract video IDs from search results
+    const videoIds = searchData.items
+      .filter(video => video.id.kind === "youtube#video")
+      .map(video => video.id.videoId)
+      .join(",");
+
+    // Second API request: Get detailed video data
+    const videosUrl = `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${videoIds}&part=contentDetails,snippet`;
+    const videosResponse = await fetch(videosUrl);
+    const videosData = await videosResponse.json();
+
+    // Filter out Shorts (videos of 3 minutes or less)
+    const nonShortsVideos = videosData.items.filter(video => {
+      const duration = video.contentDetails.duration;
+      const isShort = parseISODuration(duration) <= 180; // 180 seconds = 3 minutes
+      return !isShort;  // Only keep non-Shorts
+    });
+
+    // Display the first 3 non-Shorts videos
+    const carouselWrapper = document.getElementById("carousel-wrapper");
+    carouselWrapper.innerHTML = nonShortsVideos.slice(0, 3).map(video => `
+      <div class="carousel-video">
+        <iframe
+          src="https://www.youtube.com/embed/${video.id}"
+          title="${video.snippet.title}"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    `).join("");
+
+  } catch (error) {
+    console.error("Error fetching videos:", error);
+  }
+}
+
+
+
+
+// Load videos on page load
+window.onload = fetchYouTubeVideos;
+
+function navigateToContact(service) {
+  // Navigate to Page 3 (Contact Form)
+  fullpage_api.moveTo('page3');
+
+  // Wait for the page to load, then set the dropdown value
+  setTimeout(() => {
+    const serviceDropdown = document.getElementById('service');
+    if (serviceDropdown) {
+      serviceDropdown.value = service; // Set the dropdown to the selected service
+    }
+  }, 500); // Delay to ensure the dropdown is available
+}
+
+    </script>
+
+<style>
+		@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+a:link {
+    color: #8e8722;
+    /* background-color: transparent; */
+    text-decoration: none;
+}
+a:visited {
+     color: #8e8722;
+    /* background-color: transparent; */
+    text-decoration: none;
+}
+a:hover {
+    color: #ffee00;
+
+    text-decoration: bold;
+}
+a:active {
+    color: white;
+    background-color: transparent;
+    text-decoration: underline;
+}
+#header{
+	position:relative;
+	display:block;
+	width: 100%;
+	background: #333;
+	z-index:9;
+	text-align:center;
+	color: #f2f2f2;
+	padding: 0 0 0 0;
+	font-size:2vh;
+	font-family: 'Exo', sans-serif;
+	top:0px;
+}
+#ttl{
+	font-family: 'Righteous';
+	font-size:4vh;
+	position: relative;
+	text-align: center;
+	background-color: white;
+	top:5vh;
+	left: 0;
+	margin: auto auto;
+	right: 0;
+	bottom: 3vh;
+	color: #000000;
+	display:inline;
+}
+#section0{
+	background-image: url("image(10).png");/*"thoth_header.jpg");"fractal spiral bg.png");FoL gold.png");/*top-bg-fractal-1024x512.png");*/
+	background-size:100% auto;
+	background-attachment: auto;
+	background-repeat: no-repeat;
+	background-position: top center;
+	border-style: solid;
+	border-top-width: 0;
+	border-bottom-width: 0;
+	border-left-width: 1.5em;
+	border-right-width: 1.5em;
+	color: #292545;/*rgb(67, 69, 194)*/
+
+}
+ #section1{
+	/* font-family: 'Righteous';
+	font-size:1.5em;
+	text-align: left;
+	padding-top: 2.25em;
+	padding-right: 1.5em;
+	padding-left: 1.5em; */
+	border-style: solid;
+	border-top-width: 0;
+	border-bottom-width: 0;
+	border-left-width: 1.5em;
+	border-right-width: 1.5em;
+	color: #292545;/*rgb(67, 69, 194)*/
+
+}
+#section2{
+	/*font-size:3vh;
+	 padding:5vh 5vh 0 5vh; */
+	/* bottom:0;
+	left: 0;
+	right: 0; */
+	font-size:1em;
+	border-style: solid;
+	border-top-width: 0;
+	border-bottom-width: 0;
+	border-left-width: 1.5em;
+	border-right-width: 1.5em;
+	color: #292545;/*rgb(67, 69, 194)*/
+}
+#aboutMe{
+	/*font-size:3vh;
+	 padding:5vh 5vh 0 5vh; */
+	/* bottom:0;
+	left: 0;
+	right: 0; */
+	font-size:18px;
+	border-style: solid;
+	border-top-width: 0;
+	border-bottom-width: 0;
+	border-left-width: 1.5em;
+	border-right-width: 1.5em;
+	color: #292545;/*rgb(67, 69, 194)*/
+  align-items: center;
+}
+#section3{
+	background:#559E54;
+}
+#text{
+	font-family: 'Exo', sans-serif;
+	position: absolute;
+	font-size: 2.25em;
+	padding-bottom: 5vh;
+	bottom:0;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	color: black;
+}
+#fixedHeader{
+	position: fixed;
+	padding: 5vh;
+	font-size: 2.5em;
+	bottom:0;
+	right:0;
+	left:0;
+	color: black;
+}
+#slide1-text{
+	font-size:1em;
+
+	color:#ffffff;
+	/* top: 50%; */
+	/* padding:50vh 5vh 0 5vh; */
+	bottom:0;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+}
+#slide2{
+	background:#89BEB6;
+}
+#slide2-text{
+	font-size:2.25em;
+
+	/* padding:50vh 5vh 0 5vh; */
+	color:#ffffff;
+	bottom:0;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+}
+#slide3{
+	background:#317469;
+}
+#slide3-text{
+	font-size:1.5em;
+
+	/* padding:50vh 5vh 0 5vh; */
+	bottom:0;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	color:#ffffff;
+}
+#slide4{
+	background:#1bbc9b;
+
+}
+#slide4-text{
+	font-size:2.25em;
+
+	/* padding:50vh 5vh 0 5vh; */
+	bottom:0;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	color:#ffffff;
+}
+#footerText{
+	position:relative;
+	font-family: 'Exo', sans-serif;
+	font-size:1em;
+	text-align: center;
+	left: 0;
+	right: 0;
+	bottom:0%;
+	z-index:4;
+	color: white;
+}
+#topVideo{
+text-align: center;
+}
+.dropbtn {
+  background-color: #7C83BC;
+  color: white;
+  padding: .5vh;
+  font-size: 1.5em;
+  border: none;
+  cursor: pointer;
+  border-radius: 1.5625em;
+  margin: .5vh;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  font-size: 1.5em;
+  padding-top: .5vh;
+  z-index: 9;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  left: 0;
+  min-width: 10em;
+  box-shadow: 0em 0.5em 1em 0em rgba(0,0,0,0.2);
+  z-index: 9;
+  margin: 0.3125em;
+  padding: .5vh;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 0.75em 1em;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+.emailButton {
+  display: inline-block;
+  /* min-width: 7.5em; */
+  border-radius: 0.25em;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 1.5em;
+  padding: .5vh;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 0.5vh;
+}
+
+.emailButton span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.emailButton span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -1.25em;
+  transition: 0.5s;
+}
+
+.emailButton:hover span {
+  padding-right: 1.25em;
+}
+
+.emailButton:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+h2 span{
+	display: inline;
+	width: 65%;
+background-color:rgba(255,255,255,.5);
+}
+.youtube-video-container {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.youtube-video-container::after {
+  content: "";
+  display: block;
+  padding-top: 56.25%; 
+}
+
+.youtube-video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.youtube-video-container2 {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.youtube-video-container2::after {
+  /*display: block;
+  content: "";
+  padding-top: 56.25%;*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.youtube-video-container2 iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.YTLink {
+	color: #000000;
+}
+.YTLink:hover{
+	color: goldenrod;
+}
+#socialBtns {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  margin:0;
+  padding:0;
+  display:flex;
+}
+#socialBtns li {
+  list-style:none;
+}
+#socialBtns ul li a {
+  display:block;
+  position:relative;
+  width:85%;
+  height:85%;
+  line-height:100px;
+  font-size:40px;
+  text-align:center;
+  text-decoration:none;
+  color:#404040;
+  margin: 0 30px;
+  transition:.5s;
+}
+#socialBtns ul li a span {
+  position:absolute;
+  transition: transform .5s;
+}
+#socialBtns ul li a span:nth-child(1),
+#socialBtns ul li a span:nth-child(3){
+  width:100%;
+  height:3px;
+  background:#404040;
+}
+#socialBtns ul li a span:nth-child(1) {
+  top:0;
+  left:0;
+  transform-origin: right;
+}
+#socialBtns ul li a:hover span:nth-child(1) {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition:transform .5s;
+}
+
+#socialBtns ul li a span:nth-child(3) {
+  bottom:0;
+  left:0;
+  transform-origin: left;
+}
+#socialBtns ul li a:hover span:nth-child(3) {
+  transform: scaleX(0);
+  transform-origin: right;
+  transition:transform .5s;
+}
+
+#socialBtns ul li a span:nth-child(2),
+#socialBtns ul li a span:nth-child(4){
+  width:3px;
+  height:100%;
+  background:#404040;
+}
+#socialBtns ul li a span:nth-child(2) {
+  top:0;
+  left:0;
+  transform:scale(0);
+  transform-origin: bottom;
+}
+#socialBtns ul li a:hover span:nth-child(2) {
+  transform: scale(1);
+  transform-origin: top;
+  transition:transform .5s;
+}
+#socialBtns ul li a span:nth-child(4) {
+  top:0;
+  right:0;
+  transform:scale(0);
+  transform-origin: top;
+}
+#socialBtns ul li a:hover span:nth-child(4) {
+  transform: scale(1);
+  transform-origin: bottom;
+  transition:transform .5s;
+}
+#footer{
+  position: fixed;
+  height: 50px;
+  display: block;
+  width: 95%;
+  background: #333;
+  z-index: 9;
+  text-align: center;
+  color: #f2f2f2;
+  padding:20px 0 0 0;
+  font-size: 2em;
+  font-family: 'Exo', sans-serif;
+  bottom: 0px;
+}
+.youtube:hover {
+  color: #ff0000;
+}
+.youtube:hover span {
+  background: #868686;
+}
+.twitter:hover {
+  color: #1da1f2;
+}
+.twitter:hover span {
+  background: #1da1f2;
+}
+.instagram:hover {
+  color: #c32aa3;
+}
+.instagram:hover span {
+  background: #c32aa3;
+}
+ul li a .twitter {
+  color: #1da1f2;
+}
+ul li a:hover:nth-child(3) {
+  color: #ff0000;
+}
+ul li a:hover:nth-child(4) {
+  color: #dd4b39;
+}
+h2 br{
+	margin-bottom: 1em;
+}
+/* Services Section */
+.services-container {
+  padding: 1em;
+  text-align: center;
+}
+
+.services-title {
+  font-family: 'Exo', sans-serif;
+  font-size: 2vh;
+  color: #292545;
+  margin-bottom: 1em;
+}
+
+.service-card {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1em;
+  margin: 1em auto;
+  max-width: 720px;
+  text-align: left;
+  cursor: pointer; 
+}
+
+.service-card h3 {
+  font-family: 'Righteous', sans-serif;
+  font-size: 18px;
+  color: #292545;
+}
+
+.service-card p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: #333;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.service-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+  transition: all 0.3s ease;
+}
+
+ .service-card .price {
+    color: green;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+  .service-card ul {
+    list-style-type: disc;
+    font-weight: bold;
+    padding-left: 1.5em;
+    margin: 0.5em 0 1em;
+  }
+  .service-card li {
+    margin-bottom: 0.5em;
+  }
+
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .service-card {
+    padding: 1em;
+  }
+
+  .services-title {
+    font-size: 2.5vh;
+  }
+
+  .service-card h3 {
+    font-size: 2vh;
+  }
+
+  .service-card p {
+    font-size: 1.4vh;
+  }
+}
+/* YouTube Carousel Styles */
+.carousel-container {
+  /* padding: 2em; */
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+.carousel-title {
+  font-family: 'Exo', sans-serif;
+  font-size: 3vh;
+  color: #292545;
+  /* margin-bottom: 1em; */
+}
+
+.carousel-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  overflow-x: auto;
+  padding: 1em;
+}
+
+.carousel-video {
+  min-width: 300px;
+  max-width: 560px;
+  aspect-ratio: 16/9;
+  flex: 0 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-video iframe {
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .carousel-video {
+    min-width: 250px;
+  }
+
+  .carousel-title {
+    font-size: 2.5vh;
+  }
+}
+
+.form-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.35);
+  box-shadow: 0 8px 20px rgba(0,0,0,.18);
+  text-align: left;
+}
+
+label, input, select, textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+	font-size: 16px;  /* prevent mobile auto-zoom */
+
+}
+
+label {
+  color:#000000;
+}
+textarea {
+  resize: vertical;
+}
+
+button {
+  background-color: #292545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 5px;
+  /* width: 25%; */
+}
+
+button:hover {
+  background-color: #404080;
+}
+.email-signup-button {
+  background-color: #292545;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 2vh;
+  padding: 1em 2em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.email-signup-button:hover {
+  background-color: #404080;
+  transform: scale(1.05);
+}
+.services-button {
+  background-color: #292545;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  padding: 1em 2em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+.services-button:hover {
+  background-color: #404080;
+  transform: scale(1.05);
+}
+.services-button.full-width {
+  display: block;
+  width: 100%;
+}
+
+/* workshop css */
+.workshop-landing {
+  padding: 5vh 10vw;
+  padding-bottom: 2vh;
+  background: #0b0c10;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tagline {
+  font-size: 1.3rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  color: #ccc;
+}
+
+.cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.cta-buttons .btn {
+  padding: 1em 2em;
+  margin: 0.5em;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Stack buttons vertically on narrow screens */
+@media (max-width: 600px) {
+  
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-buttons .btn {
+    width: 90%;
+    max-width: 300px;
+  }
+}
+
+.btn.primary {
+  background: #00ffcc;
+  color: #000;
+}
+
+.btn.secondary {
+  background: transparent;
+  border: 2px solid #00ffcc;
+  color: #00ffcc;
+}
+
+
+.btn.vip {
+  background: #ff0080;
+  color: #fff;
+  padding: 1em 2em;
+  margin: 0.5em;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.countdown {
+  margin: 2rem 0;
+  font-size: 1.3rem;
+}
+
+.why-when-where {
+  text-align: left;
+  margin-top: 3rem;
+
+}
+.why-when-where p {
+  text-align: left;
+  margin-top: 1em;
+  font-size: 1em;
+}
+
+.why-when-where strong {
+  text-align: left;
+  margin-top: 2rem;
+  font-size: 1.2em;
+}
+
+
+.why-when-where ul {
+  list-style-type: square;
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.1em;
+}
+
+.testimonials {
+  margin-top: 4rem;
+  background: #141414;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.testimonials blockquote {
+  margin: 1rem auto;
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+.vip-offer {
+  background: #1a1a1a;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-top: 3rem;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-background {
+  background: linear-gradient(to bottom, #12003b, #0b0c10 50%, #000 100%);
+  color: white;
+  padding-top: 2vh;
+  padding-bottom: 1vh;
+  text-align: center;
+}
+
+.workshop-label {
+  display: inline-block;
+  background: linear-gradient(to right, #00ffc3, #0077ff);
+  color: #000;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  box-shadow: 0 0 10px rgba(0,255,195,0.3);
+}
+/* .section[data-anchor="workshop"] {
+  scroll-margin-top: 70px; /* adjust as needed } */
+
+.scrollable {
+  max-height: 100vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1.5em;
+}
+@media (max-width: 600px) {
+  .hero-background {
+    padding-top: 1vh;
+    padding-bottom: 0.5vh;
+    height: auto !important;
+    min-height: unset !important;
+  }
+
+  .hero-background h1 {
+    margin-top: 0.3em;
+    margin-bottom: 0.4em;
+    font-size: 3em;
+  }
+
+  .hero-background h2 {
+    margin-top: 0;
+    margin-bottom: 0.3em;
+    font-size: 2em;
+    line-height: 1.3;
+  }
+
+  .tagline {
+    font-size: 1.5em;
+    margin-top: 0.5rem;
+  }
+
+  .workshop-landing {
+    padding-top: 2vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+}
+
+</style>
+<!--Sender JS-->
+<script>
+  (function (s, e, n, d, er) {
+    s['Sender'] = er;
+    s[er] = s[er] || function () {
+      (s[er].q = s[er].q || []).push(arguments)
+    }, s[er].l = 1 * new Date();
+    var a = e.createElement(n),
+        m = e.getElementsByTagName(n)[0];
+    a.async = 1;
+    a.src = d;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://cdn.sender.net/accounts_resources/universal.js', 'sender');
+  sender('eeda3e532a6794')
+
+
+</script>
+
+
+
+</head>
+
+<body>
+<!-- reCAPTCHA root pinned at top-level (outside fullpage sections) -->
+  <div id="recaptcha-root" style="position:relative; z-index:9999;"></div>
+<!-- <ul id="menu">
+		<li data-menuanchor="page1" class="active"><a href="#page1">Videos</a></li>
+		<li data-menuanchor="page2"><a href="#page2">Services</a></li>
+		<li data-menuanchor="page3"><a href="#page3">Videos</a></li>
+		<li data-menuanchor="page4"><a href="#page1">Top</a></li>
+	</ul> -->
+
+
+
+<div id="fullpage" class="fullpage-wrapper">
+
+<div class="section" id="section0" data-anchor="page1">
+
+
+
+<!-- <div>
+<-- Drop Down Menu	 >
+<div class="dropdown">
+  <emailButton class="dropbtn"><i class="fa fa-bars"> Menu</i></emailButton>
+  <div class="dropdown-content" >
+  <a href="#page1">Top</a>
+  <a href="#page2">About me</a>
+  <a href="#page3">More!</a>
+</div>
+
+
+</div>
+ Email Button -->
+<!-- <a href="mailto:Adam@AdamWykle.com" alt="Adam@AdamWykle.com" style="float:right;">
+<button class="emailButton" style="vertical-align:middle"><span>
+	<i class="fa fa-envelope" ></i> Email me!</span></button></a>
+</div> -->
+<div style="margin-top:15%;font-family: 'Exo';font-size:3vh;text-align:center;color: #000000; "><span>Adam David Wykle</span>
+</div>
+
+<!-- <button class="services-button" onclick="fullpage_api.moveTo('page2')">
+    📖Sign Up for Module 2! 📖
+  </button> -->
+
+<div style="text-align: center; margin: 1em 0;">
+  <!-- <a href="https://adam-david-wykle.sender.site/" target="_blank" class="services-button full-width" style="display: inline-block; text-align: center; text-decoration: none;">
+  📖✨Check out the Workshop!✨📖
+</a> -->
+
+<!--sign up-->
+  <div class="form-container" id="subscribe-section">
+    <div id="recaptcha-subscribe"></div>
+    <h2>Signup For the Guide & Newsletter</h2>
+    <form id="subscribe-form">
+      <input type="email" name="email" placeholder="Your best email" required>
+      <input type="firstname" name="firstname" placeholder="First Name" required>
+      <!-- honeypot to trap bots -->
+      <input type="text" name="hp" style="display:none">
+      <button type="submit">Sign up!</button>
+    </form>
+    <p id="subscribe-msg" style="display:none"></p>
+  </div>
+<!-- email signup end-->
+<br><br>
+  <!-- <button class="email-signup-button" onclick="fullpage_api.moveTo('page3')">
+    ✨ Join the Email List ✨
+  </button> -->
+  <!--Module Link Button-->
+<!--Services button -->
+    <button class="services-button" onclick="fullpage_api.moveTo('page2')">
+    Book a Service!
+  </button>
+<br><br>
+
+
+  
+<!--About Me button -->
+    <button class="services-button" onclick="fullpage_api.moveTo('page3')">
+    About Me 
+  </button>
+</div>
+
+<div id="topVideo">
+
+	<!-- YouTube Video Carousel Section -->
+<div id="youtube-carousel" class="carousel-container">
+  <h2 class="carousel-title">Latest Videos</h2>
+  <div id="carousel-wrapper" class="carousel-wrapper">
+    <!-- Videos will be injected here dynamically -->
+  </div>
+</div>
+<div>
+	 <h3 id="YTLink" style="color: #000000;"><a href="https://www.youtube.com/@AdamDavidSpiritU" >
+		My Spirit University YouTube channel</a>
+	<br>
+	<a href="mailto:Adam@AdamWykle.com">
+ 		<i class="fa fa-envelope"></i> Adam@AdamWykle.com
+	</a>
+	</h3>
+	</div>
+
+
+</div>
+</div>
+
+
+
+	<!-- Page 2 -->
+	<div class="section" id="section1" data-anchor="page2">
+    <h2 style="text-align: center; font-weight: bold;">Select a Service to begin booking through Ko-fi!</h2><br>
+<!-- Offer 1 -->
+<div class="service-card" onclick="window.open('https://ko-fi.com/c/7d79a14118', 'koFiWindow', 'width=600,height=1024,scrollbars=yes')">  
+  <h3>Soul Energetics Reading</h3>
+  <p style="color:green;font-weight: bold;">$67</p>
+  <p>Are you struggling with understanding your Soul Blueprint markers? Are you trying to figure out where the meaning is behind events in your life? 
+    <p>This introductory energetic reading will take into account your astrology from a soul and energetic perspective while also taking into account the current transits of the planets.</p>
+    <p>This reading will be done via a custom recorded video where we go over what you wanted to analyze as well as what your soul wanted to accomplish in this lifetime. </p>
+  </p>
+  <p><strong>Turnaround:</strong> video link delivered to your inbox within two to five business days (guaranteed).</p>
+</div>
+<!-- Offer 2 -->
+<div class="service-card" onclick="window.open('https://ko-fi.com/c/c53289bab2', 'koFiWindow', 'width=600,height=1024,scrollbars=yes')">
+  <h3>Full Soul Energetic and Astrology Reading</h3>
+  <p class="price">$222</p>
+
+  <p><strong>Esoteric Astrology and Soul Reading</strong> is a <strong>15–20-page, fully illustrated PDF</strong> that decodes the fractal signature you chose for this lifetime. I fuse Western &amp; esoteric astrology, Human Design, numerology, and Ray analysis to reveal:</p>
+
+  <ul>
+    <li>Core life themes and karmic patterns</li>
+    <li>Hidden talents &amp; optimal decision mechanics</li>
+    <li>Current transits shaping your next 12 months</li>
+    <li>Action steps to align with your highest timeline</li>
+  </ul>
+<br>
+  <p><strong>Turnaround:</strong> PDF + video link delivered to your inbox within two to five business days (guaranteed).</p>
+</div>
+<!-- Offer 3 -->
+<div class="service-card" onclick="window.open('https://ko-fi.com/c/349e8e9ca5', 'koFiWindow', 'width=600,height=1024,scrollbars=yes')">
+  <h3>Multisession Spiritual Alignment Coaching</h3>
+  <p class="price">$999</p>
+
+  <p><strong>Multisession Spiritual Alignment Coaching</strong> is a 5-session 1:1 container for those who are ready to not just understand their Soul Blueprint, but actively live it. Together we work with your energy field, Soul Blueprint, and real-world goals to create grounded change over time.</p>
+
+  <ul>
+    <li>Clarify your core intentions and challenges for this season of life</li>
+    <li>Map your Soul Blueprint (astrology, Human Design, rays) to your goals and decisions</li>
+    <li>Identify energetic patterns, blocks, and opportunities in your field</li>
+    <li>Design practical experiments and aligned actions between sessions</li>
+    <li>Track your progress over multiple sessions and refine your path as you integrate the work</li>
+  </ul>
+  <br>
+  <p><strong>Structure:</strong> Five 60–75 minute Zoom sessions, typically scheduled over 6–10 weeks. After booking, you’ll receive an email with scheduling options and details within one to two business days.</p>
+</div>
+
+
+
+
+    <!-- <div class="service-card" onclick="navigateToContact('Spiritual/Personal Coaching')">
+      <h3>Soul Alignment Coaching</h3>
+      <p class="price">Free Consultation</p>
+      <p>We'll look at all the esoteric markers of your soul and rationalize where you are in your spiritual journey.</p>
+        <p>This free consultation will be a 30-45 minute session to see if we are a good fit for each other, what to expect, and how I can help you on your journey.</p>
+        <br><p><b>30-45 Mins initial session</b></p>
+
+    </div> -->
+
+    <!-- <div class="service-card" onclick="navigateToContact('Tarot Reading')">
+      <h3>Tarot Card Reading</h3>
+      <p style="color:green;font-weight: bold;">$50</p>
+      <p>Receive a unique tarot reading focused on messages from spirit guides and understanding universal forces. Ask any question(s) you'd like!</p>
+      30 Mins
+    </div> -->
+
+  </div>
+   
+  <!-- Workshop section -->
+  <!-- <div class="section" id="workshop" data-anchor="workshop">
+    <div class="scrollable">
+  <section class="workshop-landing fade-in">
+    <div class="container">
+      <div class="section hero-background">
+      <h1>Living as a Modern Mystic</h1>
+      <h2>4-Part Interactive Workshop <br> 
+        Begins July 19th @ 11AM CDT</h2>
+      
+      </div>
+        <p class="tagline">
+          Discover the keys to unlocking your highest self and learn to become a conscious co-creator in the universe.
+        </p>
+      
+      
+      <div class="cta-buttons">
+        <a href="https://ko-fi.com/s/d1184b5528" target="_blank" class="btn primary">Secure My Spot Now</a>
+        <a href="Living_as_a_Modern_Mystic_Workshop_Overview_Clean.pdf" target="_blank" class="btn secondary">See What's Included</a>
+      </div>
+
+      <div class="countdown">
+        <h4>This Experience Begins In:</h4>
+        <div style="background: #686103"id="countdown-timer">Loading countdown...</div>
+      </div>
+
+      <div class="why-when-where">
+        <p><strong>WHEN:</strong> Starts July 19, 2025 @ 11AM CDT <br>
+           <strong>WHERE:</strong> Live via Zoom (Replay available) <br>
+           <strong>WHY:</strong> To remember and embody the co-creator within</p>
+           <br>
+         
+        <p>This is a true Initiation into becoming a Modern Mystic for the Aquarian age</p>
+        <p>Over four live sessions, we'll explore:</p><br>
+
+        <ul>
+          <li><span class="workshop-label">Workshop 1:</span> <strong>Foundations of Reality</strong><br>
+            · Stillness as pure potential <br>· Standing waves <br>· Quantum truth <br>· Intention as interface
+          </li><br>
+          <li><span class="workshop-label">Workshop 2:</span> <strong>Fields, Fractals & the Blueprint of Consciousness</strong><br>
+            · Fractal intelligence <br>· One electron theory <br>· Cellular resonance <br>· Toroidal harmonics
+          </li><br>
+          <li><span class="workshop-label">Workshop 3:</span> <strong>Individuation & Christ Consciousness</strong><br>
+            · Your soul's geometry <br>· Evolution of human consciousness <br>· The cosmic archetype
+          </li><br>
+          <li><span class="workshop-label">Workshop 4:</span> <strong>Future Human</strong><br>
+            · Telepathy <br>· Scalar awareness <br>· Esoteric tech <br>· Becoming a galactic citizen
+          </li>
+
+        </ul>
+
+      </div>
+
+      <div class="testimonials">
+        <h2>Why Others Are Joining</h2>
+        <blockquote>
+          “It felt like Adam opened a door I had been searching for my whole life. Everything just clicked.”<br>
+          <span>— Workshop Beta Participant</span>
+        </blockquote>
+        <blockquote>
+          “If you want a mystical experience grounded in logic, science, and soul… this is it.”<br>
+          <span>— Spiritual Technologist</span>
+        </blockquote>
+      </div>
+
+      <div class="vip-offer" id="vip">
+        <h3>What You'll Get</h3>
+        <ul>
+          <li>✔ Live access to all 4 workshops</li>
+          <li>✔ Lifetime access to replays (Video on Demand)</li>
+          <li>✔ Downloadable slides, diagrams & PDFs</li>
+          <li>✔ Bonus integration materials after the final session</li>
+          <li>✔ Ask Adam questions directly during Q&A</li>
+        </ul>
+        <p><strong>First 10 Registrants Get It All for $200</strong><br>
+        (Over 80% off typical transformational workshops!)</p>
+        <br>
+        <a href="https://ko-fi.com/s/d1184b5528" target="_blank" class="btn vip">Claim Early Access</a>
+      </div>
+
+      <a href="#" onclick="window.location.href = window.location.origin + window.location.pathname; return false;">Back to Top</a>
+
+
+    </div>
+  </section>
+</div>
+
+</div>end of workshop section -->
+<div class="section" id="aboutMe" data-anchor="page3">
+<div class="about-wrapper">
+    <h2>About Adam</h2>
+<br>
+    <p>
+      Hi, I’m Adam Wykle. I help spiritually awake, science-curious humans
+      understand what they’re actually sensing in this world – and how to live
+      in alignment with it. My work weaves together Western & esoteric
+      astrology, Human Design, ray work, and what I call <strong>spiritual physics</strong>:
+      a field-based view of reality drawn from plasma science, wave mechanics,
+      and consciousness studies.
+    </p>
+<br>
+    <p>
+      I have a background in computer science and a lifelong obsession with how
+      the universe really works. After years of burnout, loss, and intense
+      personal transformation, I stopped treating spirituality and science as two
+      separate languages and started using them together as one map. The result
+      is the work you see here: practical tools rooted in both
+      mystical tradition and real-world systems thinking.
+    </p>
+<br>
+    <h3>What I bring to our work together</h3>
+    <ul>
+      <li><strong>Clear translation:</strong> I turn complex spiritual and scientific ideas into language you can actually use in daily life.</li>
+      <li><strong>Deep pattern recognition:</strong> I specialize in seeing the “fractal” of your life – the repeating themes, karmic patterns, and hidden talents in your Soul Blueprint.</li>
+      <li><strong>Grounded guidance:</strong> I’m not here to float you off into fantasy. I’m here to help you make better decisions, create coherence in your field, and move through this world with more clarity and self-trust.</li>
+    </ul>
+<br>
+    <p>
+      If you feel like you don’t quite fit the default settings of this world,
+      you’re in the right place. Start with a Soul Energetics Reading or explore
+      my latest videos, and let’s begin decoding the pattern your soul has been
+      trying to show you all along.
+    </p>
+    <br>
+    <button class="services-button" onclick="fullpage_api.moveTo('page2')">
+    Services
+    </button>
+  </div>
+
+</div>
+<div class="section" id="section3" data-anchor="page4">
+		<div class="form-container">
+		  <h2>Contact Me</h2>
+		  <form id="contact-form">
+			<label for="name">Name</label>
+			<input type="text" id="name" name="name" placeholder="Your Name" required>
+
+			<label for="email">Email</label>
+			<input type="email" id="email" name="email" placeholder="Your Email" required>
+
+			<label for="service">Select a Service</label>
+			<select id="service" name="service" required>
+			  <option value="" disabled selected>Choose a Service</option>
+			  <option value="Spiritual/Personal Coaching">Spiritual/Personal Coaching</option>
+			  <option value="Tarot Reading">Tarot Reading</option>
+			  <option value="Soul Blueprint">Soul Blueprint</option>
+			  <option value="Plasma Science Consulting">Plasma Science Consulting</option>
+			  <option value="Just Contacting">Just Contacting</option>
+			</select>
+
+			<label for="message"><b>Additional Details. For Soul Blueprint - please include time, date, and location of birth along with Full name</b></label>
+			<textarea id="message" name="message" placeholder="Please enter your information amd any dates you are available..."></textarea>
+      
+      <input type="text" name="honeypot" id="honeypot" style="display: none;">
+      
+<!-- <button type="submit">Send Request</button> -->
+
+			<button type="submit">Send Request</button>
+		  </form>
+		<h2>
+		<br>
+		<a href="mailto:Adam@AdamWykle.com">
+	   	 <i class="fa fa-envelope"></i> Adam@AdamWykle.com
+		</a>
+		</h2>
+		</div>
+
+	  </div>
+</div><!-- end of fullpage div -->
+
+</script>
+
+<!-- 1) Load reCAPTCHA (explicit mode) -->
+
+<!-- 2) Your reCAPTCHA control code -->
+<script>
+  let recaptchaWidgetId = null;
+  let recaptchaReady = false;
+
+  function renderRecaptchaIfReady() {
+    if (!window.grecaptcha || !grecaptcha.render) return false;
+    if (recaptchaWidgetId === null) {
+      recaptchaWidgetId = grecaptcha.render('recaptcha-root', {
+        sitekey: '6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km',
+        size: 'invisible',
+        badge: 'bottomright',               // keep badge visible
+        callback: onRecaptchaSuccess
+      });
+    }
+    recaptchaReady = true;
+    return true;
+  }
+
+  // Warm up: render ASAP, resilient to Firefox onload quirks
+  (function warmUp(i=0) {
+    if (renderRecaptchaIfReady()) return;
+    if (i < 40) setTimeout(() => warmUp(i+1), 100);
+  })();
+
+  const form = document.getElementById('contact-form');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // Honeypot
+    if (document.getElementById('honeypot').value) return;
+
+    // Ensure widget exists before executing
+    if (!recaptchaReady || recaptchaWidgetId === null) {
+      // one quick retry
+      setTimeout(() => {
+        if (renderRecaptchaIfReady()) grecaptcha.execute(recaptchaWidgetId);
+        else alert('reCAPTCHA failed to load—please refresh and try again.');
+      }, 250);
+      return;
+    }
+
+    grecaptcha.execute(recaptchaWidgetId);
+  });
+
+  function onRecaptchaSuccess(token) {
+    // Put the token into the form for EmailJS
+    const old = form.querySelector('input[name="g-recaptcha-response"]');
+    if (old) old.remove();
+    const hidden = document.createElement('input');
+    hidden.type = 'hidden';
+    hidden.name = 'g-recaptcha-response';
+    hidden.value = token;
+    form.appendChild(hidden);
+
+    emailjs.sendForm('service_h7aa0dm', 'template_vgds77o', form)
+      .then(() => {
+        alert('Message sent successfully!');
+        form.reset();
+        grecaptcha.reset(recaptchaWidgetId);
+      })
+      .catch(err => {
+        console.error('EmailJS error:', err);
+        alert('Failed to send message. Please try again later.');
+        grecaptcha.reset(recaptchaWidgetId);
+      });
+  }
+</script>
+
+<!-- 3) Now load and initialize fullpage.js AFTER the widget is alive -->
+<script type="text/javascript" src="fullpage.js"></script>
+<script type="text/javascript">
+  const isMobile = window.innerWidth < 768;
+// List your anchors
+  const anchors = ['page1', 'page2', 'page3', 'page4'];
+  const hash = window.location.hash.replace('#', '');
+
+  // Only act if the hash is valid
+  if (anchors.includes(hash)) {
+    const fullpageEl = document.getElementById('fullpage');
+    const sections = Array.from(fullpageEl.querySelectorAll('.section'));
+    const targetSection = fullpageEl.querySelector(`[data-anchor="${hash}"]`);
+
+    if (targetSection) {
+      // Remove the target section
+      fullpageEl.removeChild(targetSection);
+
+      // Insert it at the top
+      fullpageEl.insertBefore(targetSection, sections[0]);
+    }
+  }
+
+new fullpage('#fullpage', {
+  anchors: ['page1', 'page2', 'page3', 'page4'],
+  menu: '#menu',
+  autoScrolling: !isMobile,
+  fitToSection: !isMobile,
+  scrollOverflow: false,  // 👈 disable on mobile
+  css3: true,
+  controlArrows: true,
+  verticalCentered: true,
+  //  paddingTop: '1em',
+  responsiveWidth: 768,
+  lockAnchors: true,
+  normalScrollElements: '.scrollable', // allow inner scrolls to work
+});
+
+</script>
+
+<script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
+
+<script>
+  //const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyBh_2To1hitSKCrETthofcYTclxEYM6JyxExkZJFa1VIllrEtQ4K67PuX1Fvbbgjgz/exec';
+
+
+  // window.addEventListener('DOMContentLoaded', ()=> {
+  //   const form = document.getElementById('subscribe-form');
+  //   const msg  = document.getElementById('subscribe-msg');
+  //   if (!form) {
+  //     console.error('No subscribe-form on page!');
+  //     return;
+  //   }
+  //   form.addEventListener('submit', async e => {
+  //     e.preventDefault();
+
+  //     // trap bots
+  //     if (form.hp.value) return alert('Bot detected');
+
+  //     console.log('🤞 submitting to Google Apps Script…');
+  //     const data = new FormData(form);
+  //     try {
+  //       const res  = await fetch(WEB_APP_URL, { method:'POST', body: data });
+  //       const json = await res.json();
+  //       console.log('GAS returned', json);
+  //       if (json.status === 'success') {
+  //       msg.textContent = '✅ You’re in! Thank you.';
+  //     } else if (json.status === 'already_subscribed') {
+  //       msg.textContent = '⚡ You’re already subscribed!';
+  //     } else {
+  //       msg.textContent = '⚠️ That doesn’t look like a valid email.';
+  //     }
+  //     } catch(err) {
+  //       console.error(err);
+  //       msg.textContent = '⚠️ Network error—please try again.';
+  //     }
+  //     msg.style.display = 'block';
+  //     form.reset();
+  //   });
+  // });
+
+
+window.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('subscribe-form');
+  const msg  = document.getElementById('subscribe-msg');
+  const RECAPTCHA_SITE_KEY = '6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km'; // 🧠 your site key
+
+  if (!form) {
+    console.error('No subscribe-form on page!');
+    return;
+  }
+
+  // 🧠 Render the invisible reCAPTCHA widget once the API loads
+  let recaptchaWidgetId = null;
+  function renderRecaptcha() {
+    if (window.grecaptcha && !recaptchaWidgetId) {
+      recaptchaWidgetId = grecaptcha.render('recaptcha-subscribe', {
+        sitekey: RECAPTCHA_SITE_KEY,
+        size: 'invisible',
+        callback: onRecaptchaSuccess
+      });
+    }
+  }
+  // Poll until the reCAPTCHA library is ready
+  (function waitForRecaptcha(i = 0) {
+    if (window.grecaptcha && window.grecaptcha.render) return renderRecaptcha();
+    if (i < 50) setTimeout(() => waitForRecaptcha(i + 1), 100);
+  })();
+
+  // Store form data temporarily while we wait for the token
+  let pendingData = null;
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    // trap bots via honeypot or speed
+    if (form.hp.value || isFastSubmit()) {
+      alert('Bot detected');
+      return;
+    }
+
+    function isFastSubmit() {
+      const delta = Date.now() - pageLoadTs;
+      console.log('Time delta:', delta);
+      return delta < 2500; // less than 2.5s = likely bot
+    }
+
+    const firstname = form.firstname.value.trim();
+    const email = form.email.value.trim();
+    if (!email) {
+      msg.textContent = 'Please enter an email address.';
+      msg.style.display = 'block';
+      return;
+    }
+
+    // Clear previous message
+    msg.textContent = '';
+    msg.style.display = 'none';
+
+    // 🧠 Save pending form data and trigger invisible reCAPTCHA
+    pendingData = { firstname, email };
+    if (recaptchaWidgetId !== null) {
+      grecaptcha.execute(recaptchaWidgetId);
+    } else {
+      msg.textContent = 'reCAPTCHA not ready—please refresh.';
+      msg.style.display = 'block';
+    }
+  });
+
+  // 🧠 Called automatically once Google returns a valid token
+  async function onRecaptchaSuccess(token) {
+    if (!pendingData) return;
+
+    console.log('🤞 Submitting to Cloudflare Worker → Sender.net…');
+
+    try {
+      const res = await fetch('https://dawn-bar-d75f.adam-40f.workers.dev/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstname: pendingData.firstname,
+          email: pendingData.email,
+          'g-recaptcha-response': token // 🧠 include token
+        })
+      });
+
+      const json = await res.json();
+      console.log('Worker returned', json);
+
+      if (res.ok) {
+        msg.textContent = '✅ You’re in! Thank you.';
+      } else if (json.title && /already subscribed/i.test(json.title)) {
+        msg.textContent = '⚡ You’re already subscribed!';
+      } else if (json.error === 'Invalid reCAPTCHA') {
+        msg.textContent = '⚠️ reCAPTCHA failed—please try again.';
+      } else {
+        msg.textContent = '⚠️ Could not subscribe—please retry later.';
+      }
+    } catch (err) {
+      console.error(err);
+      msg.textContent = '⚠️ Network error—please try again.';
+    } finally {
+      msg.style.display = 'block';
+      form.reset();
+      pendingData = null;
+      try { grecaptcha.reset(recaptchaWidgetId); } catch (_) {}
+    }
+  }
+
+  // 🧠 Expose callback globally so reCAPTCHA can call it
+  window.onRecaptchaSuccess = onRecaptchaSuccess;
+});
+
+</script>
+
+  <script>
+  function updateCountdown() {
+    const targetDate = new Date("2025-07-19T11:00:00-05:00"); // CST
+    const now = new Date();
+    const diff = targetDate - now;
+
+    if (diff <= 0) {
+      document.getElementById("countdown-timer").innerHTML = "We're Live!";
+      clearInterval(countdownInterval);
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    const pad = (n) => (n < 10 ? "0" + n : n);
+
+    document.getElementById("countdown-timer").innerHTML = 
+      `${pad(days)} Days : ${pad(hours)} Hrs : ${pad(minutes)} Mins : ${pad(seconds)} Secs`;
+  }
+
+  // Run immediately and then every second
+  updateCountdown();
+  const countdownInterval = setInterval(updateCountdown, 1000);
+</script>
+
+		<script>
+// Reset zoom on blur or resize
+function resetViewport() {
+  const viewport = document.querySelector("meta[name=viewport]");
+  if (viewport) {
+    viewport.setAttribute(
+      "content",
+      "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    );
+  }
+}
+window.addEventListener('resize', resetViewport);
+document.addEventListener('focusout', resetViewport);
+
+</script>
+<script>
+  window.addEventListener('load', () => {
+    document.querySelector('.workshop-landing').classList.add('visible');
+  });
+
+  // OR use this if you want to trigger when scrolled into view:
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.4 });
+
+  const fadeEls = document.querySelectorAll('.fade-in');
+  fadeEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
