@@ -52,7 +52,7 @@ async function fetchYouTubeVideos() {
     });
 
     const videosScroll = document.getElementById("videos-scroll");
-    videosScroll.innerHTML = nonShortsVideos.slice(0, 4).map(video => `
+    videosScroll.innerHTML = nonShortsVideos.slice(0, 8).map(video => `
       <a href="https://www.youtube.com/watch?v=${video.id}" target="_blank" rel="noopener" class="video-card">
         <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/${video.id}/hqdefault.jpg'); background-size: cover; background-position: center;"></div>
         <div class="video-card-body">
