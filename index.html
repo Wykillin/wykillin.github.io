@@ -121,9 +121,9 @@ body {
   top: -50%;
   left: -50%;
   background:
-    radial-gradient(ellipse 600px 600px at 20% 30%, rgba(74, 111, 165, 0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 500px 500px at 75% 60%, rgba(107, 76, 154, 0.05) 0%, transparent 70%),
-    radial-gradient(ellipse 400px 400px at 50% 80%, rgba(139, 69, 101, 0.04) 0%, transparent 70%);
+    radial-gradient(ellipse 400px 400px at 20% 30%, rgba(74, 111, 165, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 300px 300px at 75% 60%, rgba(107, 76, 154, 0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 200px 200px at 50% 80%, rgba(139, 69, 101, 0.04) 0%, transparent 70%);
   animation: drift 60s linear infinite;
 }
 
@@ -248,8 +248,8 @@ nav.scrolled {
 
 .toroid-container {
   position: relative;
-  width: 280px;
-  height: 280px;
+  width: 160px;
+  height: 160px;
   margin-bottom: 3rem;
 }
 
@@ -262,26 +262,26 @@ nav.scrolled {
 
 .toroid-ring:nth-child(1) {
   inset: 0;
-  border-color: rgba(201, 168, 76, 0.3);
+  border-color: rgba(255, 187, 0, 0.438);
   animation-duration: 25s;
 }
 
 .toroid-ring:nth-child(2) {
   inset: 20px;
-  border-color: rgba(74, 111, 165, 0.25);
+  border-color: rgba(74, 4, 121, 0.767);
   animation-duration: 18s;
   animation-direction: reverse;
 }
 
 .toroid-ring:nth-child(3) {
   inset: 45px;
-  border-color: rgba(107, 76, 154, 0.2);
+  border-color: rgba(223, 217, 233, 0.349);
   animation-duration: 15s;
 }
 
 .toroid-ring:nth-child(4) {
   inset: 70px;
-  border-color: rgba(201, 168, 76, 0.15);
+  border-color: rgba(247, 188, 28, 0.15);
   animation-duration: 22s;
   animation-direction: reverse;
 }
@@ -290,7 +290,7 @@ nav.scrolled {
   position: absolute;
   inset: 100px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(201, 168, 76, 0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(236, 173, 0, 0.644) 0%, transparent 30%);
   animation: pulse-core 4s ease-in-out infinite;
 }
 
@@ -317,8 +317,8 @@ nav.scrolled {
 
 .hero h1 {
   font-family: var(--serif);
-  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
-  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 2.9rem);
+  font-weight: 100;
   line-height: 1.15;
   max-width: 700px;
   color: var(--text-primary);
@@ -344,7 +344,7 @@ nav.scrolled {
 .hero-actions {
   display: flex;
   gap: 1rem;
-  margin-top: 2.5rem;
+  margin-top: 1rem;
   flex-wrap: wrap;
   justify-content: center;
   opacity: 0;
@@ -423,14 +423,14 @@ section {
 /* ── LEAD MAGNET ── */
 .lead-magnet {
   position: relative;
-  padding: 4rem;
+  padding: 1rem;
   background: var(--bg-card);
   border: 1px solid rgba(201, 168, 76, 0.1);
-  max-width: 900px;
+  max-width: 1200px;
   margin: -2rem auto 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: 1.5rem;
   align-items: center;
   overflow: hidden;
 }
@@ -1005,6 +1005,27 @@ footer .copy {
   opacity: 1;
   transform: translateY(0);
 }
+
+.services-scroll {
+  margin-top: 1rem;
+  font-family: var(--serif);
+  font-size: 2.5rem;
+  font-weight: 75;
+  line-height: 1.15;
+  color: var(--text-primary);
+  opacity: 0;
+  animation: fadeUp 1s 0.5s ease forwards;
+}
+
+.services-scroll a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+  a-:hover { color: var(--plasma-rose); }
+  a-:active { color: var(--plasma-violet); }
+  a-:focus { color: var(--plasma-blue); }
+  a-:visited { color: var(--gold-dim); }
+}
 </style>
 </head>
 <body>
@@ -1036,13 +1057,13 @@ footer .copy {
     <div class="toroid-ring"></div>
     <div class="toroid-core"></div>
   </div>
+  <h1><em>Be Reality</em> Through Modern Mysticism</h1>
   <p class="hero-eyebrow">Plasma Cosmology · Esoteric Astrology · Consciousness Science</p>
-  <h1>The Universe Is a <em>Living Broadcast.</em><br>Learn to Read the Signal.</h1>
-  <p class="hero-sub">I help spiritually awake, science-curious humans decode the fractal signature of their soul — using the language of science, field-based consciousness, fractals, and esoteric schools of thought.</p>
+  <!-- <p class="hero-sub">I help spiritually awake, science-curious humans decode the fractal signature of their soul — using the language of science, field-based consciousness, fractals, and esoteric schools of thought.</p> -->
   <!-- <div class="hero-actions">
     <a href="Guide.pdf" class="btn btn-ghost">Free Guide →</a>
   </div> -->
-
+<div class="services-scroll"><a href="#services" style="color: white; text-decoration: underline;">Available Services</a></div>
 <!-- Lead Magnet  -->
 <div class="lead-magnet reveal" style="margin-top: 1rem;">
   <div class="lead-magnet-content">
@@ -1100,18 +1121,21 @@ footer .copy {
 
     <div class="service-card reveal">
       <span class="service-tag">Entry Point</span>
-      <h3>Soul Energetics Reading</h3>
-      <div class="service-price">$97</div>
-      <p>A custom recorded video reading that maps your natal chart through the lens of esoteric astrology and current planetary transits — revealing what your soul chose to work with this lifetime.</p>
+      <h3>Soul-Centered Astrology Reading</h3>
+      <div class="service-price">$150</div>
+      <p>This is a 45+ minute recorded video that decodes the fractal plasmic signature you chose for this lifetime. I fuse traditional and esoteric astrology with cutting edge Plasma Physics to reveal:</p>
       <div class="service-includes">
-        <span><span class="check">◈</span> Custom video delivered within 5 days</span>
-        <span><span class="check">◈</span> Esoteric astrology + transit analysis</span>
-        <span><span class="check">◈</span> Soul-level pattern identification</span>
+        <span><span class="check">◈</span> Core life themes and karmic patterns</span>
+        <span><span class="check">◈</span> The inherited talents and lessons your soul intends to use</span>
+        <span><span class="check">◈</span> Insights into how karmic lessons were designed to be resolved</span>
+        <span><span class="check">◈</span> Best practices to advance spiritually in this lifetime</span>
       </div>
+      <p>You will receive a video link delivered to your inbox within two to five business days (guaranteed).</p>
+      <p>Also available is a live 60-90 minute meeting to discuss findings and go over any questions. Select the available add-on and I will personally email you to setup a time to meet.</p>
       <a href="https://ko-fi.com/c/7d79a14118" class="btn btn-ghost">Book Reading</a>
     </div>
 
-    <div class="service-card featured reveal">
+    <!-- <div class="service-card featured reveal">
       <span class="service-tag">Most Popular</span>
       <h3>Full Soul Blueprint</h3>
       <div class="service-price">$333</div>
@@ -1123,7 +1147,7 @@ footer .copy {
         <span><span class="check">◈</span> Karmic pattern + hidden talent mapping</span>
       </div>
       <a href="https://ko-fi.com/c/c53289bab2" class="btn btn-gold">Get Your Blueprint</a>
-    </div>
+    </div> -->
 
     <div class="service-card reveal">
       <span class="service-tag">Ongoing Container</span>
