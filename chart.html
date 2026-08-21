@@ -3,35 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/@astrodraw/astrochart">  
-        const chart = new Chart( 'paper', 800, 800)
-        const radix = chart.radix( data )
-        //var chart = new Chart( 'paper', 800, 800);
-        //data example
-        var data = {
-            "planets":{
-                "Pluto":[63], 
-                "Neptune":[110], 
-                "Uranus":[318], 
-                "Saturn":[201], 
-                "Jupiter":[192], 
-                "Mars":[210], 
-                "Moon":[268], 
-                "Sun":[281],
-                "Mercury":[312], 
-                "Venus":[330]},
-            "cusps":[296, 350, 30, 56, 75, 94, 116, 170, 210, 236, 255, 274]          
-        };
-
-       // var radix = chart.radix( data );    
-    </script>
     <title>Chart</title>
+
+    <!-- Load the astrodraw library. A <script src> tag must NOT contain inline
+         code — that was the original bug: the code inside was silently ignored. -->
+    <script src="https://unpkg.com/@astrodraw/astrochart"></script>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background-color: #f5f5f5;
@@ -45,18 +24,79 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             padding: 30px;
         }
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
+        h1 { color: #333; margin-bottom: 20px; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Chart</h1>
-        <!-- Add chart content here -->
-         <div id="paper"></div>
-         
+        <div id="paper"></div>
     </div>
+
+    <!-- A module runs after the DOM is parsed and after the classic astrochart
+         script above has executed, so both #paper and window.astrochart exist. -->
+    <script type="module">
+        import SwissEph from 'https://cdn.jsdelivr.net/gh/prolaxu/swisseph-wasm@main/src/swisseph.js';
+
+        const swe = new SwissEph();
+        await swe.initSwissEph();   // this also sets the ephe path to 'sweph' (bundled data + seorbel.txt)
+
+        const signs = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo',
+                       'Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
+
+        // --- Chart input -------------------------------------------------------
+        // Time is treated as Universal Time (UT). year, month, day, decimal hour.
+        const jd = swe.julday(1986, 5, 1, 22.75);
+
+        // House cusps need a geographic location. Defaulted to Woodstock, IL —
+        // change these two for a different birthplace.
+        const GEOLAT = 42.3147;
+        const GEOLON = -88.4487;
+
+        const flags = swe.SEFLG_SWIEPH | swe.SEFLG_SPEED;
+
+        // Bodies to plot. astrodraw draws glyphs for the known names; "Vulcan"
+        // isn't in its symbol set, so it renders as a text label — still correct.
+        const bodies = [
+            ['Sun',     swe.SE_SUN],
+            ['Moon',    swe.SE_MOON],
+            ['Mercury', swe.SE_MERCURY],
+            ['Venus',   swe.SE_VENUS],
+            ['Mars',    swe.SE_MARS],
+            ['Jupiter', swe.SE_JUPITER],
+            ['Saturn',  swe.SE_SATURN],
+            ['Uranus',  swe.SE_URANUS],
+            ['Neptune', swe.SE_NEPTUNE],
+            ['Pluto',   swe.SE_PLUTO],
+            ['NNode',   swe.SE_TRUE_NODE],
+            ['Chiron',  swe.SE_CHIRON],
+            ['Vulcan',  swe.SE_VULCAN],   // esoteric intramercurial Vulcan (Weston)
+        ];
+
+        // --- Build the data object astrodraw expects ---------------------------
+        const data = { planets: {}, cusps: [] };
+
+        for (const [name, id] of bodies) {
+            try {
+                const pos = swe.calc_ut(jd, id, flags);   // [lon, lat, dist, ...]
+                const lon = pos[0];
+                data.planets[name] = [lon];               // astrodraw wants [longitude]
+                console.log(`${name} at ${(lon % 30).toFixed(2)}° ${signs[Math.floor(lon / 30)]}`);
+            } catch (e) {
+                // One unavailable body shouldn't kill the whole chart.
+                console.warn(`Skipped ${name}: ${e.message}`);
+            }
+        }
+
+     
+        const h = swe.houses(jd, GEOLAT, GEOLON, 'P');    // 'P' = Placidus
+        data.cusps = Array.from(h.cusps).slice(1, 13);
+
+        // --- Draw --------------------------------------------------------------
+        const chart = new astrochart.Chart('paper', 800, 800);
+        chart.radix(data);
+
+        swe.close();
+    </script>
 </body>
 </html>
