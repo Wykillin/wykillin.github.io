@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Sign up for the free video course and newsletter from Adam David Wykle — plasma cosmology, esoteric astrology, and consciousness science.">
+<title>Sign Up — Adam David Wykle</title>
+<link rel="icon" href="torus.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<script>const pageLoadTs = Date.now();</script>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-deep: #06050e;
+  --bg-card: #0c0b18;
+  --gold: #c9a84c;
+  --gold-dim: #9a7a30;
+  --plasma-blue: #4a6fa5;
+  --plasma-violet: #6b4c9a;
+  --text-primary: #e8e4dc;
+  --text-secondary: #9e9a90;
+  --text-dim: #6b675f;
+  --ok: #7fc98b;
+  --warn: #e0a355;
+  --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.65;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: max(1.25rem, env(safe-area-inset-top)) 1.25rem max(1.25rem, env(safe-area-inset-bottom));
+  overflow-x: hidden;
+}
+
+/* ── COSMIC BACKGROUND ── */
+.cosmic-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cosmic-bg::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background:
+    radial-gradient(ellipse 400px 400px at 20% 30%, rgba(74, 111, 165, 0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 300px 300px at 75% 60%, rgba(107, 76, 154, 0.09) 0%, transparent 70%),
+    radial-gradient(ellipse 220px 220px at 50% 85%, rgba(201, 168, 76, 0.06) 0%, transparent 70%);
+  animation: drift 60s linear infinite;
+}
+
+@keyframes drift {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── CARD ── */
+.card {
+  width: 100%;
+  max-width: 30rem;
+  background: var(--bg-card);
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  border-radius: 14px;
+  padding: 2.25rem 1.75rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+}
+
+.card::before {
+  content: '';
+  display: block;
+  height: 1px;
+  margin: -2.25rem -1.75rem 2rem;
+  background: linear-gradient(90deg, transparent, var(--plasma-blue), var(--gold), var(--plasma-violet), transparent);
+  opacity: 0.65;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+
+h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 6vw, 2.35rem);
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+h1 em { color: var(--gold); font-style: italic; }
+
+.lede {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin-bottom: 1.75rem;
+}
+
+/* ── FORM ── */
+.field { margin-bottom: 1rem; }
+
+label {
+  display: block;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+}
+
+.req { color: var(--gold-dim); }
+
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  /* 16px minimum keeps iOS Safari from zooming in on focus */
+  font-size: 16px;
+  font-family: var(--sans);
+  font-weight: 300;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 0.85rem 0.95rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+input::placeholder { color: var(--text-dim); }
+
+input:focus-visible {
+  outline: none;
+  border-color: var(--gold);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+}
+
+/* honeypot — off-screen for humans, still filled in by naive bots */
+.hp {
+  position: absolute !important;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+button {
+  width: 100%;
+  margin-top: 0.5rem;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: #06050e;
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 0.95rem 1.5rem;
+  min-height: 48px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+button:hover { background: #d4b35a; }
+button:active { transform: translateY(1px); }
+button:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 3px; }
+
+button[disabled] { opacity: 0.6; cursor: default; transform: none; }
+
+#subscribe-msg {
+  display: none;
+  margin-top: 1rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#subscribe-msg.is-ok   { color: var(--ok);   border-color: rgba(127, 201, 139, 0.35); }
+#subscribe-msg.is-warn { color: var(--warn); border-color: rgba(224, 163, 85, 0.35); }
+
+#recaptcha-subscribe { margin-top: 0.5rem; }
+
+.fine {
+  margin-top: 1.5rem;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.fine a { color: var(--text-secondary); }
+
+/* the floating reCAPTCHA badge crowds the card on small screens */
+.grecaptcha-badge { visibility: hidden; }
+
+@media (max-width: 380px) {
+  .card { padding: 1.75rem 1.25rem; }
+  .card::before { margin: -1.75rem -1.25rem 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cosmic-bg::before { animation: none; }
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="cosmic-bg" aria-hidden="true"></div>
+
+<main class="card">
+  <p class="eyebrow">Free Video Course &amp; Newsletter</p>
+  <h1>Decode the <em>fractal signature</em> of your reality</h1>
+  <p class="lede">Plasma cosmology, esoteric astrology, and consciousness science — in plain language. Enter your name and email and the first video is yours free.</p>
+
+  <form id="subscribe-form" novalidate>
+    <div class="field">
+      <label for="firstname">First name</label>
+      <input type="text" id="firstname" name="firstname" placeholder="Your first name"
+             autocomplete="given-name" autocapitalize="words" enterkeyhint="next">
+    </div>
+
+    <div class="field">
+      <label for="email">Email address <span class="req" aria-hidden="true">*</span></label>
+      <input type="email" id="email" name="email" placeholder="your@email.com"
+             autocomplete="email" inputmode="email" autocapitalize="off"
+             autocorrect="off" spellcheck="false" enterkeyhint="send" required>
+    </div>
+
+    <div class="hp" aria-hidden="true">
+      <label for="hp">Leave this field empty</label>
+      <input type="text" id="hp" name="hp" tabindex="-1" autocomplete="off">
+    </div>
+
+    <button type="submit" id="subscribe-btn">Get the Free Video</button>
+    <div id="recaptcha-subscribe"></div>
+    <p id="subscribe-msg" role="status" aria-live="polite"></p>
+  </form>
+
+  <p class="fine">
+    No spam. Unsubscribe any time.<br>
+    Protected by reCAPTCHA — Google's
+    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and
+    <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms</a> apply.
+  </p>
+</main>
+
+<script>
+// Subscribe form — single unified handler, no duplicate declarations
+window.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('subscribe-form');
+  const msg  = document.getElementById('subscribe-msg');
+  const btn  = document.getElementById('subscribe-btn');
+  const RECAPTCHA_SITE_KEY = '6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km';
+
+  if (!form) return;
+
+  let recaptchaWidgetId = null;
+  let pendingData = null;
+
+  function say(text, kind) {
+    msg.textContent = text;
+    msg.className = kind ? 'is-' + kind : '';
+    msg.style.display = text ? 'block' : 'none';
+  }
+
+  function busy(state) {
+    btn.disabled = state;
+    btn.textContent = state ? 'Sending…' : 'Get the Free Video';
+  }
+
+  function renderRecaptcha() {
+    if (window.grecaptcha && recaptchaWidgetId === null) {
+      recaptchaWidgetId = grecaptcha.render('recaptcha-subscribe', {
+        sitekey: RECAPTCHA_SITE_KEY,
+        size: 'invisible',
+        callback: onRecaptchaSuccess
+      });
+    }
+  }
+
+  (function waitForRecaptcha(i = 0) {
+    if (window.grecaptcha && window.grecaptcha.render) return renderRecaptcha();
+    if (i < 50) setTimeout(() => waitForRecaptcha(i + 1), 100);
+  })();
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    if (form.hp && form.hp.value) return;
+
+    const delta = Date.now() - pageLoadTs;
+    if (delta < 2500) {
+      say('One moment — please try again in a couple of seconds.', 'warn');
+      return;
+    }
+
+    const firstname = form.firstname.value.trim();
+    const email = form.email.value.trim();
+    if (!email) {
+      say('Please enter an email address.', 'warn');
+      form.email.focus();
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      say('That email address does not look right — please check it.', 'warn');
+      form.email.focus();
+      return;
+    }
+
+    say('');
+    pendingData = { firstname, email };
+
+    if (recaptchaWidgetId !== null) {
+      busy(true);
+      grecaptcha.execute(recaptchaWidgetId);
+    } else {
+      say('⚠️ reCAPTCHA not ready — please refresh.', 'warn');
+    }
+  });
+
+  async function onRecaptchaSuccess(token) {
+    if (!pendingData) return;
+    let kind = 'warn';
+    try {
+      const res = await fetch('https://dawn-bar-d75f.adam-40f.workers.dev/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstname: pendingData.firstname,
+          email: pendingData.email,
+          'g-recaptcha-response': token
+        })
+      });
+      const json = await res.json().catch(() => ({}));
+      if (res.ok) {
+        msg.textContent = '✅ You\'re in! Check your inbox — the first video is on its way.';
+        kind = 'ok';
+      } else if (json.title && /already subscribed/i.test(json.title)) {
+        msg.textContent = '⚡ You\'re already subscribed!';
+        kind = 'ok';
+      } else if (json.error === 'Invalid reCAPTCHA') {
+        msg.textContent = '⚠️ reCAPTCHA failed — please try again.';
+      } else {
+        msg.textContent = '⚠️ Could not subscribe — please retry later.';
+      }
+    } catch (err) {
+      console.error(err);
+      msg.textContent = '⚠️ Network error — please try again.';
+    } finally {
+      msg.className = 'is-' + kind;
+      msg.style.display = 'block';
+      busy(false);
+      form.reset();
+      pendingData = null;
+      try { grecaptcha.reset(recaptchaWidgetId); } catch (_) {}
+    }
+  }
+
+  window.onRecaptchaSuccess = onRecaptchaSuccess;
+});
+</script>
+<script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
+</body>
+</html>
