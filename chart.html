@@ -8,6 +8,9 @@
     <!-- Load the astrodraw library. A <script src> tag must NOT contain inline
          code — that was the original bug: the code inside was silently ignored. -->
     <script src="https://unpkg.com/@astrodraw/astrochart"></script>
+     <script>
+       
+    </script>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,18 +28,146 @@
             padding: 30px;
         }
         h1 { color: #333; margin-bottom: 20px; }
+
+        .results { list-style: none; margin: 4px 0; padding: 0; border: 1px solid #ddd;
+                    border-radius: 6px; max-width: 360px; }
+        .results:empty { display: none; }
+        .results li { padding: 8px 12px; cursor: pointer; }
+        .results li:hover { background: #f0f0f0; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Chart</h1>
+        <h1>Chart</h1>  
+        <form id="geocodeForm">
+        <div id="birthDetails">
+        <input type="datetime-local" id="birthdaytime" name="birthdaytime">
+        <input id="city" type="text" placeholder="Birth city…" autocomplete="off">
+        <ul id="cityResults" class="results"></ul>
+        <button type="button" id="geocodeBtn">Search</button>
+   
+      
+            <!-- <label for="city">City:</label>
+            <input type="text" id="city" placeholder="Enter city name" />
+            <button type="button" id="geocodeBtn">Geocode</button> -->
+        </form>
+        </div>
         <div id="paper"></div>
     </div>
-
-    <!-- A module runs after the DOM is parsed and after the classic astrochart
-         script above has executed, so both #paper and window.astrochart exist. -->
+   
     <script type="module">
         import SwissEph from 'https://cdn.jsdelivr.net/gh/prolaxu/swisseph-wasm@main/src/swisseph.js';
+
+        var lifeDeets = {
+            city: '',
+            hour: 0,
+            min: 0,
+            year: 0,
+            month: 0,
+            day: 0,
+            tz: '',
+            lat: 0,
+            lon: 0
+        };
+        const cityInput = document.getElementById('city');
+        const resultsEl = document.getElementById('cityResults');
+        const subButton = document.getElementById('geocodeBtn');
+        let selectedPlace = null;          // { label, lat, lon, tz } once chosen
+        let debounceTimer, latestQuery = 0;
+
+        cityInput.addEventListener('input', () => {
+            const q = cityInput.value.trim();
+            selectedPlace = null;                       // typing invalidates a prior pick
+            clearTimeout(debounceTimer);
+            if (q.length < 2) { resultsEl.innerHTML = ''; return; }
+            debounceTimer = setTimeout(() => runSearch(q), 250);
+        });
+
+        // Belt-and-suspenders: if the input is inside a form, stop Enter from reloading.
+        cityInput.addEventListener('keydown', e => { if (e.key === 'Enter') e.preventDefault(); });
+
+        async function runSearch(q) {
+            const myId = ++latestQuery;
+            let matches = [];
+            try { matches = await geocode(q); } catch { /* network hiccup: leave list as-is */ }
+            if (myId !== latestQuery) return;           // a newer keystroke already fired — drop stale results
+            renderResults(matches.slice(0, 5));
+        }
+
+        function renderResults(matches) {
+            resultsEl.innerHTML = '';
+            for (const m of matches) {
+                const li = document.createElement('li');
+                li.textContent = m.label;               // "Woodstock, Illinois, United States"
+                li.addEventListener('click', () => {
+                    selectedPlace = m;
+                    cityInput.value = m.label;
+                    resultsEl.innerHTML = '';           // collapse the dropdown
+                });
+                resultsEl.appendChild(li);
+            }
+        }
+
+        // Wall-clock birth time in the birth zone -> Julian Day in UT.
+        function birthJD(swe, y, mo, d, h, min, tz) {
+            const wall = Date.UTC(y, mo - 1, d, h, min);           // treat wall time as if UTC
+            const fmt = new Intl.DateTimeFormat('en-US', { timeZone: tz, hour12: false,
+                year:'numeric', month:'2-digit', day:'2-digit',
+                hour:'2-digit', minute:'2-digit', second:'2-digit' });
+            const p = Object.fromEntries(fmt.formatToParts(new Date(wall)).map(x => [x.type, x.value]));
+            const zoned = Date.UTC(+p.year, p.month - 1, +p.day, +p.hour, +p.minute, +p.second);
+            const offsetMs = zoned - wall;                          // the zone's offset at that date
+            const utc = new Date(wall - offsetMs);                  // the true UTC instant
+            return swe.julday(utc.getUTCFullYear(), utc.getUTCMonth() + 1, utc.getUTCDate(),
+                            utc.getUTCHours() + utc.getUTCMinutes() / 60);
+        }
+
+       // Returns a list of matches so the user can disambiguate (there are ~40 Springfields).
+        async function geocode(cityName) {
+            const url = `https://geocoding-api.open-meteo.com/v1/search`
+                    + `?name=${encodeURIComponent(cityName)}&count=5&language=en&format=json`;
+            const res = await fetch(url);
+            const { results = [] } = await res.json();
+            return results.map(r => ({
+                label: [r.name, r.admin1, r.country].filter(Boolean).join(', '), // "Woodstock, Illinois, United States"
+                lat: r.latitude,
+                lon: r.longitude,
+                tz: r.timezone,          // IANA zone name
+            }));
+        }
+
+        subButton.addEventListener('click', async e => {
+                    e.preventDefault();
+                    const when = document.getElementById('birthdaytime').value;
+                    if (!when) { console.warn('Enter a birth date and time first.'); return; }
+
+                    lifeDeets.city = document.getElementById('city').value;
+                    lifeDeets.hour = Number(when.split('T')[1].split(':')[0]);
+                    lifeDeets.min = Number(when.split('T')[1].split(':')[1]);
+                    lifeDeets.year = Number(when.split('T')[0].split('-')[0]);
+                    lifeDeets.month = Number(when.split('T')[0].split('-')[1]);
+                    lifeDeets.day = Number(when.split('T')[0].split('-')[2]);
+
+                    // The place carries the zone, so resolve it BEFORE drawing:
+                    // use the entry the user clicked, else look the typed city up.
+                    let place = selectedPlace;
+                    if (!place) {
+                        const matches = await geocode(lifeDeets.city);
+                        if (!matches.length) { console.warn('No match for that city.'); return; }
+                        place = matches[0];
+                    }
+                    lifeDeets.tz = place.tz;
+                    lifeDeets.lat = place.lat;
+                    lifeDeets.lon = place.lon;
+
+                    console.log(lifeDeets);
+                    await drawChart(lifeDeets);
+                });
+        // e.g.
+        // const matches = await geocode(document.getElementById('city').value);
+        // let the user pick one from `matches`, then:
+        
+        async function drawChart(lifeDeets) {
 
         const swe = new SwissEph();
         await swe.initSwissEph();   // this also sets the ephe path to 'sweph' (bundled data + seorbel.txt)
@@ -46,12 +177,13 @@
 
         // --- Chart input -------------------------------------------------------
         // Time is treated as Universal Time (UT). year, month, day, decimal hour.
-        const jd = swe.julday(1986, 5, 1, 22.75);
-
+        const jd = birthJD(swe, lifeDeets.year, lifeDeets.month, lifeDeets.day, lifeDeets.hour, lifeDeets.min, lifeDeets.tz);
+            console.log(jd);
+       
         // House cusps need a geographic location. Defaulted to Woodstock, IL —
         // change these two for a different birthplace.
-        const GEOLAT = 42.3147;
-        const GEOLON = -88.4487;
+        // const GEOLAT = 42.3147;
+        // const GEOLON = -88.4487;
 
         const flags = swe.SEFLG_SWIEPH | swe.SEFLG_SPEED;
 
@@ -89,14 +221,16 @@
         }
 
      
-        const h = swe.houses(jd, GEOLAT, GEOLON, 'P');    // 'P' = Placidus
+        const h = swe.houses(jd, lifeDeets.lat, lifeDeets.lon, 'P');    // 'P' = Placidus
         data.cusps = Array.from(h.cusps).slice(1, 13);
 
         // --- Draw --------------------------------------------------------------
+        document.getElementById('paper').innerHTML = '';   // don't stack charts on repeat searches
         const chart = new astrochart.Chart('paper', 800, 800);
         chart.radix(data);
 
         swe.close();
+    }
     </script>
 </body>
 </html>
