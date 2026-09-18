@@ -238,12 +238,12 @@
   background: var(--rep-gold-dim);
   outline: none;
 }
-.asp-conjunction { color: #E6EDF3; }
-.asp-sextile     { color: #79C0FF; }
-.asp-square      { color: #FF7B72; }
+.asp-conjunction { color: #f7f704; }
+.asp-sextile     { color: #3da1ff; }
+.asp-square      { color: #ff1100; }
 .asp-trine       { color: #56D364; }
-.asp-opposition  { color: #F0883E; }
-.asp-quincunx    { color: #D2A8FF; }
+.asp-opposition  { color: #0059ff; }
+.asp-quincunx    { color: #7707f0; }
 
 .rep-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 12px 0 16px; font-size: 0.9rem; }
 .rep-legend-item .glyph { font-size: 1.1rem; }
