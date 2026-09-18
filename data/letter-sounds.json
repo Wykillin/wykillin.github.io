@@ -1,0 +1,298 @@
+{
+  "intro": "Each consonant is read through the Hebrew letter it descends from (the Latin alphabet comes from Phoenician through Greek, the same root as the Hebrew letters), and each vowel through the gesture it carries in Rudolf Steiner's eurythmy together with older vowel traditions. A syllable is the consonant meaning carried by the vowel: the consonant gives the form, the vowel gives the movement.",
+  "method": "Consonants attach to the vowel that follows them; a single consonant between two vowels starts the next syllable (A-DAM), two or more are split (WYK-LE); consonants at the end of a word stay with the last vowel. Y is a vowel when it is not next to another vowel.",
+  "consonants": {
+    "B": {
+      "hebrew": "Bet",
+      "glyph": "ב",
+      "pictograph": "house, tent",
+      "meaning": "a container, a dwelling, what holds and shelters; the inside of things",
+      "note": "",
+      "hebrewKeys": [
+        "bet"
+      ]
+    },
+    "C": {
+      "hebrew": "Kaf / Samekh",
+      "glyph": "כ / ס",
+      "pictograph": "open palm (hard C) or support (soft C)",
+      "meaning": "hard C (as in cat) is Kaf, the palm that grasps and shapes; soft C (as in cell) is Samekh, the prop that supports",
+      "note": "read as K before A, O, U and as S before E, I, Y",
+      "hebrewKeys": [
+        "kaf",
+        "samekh"
+      ]
+    },
+    "D": {
+      "hebrew": "Dalet",
+      "glyph": "ד",
+      "pictograph": "door, tent flap",
+      "meaning": "a door, a threshold, the way in and out; movement between states",
+      "note": "",
+      "hebrewKeys": [
+        "dalet"
+      ]
+    },
+    "F": {
+      "hebrew": "Pe (soft)",
+      "glyph": "פ",
+      "pictograph": "mouth",
+      "meaning": "the mouth breathing out, speech and expression released as a soft outflow",
+      "note": "",
+      "hebrewKeys": [
+        "pe"
+      ]
+    },
+    "G": {
+      "hebrew": "Gimel",
+      "glyph": "ג",
+      "pictograph": "camel, foot in motion",
+      "meaning": "carrying, journeying, lifting and bearing across a distance; generosity that moves toward another",
+      "note": "",
+      "hebrewKeys": [
+        "gimel"
+      ]
+    },
+    "H": {
+      "hebrew": "He",
+      "glyph": "ה",
+      "pictograph": "window, man with raised arms",
+      "meaning": "breath, revelation, a window that lets light and air through; behold",
+      "note": "",
+      "hebrewKeys": [
+        "he"
+      ]
+    },
+    "J": {
+      "hebrew": "Yod",
+      "glyph": "י",
+      "pictograph": "hand, arm",
+      "meaning": "the hand at work, a seed point of action, the smallest spark from which things unfold",
+      "note": "J developed from consonantal I / Yod",
+      "hebrewKeys": [
+        "yod"
+      ]
+    },
+    "K": {
+      "hebrew": "Kaf",
+      "glyph": "כ",
+      "pictograph": "open palm",
+      "meaning": "the palm that holds, covers and shapes; capacity and grasp",
+      "note": "",
+      "hebrewKeys": [
+        "kaf"
+      ]
+    },
+    "L": {
+      "hebrew": "Lamed",
+      "glyph": "ל",
+      "pictograph": "ox-goad, staff",
+      "meaning": "teaching, guiding, urging forward; the staff that reaches upward and the learning that follows it",
+      "note": "",
+      "hebrewKeys": [
+        "lamed"
+      ]
+    },
+    "M": {
+      "hebrew": "Mem",
+      "glyph": "מ",
+      "pictograph": "water",
+      "meaning": "water, the womb, flowing and gathering; the mother substance out of which form arises",
+      "note": "",
+      "hebrewKeys": [
+        "mem"
+      ]
+    },
+    "N": {
+      "hebrew": "Nun",
+      "glyph": "נ",
+      "pictograph": "fish, sprouting seed",
+      "meaning": "life continuing, the fish in the water, seed and offspring; faithfulness through generations",
+      "note": "",
+      "hebrewKeys": [
+        "nun"
+      ]
+    },
+    "P": {
+      "hebrew": "Pe",
+      "glyph": "פ",
+      "pictograph": "mouth",
+      "meaning": "the mouth, speech, the word that opens and the edge that closes; expression with force",
+      "note": "",
+      "hebrewKeys": [
+        "pe"
+      ]
+    },
+    "Q": {
+      "hebrew": "Qof",
+      "glyph": "ק",
+      "pictograph": "back of the head, eye of a needle",
+      "meaning": "what lies behind, the hidden side, holiness and the cycle of time; the horizon",
+      "note": "",
+      "hebrewKeys": [
+        "qof"
+      ]
+    },
+    "R": {
+      "hebrew": "Resh",
+      "glyph": "ר",
+      "pictograph": "head",
+      "meaning": "the head, the beginning and the leader; what goes first and what rules; rolling motion",
+      "note": "",
+      "hebrewKeys": [
+        "resh"
+      ]
+    },
+    "S": {
+      "hebrew": "Samekh / Shin",
+      "glyph": "ס / ש",
+      "pictograph": "support (S) or tooth, flame (SH)",
+      "meaning": "S is Samekh, the circle of support and protection; SH is Shin, the tooth and the fire that consumes and transforms",
+      "note": "read SH as Shin",
+      "hebrewKeys": [
+        "samekh",
+        "shin"
+      ]
+    },
+    "T": {
+      "hebrew": "Tav",
+      "glyph": "ת",
+      "pictograph": "mark, cross, signature",
+      "meaning": "the mark, the seal, the covenant and the completion; the sign at the end",
+      "note": "TH may also be read as Tet ט, the coiled serpent or basket: what is enclosed and good",
+      "hebrewKeys": [
+        "tav",
+        "tet"
+      ]
+    },
+    "V": {
+      "hebrew": "Vav",
+      "glyph": "ו",
+      "pictograph": "nail, hook, peg",
+      "meaning": "the hook that joins, the nail that fixes; connection, and, continuation",
+      "note": "",
+      "hebrewKeys": [
+        "vav"
+      ]
+    },
+    "W": {
+      "hebrew": "Vav (doubled)",
+      "glyph": "ו",
+      "pictograph": "nail, hook",
+      "meaning": "joining and binding doubled; a woven connection, a wave of linking",
+      "note": "",
+      "hebrewKeys": [
+        "vav"
+      ]
+    },
+    "X": {
+      "hebrew": "Samekh + Kaf",
+      "glyph": "ס + כ",
+      "pictograph": "support and palm",
+      "meaning": "a crossing of support and grasp; the mark of the unknown, the crossroads",
+      "note": "sounds as KS",
+      "hebrewKeys": [
+        "samekh",
+        "kaf"
+      ]
+    },
+    "Y": {
+      "hebrew": "Yod",
+      "glyph": "י",
+      "pictograph": "hand",
+      "meaning": "the hand and the seed point; the spark of creation in the smallest gesture",
+      "note": "when Y is a vowel it is read as the vowel I",
+      "hebrewKeys": [
+        "yod"
+      ]
+    },
+    "Z": {
+      "hebrew": "Zayin",
+      "glyph": "ז",
+      "pictograph": "weapon, sword, plough",
+      "meaning": "the blade that cuts and divides, the plough that opens the ground; decision and nourishment through struggle",
+      "note": "",
+      "hebrewKeys": [
+        "zayin"
+      ]
+    }
+  },
+  "vowels": {
+    "A": {
+      "sound": "ah",
+      "steiner": "wonder and openness; the soul opens its arms to receive the world",
+      "gesture": "arms opened wide from the heart",
+      "quality": "receiving, beginning, astonishment",
+      "traditions": {
+        "sanskrit": "A is the first sound and the beginning of AUM: creation, Brahma, the unmanifest opening into being",
+        "greek": "Alpha, the beginning; in the Gnostic vowel scheme assigned to the Moon",
+        "hebrew": "the open vowel of the Aleph, silent breath before speech"
+      }
+    },
+    "E": {
+      "sound": "eh",
+      "steiner": "the self meets the world and feels resistance; the crossing where I become aware of myself against what is not me",
+      "gesture": "arms crossed, one over the other",
+      "quality": "meeting, boundary, self-awareness, energy moving forward",
+      "traditions": {
+        "sanskrit": "E as a fused vowel (a + i), the meeting of opening and pointing",
+        "greek": "Epsilon, assigned to Mercury; the messenger between",
+        "hebrew": "the Tzere and Segol vowels, associated in one Kabbalistic scheme with understanding and loving-kindness"
+      }
+    },
+    "I": {
+      "sound": "ee",
+      "steiner": "self-assertion and uprightness; the I stands in the light and affirms itself",
+      "gesture": "one arm stretched up, the other down: a vertical line",
+      "quality": "light, affirmation, direction, individuality",
+      "traditions": {
+        "sanskrit": "I is the vowel of the goddess and of desire (icchā), the pointed will",
+        "greek": "Iota, the smallest letter and the Sun in the vowel scheme; the ray",
+        "hebrew": "the Chirik vowel, a single point below the letter: concentration and endurance"
+      }
+    },
+    "O": {
+      "sound": "oh",
+      "steiner": "embracing with love; the arms enclose what is loved and the soul takes it in with warmth",
+      "gesture": "arms rounded into a circle in front of the chest",
+      "quality": "enclosing, wholeness, love that holds, roundness",
+      "traditions": {
+        "sanskrit": "O as a fused vowel (a + u), the circle of creation and preservation",
+        "greek": "Omicron and Omega, Mars and Saturn in the vowel scheme; the circle and the end",
+        "hebrew": "the Cholam vowel, a point above the letter: beauty and balance at the centre"
+      }
+    },
+    "U": {
+      "sound": "oo",
+      "steiner": "awe and chill, standing firm in the dark; the soul draws inward and roots itself",
+      "gesture": "arms held parallel and close together",
+      "quality": "depth, inwardness, fear turned to reverence, grounding",
+      "traditions": {
+        "sanskrit": "U is the middle of AUM: preservation, Vishnu, the sustaining hum",
+        "greek": "Upsilon, assigned to Jupiter; the cup",
+        "hebrew": "the Shuruk and Kubutz vowels: foundation and the gathering of what has been given"
+      }
+    }
+  },
+  "combinations": {
+    "BA": "a container or basket: the house (B) opened to receive (A)",
+    "BE": "a dwelling that meets the world: the house (B) with a threshold of self-awareness (E)",
+    "BO": "an enclosure held with warmth: the house (B) rounded and embraced (O)",
+    "DA": "a door opened wide: the threshold (D) in wonder and receiving (A)",
+    "ER": "energy and light flowing forwards: the meeting-vowel (E) sent out by the head that leads (R)",
+    "AR": "the open beginning that leads: receiving (A) given a head and direction (R)",
+    "EL": "the upward staff of the meeting self: E carried by Lamed, teaching and reaching up (the divine name El)",
+    "AL": "openness lifted upward: wonder (A) on the staff of guidance (L)",
+    "MA": "the waters opened: the mother substance (M) in receiving (A); the primal mother syllable",
+    "AM": "receiving gathered into the waters: wonder (A) flowing into the womb (M); the close of AUM",
+    "NA": "life sprouting into the open: the seed (N) received (A)",
+    "RA": "the head in the light of beginning: leadership (R) with open wonder (A); the sun syllable",
+    "SA": "support opened outward: protection (S) offered in wonder (A)",
+    "SHA": "fire opened: the transforming flame (SH) breathed out with wonder (A)",
+    "TA": "the seal opened: the mark of completion (T) meeting a new beginning (A)",
+    "LI": "the staff in the light: guidance (L) with upright affirmation (I)",
+    "MI": "the waters pointed and lit: flowing substance (M) given direction (I)",
+    "KA": "the palm opened to receive: grasp (K) in wonder (A); the life-force syllable of Egypt",
+    "OM": "the circle of love closing into the waters: enclosing (O) gathered into the womb (M)"
+  }
+}

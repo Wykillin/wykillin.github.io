@@ -6,50 +6,122 @@
     <title>Chart</title>
 
     <script src="https://unpkg.com/@astrodraw/astrochart"></script>
-    
+    <!-- NatalEngine (MIT) pre-built browser bundle for the Human Design tab. See README.md to rebuild. -->
+    <script src="js/natalengine.bundle.js"></script>
+    <!-- Dark-themed styles for the report, tab bar and Human Design tab -->
+    <link rel="stylesheet" href="css/chart-report.css">
+    <!-- Handwritten (cursive) Hebrew for the numerology letter breakdown -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gveret+Levin+AlefAlefAlef&family=Noto+Sans+Hebrew:wght@400;600&display=swap">
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: #f5f5f5;
+            background-color: #0D1117;
+            color: #E6EDF3;
             padding: 20px;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            padding: 30px;
-        }
-        h1 { color: #333; margin-bottom: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
 
-        .results { list-style: none; margin: 4px 0; padding: 0; border: 1px solid #ddd;
-                    border-radius: 6px; max-width: 360px; }
+        /* Birth-data form: same dark card style as the report panels */
+        #geocodeForm {
+            background: #0D1117;
+            border: 1px solid #30363D;
+            border-radius: 10px;
+            padding: clamp(16px, 3vw, 28px);
+        }
+        #geocodeForm .form-kicker { color: #C9A84C; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; }
+        #birthDetails { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px 16px; align-items: end; }
+        #birthDetails label { display: grid; gap: 4px; color: #8B949E; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; position: relative; }
+        #birthDetails input {
+            min-height: 44px; padding: 8px 12px; width: 100%;
+            font: inherit; font-size: 1rem; color: #E6EDF3;
+            background: #161B22; border: 1px solid #30363D; border-radius: 8px;
+            color-scheme: dark;
+        }
+        #birthDetails input:focus { outline: none; border-color: #C9A84C; box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.18); }
+        #geocodeBtn {
+            min-height: 44px; padding: 10px 22px;
+            background: #C9A84C; color: #0D1117; border: 1px solid #C9A84C; border-radius: 8px;
+            font: inherit; font-weight: 700; letter-spacing: 0.04em; cursor: pointer;
+        }
+        #geocodeBtn:hover { filter: brightness(1.08); }
+
+        /* City suggestions dropdown */
+        .results { list-style: none; margin: 4px 0 0; padding: 0; border: 1px solid #30363D; background: #161B22;
+                    border-radius: 8px; position: absolute; left: 0; right: 0; top: 100%; z-index: 30; text-transform: none; letter-spacing: 0; }
         .results:empty { display: none; }
-        .results li { padding: 8px 12px; cursor: pointer; }
-        .results li:hover { background: #f0f0f0; }
+        .results li { padding: 10px 12px; cursor: pointer; color: #E6EDF3; font-size: 0.95rem; }
+        .results li:hover { background: #1F2630; }
     </style>
 </head>
 <body>
     <!-- BEGIN HTML -->
     <div class="container">
-        <h1>Chart</h1>  
-    <form id="geocodeForm">
+    <form id="geocodeForm" autocomplete="off">
+        <div class="form-kicker">Birth data</div>
         <div id="birthDetails">
-            <label for="birthdaytime">Birth Day and Time</label>
-            <input type="datetime-local" id="birthdaytime" name="birthdaytime"><br>
-            <label for="city">Birth City</label>
-            <input id="city" type="text" placeholder="Birth city…" autocomplete="off" label="Birth City">
-            <ul id="cityResults" class="results"></ul><br>
-            <button type="button" id="geocodeBtn">Submit</button>
-    </form>
+            <label for="personName">Name (optional)
+                <input type="text" id="personName" name="personName" placeholder="Name for the report" autocomplete="off"></label>
+            <label for="birthdaytime">Birth day and time
+                <input type="datetime-local" id="birthdaytime" name="birthdaytime"></label>
+            <label for="city">Birth city
+                <input id="city" type="text" placeholder="Birth city…" autocomplete="off">
+                <ul id="cityResults" class="results"></ul></label>
+            <button type="button" id="geocodeBtn">Calculate</button>
         </div>
-    <div id="chart"></div>
-    <div id="placements"><table id="placementsTable"></table></div>
+    </form>
+    <!-- Tab bar: switches between the three systems using the same birth data -->
+    <div class="chart-toolbar">
+        <div class="chart-tabs" id="chartTabs" role="tablist">
+            <button type="button" role="tab" data-tab="astro" class="active" aria-selected="true" aria-controls="tab-astro">Esoteric Astrology</button>
+            <button type="button" role="tab" data-tab="hd" aria-selected="false" aria-controls="tab-hd">Human Design</button>
+            <button type="button" role="tab" data-tab="num" aria-selected="false" aria-controls="tab-num">Numerology</button>
+            <button type="button" role="tab" data-tab="tree" aria-selected="false" aria-controls="tab-tree">Kabbalah</button>
+        </div>
+        <button type="button" id="exportPdf" class="rep-export" title="Print all three tabs to PDF">⬇ Export PDF</button>
+    </div>
+    <div id="chartStatus" class="chart-status" aria-live="polite"></div>
+
+    <!-- Esoteric Astrology output -->
+    <section id="tab-astro" class="tab-panel" role="tabpanel">
+        <!-- The wheel (with its settings menu) is created by js/wheel.js and placed
+             inside the report between the birth-details header and the placements table. -->
+        <div id="report"></div>
+    </section>
+
+    <!-- Human Design output -->
+    <section id="tab-hd" class="tab-panel" role="tabpanel" hidden>
+        <div id="humanDesign"></div>
+    </section>
+
+    <!-- Numerology output -->
+    <section id="tab-num" class="tab-panel" role="tabpanel" hidden>
+        <div id="numerology"></div>
+    </section>
+
+    <!-- Kabbalah / Tree of Life output -->
+    <section id="tab-tree" class="tab-panel" role="tabpanel" hidden>
+        <div id="kabbalah"></div>
+    </section>
     <!-- END HTML -->
     <script type="module">
         import SwissEph from 'https://cdn.jsdelivr.net/gh/prolaxu/swisseph-wasm@main/src/swisseph.js';
+        import { SIGNS, NEVER_RETROGRADE } from './js/config.js';
+        import { calculateAspects } from './js/aspects.js';
+        import { detectPatterns } from './js/patterns.js';
+        import { loadInterpretationData, renderReport } from './js/report.js';
+        import { createWheelSection, drawWheel, drawPatternWheel } from './js/wheel.js';
+        import { computeHumanDesign, renderHumanDesign } from './js/human-design.js';
+        import { loadNumerologyData, renderNumerologyTab } from './js/numerology-tab.js';
+        import { setupPdfExport } from './js/export-pdf.js';
+        import { loadTree } from './js/kabbalah.js';
+        import { renderKabbalahTab } from './js/kabbalah-tab.js';
+        import { loadHebrewLetters } from './js/hebrew.js';
+        import { calculateNumerology } from './js/numerology.js';
+
+        const NE = window.NatalEngine;   // IIFE bundle loaded in <head>
 
         var lifeDeets = {
             city: '',
@@ -153,21 +225,205 @@
                     lifeDeets.lat = place.lat;
                     lifeDeets.lon = place.lon;
 
+                    lifeDeets.name = document.getElementById('personName').value.trim();
+
                     console.log(lifeDeets);
-                    await drawChart(lifeDeets);
+                    lastBirth = { ...lifeDeets };          // remember for tab switching
+                    rendered.astro = rendered.hd = rendered.num = rendered.tree = false;
+                    await runActiveTab();
                 });
         // e.g.
         // const matches = await geocode(document.getElementById('city').value);
         // let the user pick one from `matches`, then:
-        
-        function addRow(table, name, degrees, sign, cellTag = 'td') {
-            const tr = document.createElement('tr');
-            for (const value of [name, degrees, sign]) {
-                const cell = document.createElement(cellTag);
-                cell.textContent = value;
-                tr.appendChild(cell);
+
+        // ------------------------------------------------------------------
+        // Tabs: "astro" (Esoteric Astrology) and "hd" (Human Design).
+        // The birth form is shared. Submitting runs the active tab; switching
+        // tabs re-runs the calculation for that tab with the same data.
+        // ------------------------------------------------------------------
+        let activeTab = 'astro';
+        let lastBirth = null;              // the last submitted lifeDeets
+        const tabButtons = document.querySelectorAll('#chartTabs [data-tab]');
+        const statusEl = document.getElementById('chartStatus');
+
+        function setStatus(msg, isError = false) {
+            statusEl.textContent = msg || '';
+            statusEl.classList.toggle('error', !!isError);
+        }
+
+        function showTab(tab) {
+            activeTab = tab;
+            for (const btn of tabButtons) {
+                const on = btn.dataset.tab === tab;
+                btn.classList.toggle('active', on);
+                btn.setAttribute('aria-selected', on ? 'true' : 'false');
             }
-            table.appendChild(tr);
+            document.getElementById('tab-astro').hidden = tab !== 'astro';
+            document.getElementById('tab-hd').hidden = tab !== 'hd';
+            document.getElementById('tab-num').hidden = tab !== 'num';
+            document.getElementById('tab-tree').hidden = tab !== 'tree';
+        }
+
+        for (const btn of tabButtons) {
+            btn.addEventListener('click', async () => {
+                if (btn.dataset.tab === activeTab) return;
+                showTab(btn.dataset.tab);
+                if (lastBirth) await runActiveTab();
+            });
+        }
+
+        // Which tabs have been rendered for the current birth data (for PDF export).
+        const rendered = { astro: false, hd: false, num: false, tree: false };
+
+        async function runActiveTab() {
+            if (!lastBirth) return;
+            rendered[activeTab] = false;
+            try {
+                if (activeTab === 'astro') {
+                    setStatus('Calculating chart…');
+                    await drawChart(lastBirth);
+                } else if (activeTab === 'hd') {
+                    setStatus('Calculating Human Design…');
+                    await drawHumanDesign(lastBirth);
+                } else if (activeTab === 'num') {
+                    setStatus('Calculating numerology…');
+                    await drawNumerology(lastBirth);
+                } else {
+                    setStatus('Mapping the Tree of Life…');
+                    await drawKabbalah(lastBirth);
+                }
+                rendered[activeTab] = true;
+                setStatus('');
+            } catch (err) {
+                console.error(err);
+                setStatus(`Something went wrong: ${err.message}`, true);
+            }
+        }
+
+        // Export PDF: make sure all three tabs are rendered for the current data,
+        // then print (the print stylesheet lays the three panels out in order).
+        setupPdfExport({
+            button: document.getElementById('exportPdf'),
+            panels: ['tab-astro', 'tab-hd', 'tab-num', 'tab-tree'],
+            onStatus: setStatus,
+            ensureAllTabs: async () => {
+                if (!lastBirth) { setStatus('Enter birth data and calculate first.', true); throw new Error('no birth data'); }
+                if (!rendered.astro) { await drawChart(lastBirth); rendered.astro = true; }
+                if (!rendered.hd) { await drawHumanDesign(lastBirth); rendered.hd = true; }
+                if (!rendered.num) { await drawNumerology(lastBirth); rendered.num = true; }
+                if (!rendered.tree) { await drawKabbalah(lastBirth); rendered.tree = true; }
+            }
+        });
+
+        // ------------------------------------------------------------------
+        // Kabbalah tab: needs the astrology calculation (positions, aspects,
+        // patterns), so it runs the chart first if that has not happened yet.
+        // ------------------------------------------------------------------
+        let lastPatterns = [];
+        async function drawKabbalah(ld) {
+            if (!wheelState || !rendered.astro) { await drawChart(ld); rendered.astro = true; }
+            const [tree, hebrew] = await Promise.all([loadTree(), loadHebrewLetters()]);
+            const profile = ld.name ? calculateNumerology({ name: ld.name, birth: { year: ld.year, month: ld.month, day: ld.day } }) : null;
+            renderKabbalahTab('kabbalah', {
+                birth: { year: ld.year, month: ld.month, day: ld.day, city: ld.city, name: ld.name || '' },
+                chartData: wheelState.chartData,
+                aspects: wheelState.aspects,
+                patterns: lastPatterns,
+                profile, tree, hebrew
+            });
+        }
+
+        /** Birth details used in the report headers. */
+        function birthSummary(ld) {
+            const pad = n => String(n).padStart(2, '0');
+            return {
+                name: ld.name || '',
+                dateText: `${ld.year}-${pad(ld.month)}-${pad(ld.day)}`,
+                timeText: `${pad(ld.hour)}:${pad(ld.min)}`,
+                location: ld.city,
+                tz: ld.tz
+            };
+        }
+
+        // ------------------------------------------------------------------
+        // Numerology tab (birth date + name; no ephemeris needed)
+        // ------------------------------------------------------------------
+        async function drawNumerology(ld) {
+            const data = await loadNumerologyData();
+            renderNumerologyTab('numerology', {
+                birth: { year: ld.year, month: ld.month, day: ld.day, city: ld.city },
+                baseName: ld.name || '',
+                data
+            });
+        }
+
+        // ------------------------------------------------------------------
+        // Structured chart data
+        // ------------------------------------------------------------------
+
+        /**
+         * House number (1-12) for a longitude given the 12 Placidus cusps
+         * (cusps[0] = 1st house cusp). Handles the wrap-around where the
+         * cusp sequence crosses 0° Aries.
+         */
+        function houseOf(longitude, cusps) {
+            const norm = d => ((d % 360) + 360) % 360;
+            const lon = norm(longitude);
+            for (let i = 0; i < 12; i++) {
+                const start = norm(cusps[i]);
+                const end = norm(cusps[(i + 1) % 12]);
+                if (start <= end) {
+                    if (lon >= start && lon < end) return i + 1;
+                } else {
+                    // this house spans 0° Aries
+                    if (lon >= start || lon < end) return i + 1;
+                }
+            }
+            return 12; // unreachable for a valid cusp set
+        }
+
+        /** Build one structured entry from a Swiss Ephemeris position. */
+        function buildEntry(name, pos, cusps) {
+            const lon = ((pos[0] % 360) + 360) % 360;
+            const signIndex = Math.floor(lon / 30);
+            const speed = pos[3];
+            return {
+                name,
+                longitude: lon,
+                sign: SIGNS[signIndex],
+                signIndex,
+                degreeInSign: lon - signIndex * 30,
+                house: houseOf(lon, cusps),
+                retrograde: !NEVER_RETROGRADE.includes(name) && speed < 0,
+                speed
+            };
+        }
+
+        /** Ascendant / MC as chart points so they take part in aspects and patterns. */
+        function angleEntry(name, longitude, cusps) {
+            const entry = buildEntry(name, [longitude, 0, 0, 0], cusps);
+            entry.isAngle = true;
+            entry.retrograde = false;
+            return entry;
+        }
+
+        // ------------------------------------------------------------------
+        // Chart wheel: built once; redrawn from the last calculation whenever
+        // the settings menu changes (no ephemeris recalculation needed).
+        // ------------------------------------------------------------------
+        let wheelState = null;             // { chartData, cusps, aspects }
+        const wheel = createWheelSection(settings => {
+            if (wheelState) drawWheel(wheel.chartEl, wheelState, settings);
+        });
+
+        // ------------------------------------------------------------------
+        // Human Design tab
+        // ------------------------------------------------------------------
+        async function drawHumanDesign(ld) {
+            if (!NE) throw new Error('NatalEngine bundle failed to load (js/natalengine.bundle.js).');
+            const hd = computeHumanDesign(ld, NE);
+            console.log('Human Design', hd);
+            renderHumanDesign('humanDesign', hd, birthSummary(ld), NE);
         }
 
         async function drawChart(lifeDeets) {
@@ -207,34 +463,50 @@
             ['Vulcan',  swe.SE_VULCAN],   // esoteric intramercurial Vulcan (Weston)
         ];
 
-        // --- Build the data for astrodraw 
-        const data = { planets: {}, cusps: [] };
-        const pt = document.getElementById('placementsTable');
-        pt.innerHTML = '';                                // start fresh on every search
-        addRow(pt, 'Placement', 'Degrees', 'Sign', 'th');
+        // House cusps first: the structured data needs them for house assignment.
+        const h = swe.houses(jd, lifeDeets.lat, lifeDeets.lon, 'P');    // 'P' = Placidus
+        const cusps = Array.from(h.cusps).slice(1, 13);
+
+        // --- Build the structured chart data (nothing is rendered yet)
+        const chartData = [];
         for (const [name, id] of bodies) {
             try {
-                const pos = swe.calc_ut(jd, id, flags);   // [lon, lat, dist, ...]
-                const lon = pos[0];
-                data.planets[name] = [lon];               // astrodraw wants [longitude]
-                addRow(pt, name, (lon % 30).toFixed(2) + '°', signs[Math.floor(lon / 30)]);
-                console.log(`${name} at ${(lon % 30).toFixed(2)}° ${signs[Math.floor(lon / 30)]}`);
+                const pos = swe.calc_ut(jd, id, flags);   // [lon, lat, dist, dlon, dlat, ddist]
+                chartData.push(buildEntry(name, pos, cusps));
+                const p = chartData[chartData.length - 1];
+                console.log(`${name} at ${p.degreeInSign.toFixed(2)}° ${p.sign}, house ${p.house}${p.retrograde ? ' ℞' : ''}`);
             } catch (e) {
                 // One unavailable body shouldn't kill the whole chart.
                 console.warn(`Skipped ${name}: ${e.message}`);
             }
         }
 
-     
-        const h = swe.houses(jd, lifeDeets.lat, lifeDeets.lon, 'P');    // 'P' = Placidus
-        data.cusps = Array.from(h.cusps).slice(1, 13);
-
-        // --- Draw 
-        document.getElementById('chart').innerHTML = '';   // don't stack charts on repeat searches
-        const chart = new astrochart.Chart('chart', 800, 800);
-        chart.radix(data);
+        // --- Angles: Ascendant = 1st cusp, MC = 10th cusp (Placidus)
+        chartData.push(angleEntry('Ascendant', cusps[0], cusps));
+        chartData.push(angleEntry('MC', cusps[9], cusps));
 
         swe.close();
+
+        // --- Interpretation pipeline: aspects -> patterns -> data -> report -> wheel
+        const aspects = calculateAspects(chartData);
+        const patterns = detectPatterns(aspects, chartData);
+        lastPatterns = patterns;
+        console.log('aspects', aspects, 'patterns', patterns);
+        const interp = await loadInterpretationData();
+        wheelState = { chartData, cusps, aspects };
+        renderReport('report', {
+            birth: birthSummary(lifeDeets),
+            chartData,
+            aspects,
+            patterns,
+            data: interp,
+            wheel: wheel.element,           // placed after the header, above the placements table
+            drawPattern: (box, pattern) => drawPatternWheel(box, wheelState, pattern)
+        });
+
+        // --- Draw the wheel with aspect lines (astrochart + js/wheel.js)
+        drawWheel(wheel.chartEl, wheelState, wheel.getSettings());
+        return { chartData, aspects, patterns };
     }
     </script>
 </body>

@@ -1,0 +1,117 @@
+{
+  "grandTrine": {
+    "name": "Grand Trine",
+    "meaning": "A Grand Trine is three planets roughly 120° apart, forming a closed triangle of trines. It usually falls within one element and describes a self-contained circuit of talent and ease: the three planets feed one another effortlessly. The gift is natural flow and resilience in the element concerned; the risk is complacency, because nothing in the pattern itself demands effort. Grand Trines are most productive when a square or opposition from elsewhere in the chart gives them something to work on.",
+    "template": "A Grand Trine in {element} connecting {planet1} in {sign1}, {planet2} in {sign2}, and {planet3} in {sign3} suggests an easy, self-sustaining flow of {element} energy between {planets}. These talents come naturally; the challenge is to use them deliberately rather than coast on them."
+  },
+  "tSquare": {
+    "name": "T-Square",
+    "meaning": "A T-Square is an opposition with a third planet squaring both ends. The apex planet carries the tension of the whole configuration and becomes a focal point of drive, frustration and eventual mastery. T-Squares are among the most dynamic patterns in a chart: they describe a recurring dilemma that pushes the person toward action and achievement. The empty point opposite the apex often shows where balance can be found.",
+    "template": "A {modality} T-Square with {apex} in {apexSign} at the apex, squaring the opposition between {base1} in {baseSign1} and {base2} in {baseSign2}, suggests a persistent tension between {base1} and {base2} that gets channelled through {apex}. This is a source of drive and achievement once the pressure is consciously directed."
+  },
+  "grandCross": {
+    "name": "Grand Cross",
+    "meaning": "A Grand Cross is two oppositions crossing at right angles, so that four planets square one another around the chart. It is usually within one modality. The pattern describes a life of considerable tension with demands coming from four directions at once, and a corresponding capacity for endurance and accomplishment. People with a Grand Cross often feel pulled apart until they learn to hold the centre and act from it.",
+    "template": "A {modality} Grand Cross formed by {planet1} in {sign1}, {planet2} in {sign2}, {planet3} in {sign3}, and {planet4} in {sign4} suggests strong, competing demands that must be balanced from the centre. It confers stamina and the capacity to carry a great deal once the pull in four directions is consciously managed."
+  },
+  "yod": {
+    "name": "Yod",
+    "meaning": "A Yod, or Finger of God, is two planets in sextile that both form quincunxes to a third planet at the apex. The apex planet is subject to constant adjustment from the two base planets, and the pattern often describes a sense of special purpose or a fated turning point that only becomes clear over time. Yods ask for refinement, humility and a willingness to be redirected.",
+    "template": "A Yod pointing to {apex} in {apexSign}, with {base1} in {baseSign1} and {base2} in {baseSign2} at the base, suggests a focused, slightly uncomfortable sense of purpose centred on {apex}. The base planets keep nudging {apex} to adjust until its particular contribution is refined."
+  },
+  "stellium": {
+    "name": "Stellium",
+    "meaning": "A Stellium is a cluster of three or more planets in the same sign (or house). It concentrates a great deal of energy in one area of life and one style of expression, giving the sign a dominant voice in the personality. Stelliums bring focus, intensity and often talent in the area concerned, but they can also produce imbalance because so much of the chart speaks with a single accent.",
+    "template": "A Stellium in {sign} made up of {planets} concentrates a great deal of energy in the {element} style of {sign}. This sign speaks with a dominant voice in your chart, bringing focus and intensity to the themes of {planets}, and inviting you to balance it with the rest of the chart."
+  },
+  "mysticRectangle": {
+    "name": "Mystic Rectangle",
+    "meaning": "A Mystic Rectangle is two oppositions linked around the outside by two sextiles and two trines. The oppositions supply awareness and tension while the soft aspects give the means to resolve it, so the pattern describes a practical, workable balance between polarities. It tends to show up as a capacity to hold opposing needs and find creative compromises.",
+    "template": "A Mystic Rectangle joining {planet1} in {sign1}, {planet2} in {sign2}, {planet3} in {sign3}, and {planet4} in {sign4} suggests two polarities that are held in creative balance. The trines and sextiles around the edges give you practical ways to reconcile the oppositions within."
+  },
+  "kite": {
+    "name": "Kite",
+    "meaning": "A Kite is a Grand Trine with a fourth planet opposing one of its vertices and sextiling the other two. The opposition gives the easy flow of the Grand Trine a direction and a point of tension to push against, so the talent can actually be delivered. The planet at the tail (the opposed vertex) is the focus of the pattern, and the opposing wing planet shows what motivates its release.",
+    "template": "A Kite built on a Grand Trine in {element} between {planet1} in {sign1}, {planet2} in {sign2}, and {planet3} in {sign3}, with {wing} in {wingSign} opposing {apex} at the tail, suggests a natural talent that has a clear outlet. {wing} gives the Grand Trine something to aim at and pushes {apex} to deliver."
+  },
+  "grandSextile": {
+    "name": "Grand Sextile",
+    "meaning": "A Grand Sextile, or Star of David, is six planets spaced about 60° apart: two interlocking Grand Trines joined by sextiles and three oppositions. It is rare and describes an unusually integrated chart, with talent in two elements that support each other and opposition points that keep the whole in motion. The risk is that so much flow leaves little friction to build character; the gift is a capacity to hold many things in balance at once.",
+    "template": "A Grand Sextile joining {planets} weaves two Grand Trines into a six-pointed star. Every planet has an easy outlet in the next, and the three oppositions across the star keep the pattern alive rather than complacent."
+  },
+  "boomerang": {
+    "name": "Boomerang",
+    "meaning": "A Boomerang is a Yod with a fourth planet opposite the apex, sitting on the reaction point where the Yod's pressure is released. The apex still carries the adjustment of the two quincunxes, but the opposing planet gives the energy somewhere to go, and what is learned at the apex comes back through the opposing planet, often through other people.",
+    "template": "A Boomerang points to {apex} in {apexSign} from {base1} in {baseSign1} and {base2} in {baseSign2}, with {wing} in {wingSign} opposite the apex. The adjustments demanded at {apex} are released and returned through {wing}."
+  },
+  "stelliumHouse": {
+    "name": "House Stellium",
+    "meaning": "Three or more planets in the same house concentrate the chart's energy in one area of life. Whatever that house rules becomes a dominant theme, absorbing attention and talent, and the planets involved tend to blend their meanings there. Balance comes from consciously feeding the opposite house.",
+    "template": "A stellium of {planets} in the {house} house makes this area of life a focal point. Much of your energy gathers here, so the themes of the {house} house will keep calling for attention and development."
+  },
+  "stelliumCluster": {
+    "name": "Conjunction Cluster",
+    "meaning": "A chain of three or more planets in close conjunction, whether or not they share a sign or house, acts as one concentrated force. The planets fuse into a single complex point in the chart, and any transit or aspect to the cluster touches all of them at once.",
+    "template": "A close cluster of {planets} fuses these planets into one concentrated point of the chart. They act together, colour one another, and are felt together whenever anything touches them."
+  },
+  "hardRectangle": {
+    "name": "Hard Rectangle",
+    "meaning": "A Hard Rectangle is two oppositions joined by semisquares and sesquiquadrates, the 45° family of aspects. It carries the awareness of the oppositions with a persistent low-grade friction along the sides, and describes someone who does not get to rest on their laurels: the tension keeps producing work, and the work produces results.",
+    "template": "A Hard Rectangle formed by {planet1} in {sign1}, {planet2} in {sign2}, {planet3} in {sign3}, and {planet4} in {sign4} keeps two polarities in constant, productive friction. The minor aspects along the sides make sure nothing settles for long."
+  },
+  "cradle": {
+    "name": "Cradle",
+    "meaning": "A Cradle is an opposition with two further planets that sextile one another and connect the two ends of the opposition by a sextile and a trine each. The soft aspects form a supportive half-circle beneath the opposition, so the tension of the opposition can be rocked and resolved. The pattern shows a talent for protecting, mediating and making peace, sometimes at the price of avoiding necessary confrontation.",
+    "template": "A Cradle rocks the opposition between {planet1} in {sign1} and {planet2} in {sign2} on the sextile-and-trine support of {planet3} in {sign3} and {planet4} in {sign4}. The tension has a safe place to rest, which brings a gift for reconciliation and a temptation to avoid the hard edge."
+  },
+  "wedge": {
+    "name": "Wedge",
+    "meaning": "A Wedge, sometimes called an easy opposition, is an opposition with a third planet trine one end and sextile the other. The apex planet offers a way out of the opposition's see-saw: its energy can be used to resolve the polarity productively, which makes the Wedge one of the most useful small patterns in a chart.",
+    "template": "A Wedge lets {apex} in {apexSign} release the opposition between {base1} in {baseSign1} and {base2} in {baseSign2}. When the two poles pull against each other, {apex} offers the practical outlet."
+  },
+  "minorGrandTrine": {
+    "name": "Minor Grand Trine",
+    "meaning": "A Minor Grand Trine is two planets in trine with a third at their midpoint, sextile to both. The apex planet becomes the working point of the trine: the ease of the trine is expressed through it, and the sextiles supply the opportunities that turn talent into results.",
+    "template": "A Minor Grand Trine focuses the trine between {base1} in {baseSign1} and {base2} in {baseSign2} through {apex} in {apexSign}. The talent of the trine finds its outlet and its opportunities through {apex}."
+  },
+  "thorsHammer": {
+    "name": "Thor's Hammer",
+    "meaning": "Thor's Hammer, or the Fist of God, is two planets in square that are both sesquiquadrate (135°) to a third. The apex planet carries a pressure that builds until it is released in a burst, and the pattern is associated with sudden, forceful action, impatience and, when handled well, the courage to strike at the right moment.",
+    "template": "Thor's Hammer drives the square between {base1} in {baseSign1} and {base2} in {baseSign2} into {apex} in {apexSign}. Pressure builds at {apex} and asks for a deliberate, well-timed release rather than an explosion."
+  },
+  "shapeBundle": {
+    "name": "Bundle Chart",
+    "meaning": "In a Bundle all the planets fall within about 120°, a third of the wheel. The chart is highly concentrated: a specialist temperament with a narrow, intense focus and a tendency to be self-contained and self-reliant. Much of life is met from within a small, well-known territory.",
+    "template": "The ten planets are bundled within {span}° from {leading} to {trailing}. Your attention concentrates in a narrow band of life, which brings depth and self-reliance."
+  },
+  "shapeBowl": {
+    "name": "Bowl Chart",
+    "meaning": "In a Bowl all the planets fall within one half of the wheel. The occupied half describes what the person has and offers; the empty half is what they feel is missing and reach toward. The leading planet, the first to rise clockwise, sets the tone for how the bowl's contents are carried into the empty half.",
+    "template": "The planets form a Bowl spanning {span}°, led by {leading}. You carry a full half of the wheel and are drawn toward the empty half, with {leading} setting the direction."
+  },
+  "shapeBucket": {
+    "name": "Bucket Chart",
+    "meaning": "A Bucket is a Bowl with one planet standing alone in the empty half: the handle. The handle planet becomes a point of release for everything in the bowl, a place where the chart's energy is directed and often the most distinctive feature of the personality. The person tends to have a mission or a particular outlet through which everything else is expressed.",
+    "template": "The planets form a Bucket with {handle} as the handle, standing alone opposite the rest. {handle} is the outlet and the point of purpose through which the rest of the chart is expressed."
+  },
+  "shapeLocomotive": {
+    "name": "Locomotive Chart",
+    "meaning": "In a Locomotive the planets occupy about two thirds of the wheel, leaving an empty third. The leading planet is the engine that pulls the rest, and the empty space is a sense of something to be achieved that drives the person forward. It describes energy, drive and a strong sense of a task in life.",
+    "template": "The planets form a Locomotive spanning {span}° with {leading} as the engine. An empty third of the wheel keeps you moving, and {leading} leads the effort."
+  },
+  "shapeSeesaw": {
+    "name": "Seesaw Chart",
+    "meaning": "In a Seesaw the planets fall in two opposing groups with empty space on either side. Life is experienced through polarity and relationship, weighing one side against the other, and the person is often an able mediator who sees both sides but can be pulled between them.",
+    "template": "The planets form a Seesaw: two groups facing each other across the wheel. Balancing the two sides, and the relationships that mirror them, is a central theme."
+  },
+  "shapeSplash": {
+    "name": "Splash Chart",
+    "meaning": "In a Splash the planets are spread fairly evenly around the whole wheel. Interests are broad and varied and the person can turn a hand to many things, with the risk of scattering energy. Wholeness and range are the gifts; focus is the discipline to learn.",
+    "template": "The planets are splashed around the whole wheel. Your interests and abilities are wide-ranging; the task is to find the thread that connects them."
+  },
+  "shapeSplay": {
+    "name": "Splay Chart",
+    "meaning": "In a Splay the planets gather in several irregular clusters with gaps between them. The person is strongly individual, resists being categorised, and has a few distinct areas of intense interest rather than one focus or an even spread.",
+    "template": "The planets are splayed into several distinct clusters. You have a few strong, separate areas of interest and a marked resistance to being fitted into a mould."
+  }
+}
