@@ -5,13 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chart</title>
 
-    <!-- Load the astrodraw library. A <script src> tag must NOT contain inline
-         code — that was the original bug: the code inside was silently ignored. -->
     <script src="https://unpkg.com/@astrodraw/astrochart"></script>
-     <script>
-       
-    </script>
-
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -37,24 +32,22 @@
     </style>
 </head>
 <body>
+    <!-- BEGIN HTML -->
     <div class="container">
         <h1>Chart</h1>  
-        <form id="geocodeForm">
+    <form id="geocodeForm">
         <div id="birthDetails">
-        <input type="datetime-local" id="birthdaytime" name="birthdaytime">
-        <input id="city" type="text" placeholder="Birth city…" autocomplete="off">
-        <ul id="cityResults" class="results"></ul>
-        <button type="button" id="geocodeBtn">Search</button>
-   
-      
-            <!-- <label for="city">City:</label>
-            <input type="text" id="city" placeholder="Enter city name" />
-            <button type="button" id="geocodeBtn">Geocode</button> -->
-        </form>
+            <label for="birthdaytime">Birth Day and Time</label>
+            <input type="datetime-local" id="birthdaytime" name="birthdaytime"><br>
+            <label for="city">Birth City</label>
+            <input id="city" type="text" placeholder="Birth city…" autocomplete="off" label="Birth City">
+            <ul id="cityResults" class="results"></ul><br>
+            <button type="button" id="geocodeBtn">Submit</button>
+    </form>
         </div>
-        <div id="paper"></div>
-    </div>
-   
+    <div id="chart"></div>
+    <div id="placements"><table id="placementsTable"></table></div>
+    <!-- END HTML -->
     <script type="module">
         import SwissEph from 'https://cdn.jsdelivr.net/gh/prolaxu/swisseph-wasm@main/src/swisseph.js';
 
@@ -167,15 +160,24 @@
         // const matches = await geocode(document.getElementById('city').value);
         // let the user pick one from `matches`, then:
         
+        function addRow(table, name, degrees, sign, cellTag = 'td') {
+            const tr = document.createElement('tr');
+            for (const value of [name, degrees, sign]) {
+                const cell = document.createElement(cellTag);
+                cell.textContent = value;
+                tr.appendChild(cell);
+            }
+            table.appendChild(tr);
+        }
+
         async function drawChart(lifeDeets) {
 
         const swe = new SwissEph();
-        await swe.initSwissEph();   // this also sets the ephe path to 'sweph' (bundled data + seorbel.txt)
+        await swe.initSwissEph();   
 
         const signs = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo',
                        'Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
 
-        // --- Chart input -------------------------------------------------------
         // Time is treated as Universal Time (UT). year, month, day, decimal hour.
         const jd = birthJD(swe, lifeDeets.year, lifeDeets.month, lifeDeets.day, lifeDeets.hour, lifeDeets.min, lifeDeets.tz);
             console.log(jd);
@@ -205,14 +207,17 @@
             ['Vulcan',  swe.SE_VULCAN],   // esoteric intramercurial Vulcan (Weston)
         ];
 
-        // --- Build the data object astrodraw expects ---------------------------
+        // --- Build the data for astrodraw 
         const data = { planets: {}, cusps: [] };
-
+        const pt = document.getElementById('placementsTable');
+        pt.innerHTML = '';                                // start fresh on every search
+        addRow(pt, 'Placement', 'Degrees', 'Sign', 'th');
         for (const [name, id] of bodies) {
             try {
                 const pos = swe.calc_ut(jd, id, flags);   // [lon, lat, dist, ...]
                 const lon = pos[0];
                 data.planets[name] = [lon];               // astrodraw wants [longitude]
+                addRow(pt, name, (lon % 30).toFixed(2) + '°', signs[Math.floor(lon / 30)]);
                 console.log(`${name} at ${(lon % 30).toFixed(2)}° ${signs[Math.floor(lon / 30)]}`);
             } catch (e) {
                 // One unavailable body shouldn't kill the whole chart.
@@ -224,9 +229,9 @@
         const h = swe.houses(jd, lifeDeets.lat, lifeDeets.lon, 'P');    // 'P' = Placidus
         data.cusps = Array.from(h.cusps).slice(1, 13);
 
-        // --- Draw --------------------------------------------------------------
-        document.getElementById('paper').innerHTML = '';   // don't stack charts on repeat searches
-        const chart = new astrochart.Chart('paper', 800, 800);
+        // --- Draw 
+        document.getElementById('chart').innerHTML = '';   // don't stack charts on repeat searches
+        const chart = new astrochart.Chart('chart', 800, 800);
         chart.radix(data);
 
         swe.close();
