@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Adam David Wykle — Modern Mysticism</title>
+<meta name="description" content="Computer scientist bridging plasma cosmology, esoteric astrology and consciousness science. Get the free Fractal Consciousness video course, or book a reading, coaching or consulting.">
+<meta name="theme-color" content="#06050e">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://adamwykle.com/">
+<meta property="og:title" content="Adam David Wykle — Modern Mysticism">
+<meta property="og:description" content="Computer scientist bridging plasma cosmology, esoteric astrology and consciousness science. Start with the free Fractal Consciousness video course.">
+<meta property="og:image" content="https://adamwykle.com/MeSmile-hero.png">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Outfit:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <script data-goatcounter="https://adamdavid.goatcounter.com/count"
@@ -12,7 +20,7 @@
       const pageLoadTs = Date.now();
       const YEK = 'AIzaSyDq9xumgS5CSmHffytPG_lI8juGCjitH40';
       const CHANNEL_ID = 'UCmK9DTHpjybx3lgx3fftzUg';
-      const MAX_RESULTS = 7;
+      const MAX_RESULTS = 15; // fetch extra so 3 remain after Shorts are filtered out
 
 // Function to parse ISO 8601 video duration into total seconds
 function parseISODuration(duration) {
@@ -52,7 +60,7 @@ async function fetchYouTubeVideos() {
     });
 
     const videosScroll = document.getElementById("videos-scroll");
-    videosScroll.innerHTML = nonShortsVideos.slice(0, 8).map(video => `
+    videosScroll.innerHTML = nonShortsVideos.slice(0, 3).map(video => `
       <a href="https://www.youtube.com/watch?v=${video.id}" target="_blank" rel="noopener" class="video-card">
         <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/${video.id}/hqdefault.jpg'); background-size: cover; background-position: center;"></div>
         <div class="video-card-body">
@@ -513,8 +521,8 @@ section {
 }
 
 /* subscribe form inputs stacked */
-#subscribe-form input[type="text"],
-#subscribe-form input[type="email"] {
+.subscribe-form input[type="text"],
+.subscribe-form input[type="email"] {
   width: 100%;
   padding: 0.8rem 1rem;
   background: rgba(255,255,255,0.04);
@@ -527,12 +535,12 @@ section {
   transition: border-color 0.3s;
 }
 
-#subscribe-form input[type="text"]:focus,
-#subscribe-form input[type="email"]:focus {
+.subscribe-form input[type="text"]:focus,
+.subscribe-form input[type="email"]:focus {
   border-color: var(--gold-dim);
 }
 
-#subscribe-form input::placeholder {
+.subscribe-form input::placeholder {
   color: var(--text-dim);
 }
 
@@ -720,8 +728,9 @@ section {
   line-height: 1.65;
 }
 
-/* ── CONSULTING BANNER ── */
-.consulting-banner {
+/* ── CONSULTING BANNER / CHART TOOL ── */
+.consulting-banner,
+.chart-tool-card {
   margin-top: 4rem;
   padding: 3.5rem;
   position: relative;
@@ -734,6 +743,15 @@ section {
   align-items: center;
   justify-content: center;
 }
+
+.chart-tool-card { margin-top: 0; }
+.chart-tool-card .section-title { margin-bottom: 0.75rem; }
+.chart-tool-card p:not(.section-label) {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+.chart-tool-card .btn { justify-self: end; }
 
 .consulting-banner h3 {
   font-family: var(--serif);
@@ -939,10 +957,505 @@ footer .copy {
   background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.12), transparent);
 }
 
+/* ── HERO LAYOUT (text + photo) ── */
+[hidden] { display: none !important; }
+
+section[id] { scroll-margin-top: 80px; }
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  grid-template-areas: "main photo";
+  gap: 3.5rem;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  text-align: left;
+}
+
+.hero-main { grid-area: main; }
+
+.hero-photo {
+  grid-area: photo;
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 1;
+  justify-self: center;
+  opacity: 0;
+  animation: fadeUp 1s 0.4s ease forwards;
+}
+
+/* toroid rings orbit the portrait */
+.hero-photo .toroid-container {
+  position: absolute;
+  inset: -14%;
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
+.hero-photo .toroid-ring:nth-child(2) { inset: 6%; }
+.hero-photo .toroid-ring:nth-child(3) { inset: 12%; }
+.hero-photo .toroid-ring:nth-child(4) { inset: 18%; }
+.hero-photo .toroid-core { inset: 20%; }
+
+.hero-photo img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(201, 168, 76, 0.22) 0%, transparent 55%),
+    linear-gradient(160deg, rgba(74, 111, 165, 0.45) 0%, rgba(107, 76, 154, 0.4) 55%, rgba(139, 69, 101, 0.35) 100%);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  box-shadow: 0 0 60px rgba(107, 76, 154, 0.25), 0 0 120px rgba(201, 168, 76, 0.08);
+}
+
+.hero-pill {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 1rem;
+  letter-spacing: 0.33em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 0.35rem 0.95rem;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 999px;
+  background: rgba(201, 168, 76, 0.05);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 1s 0.2s ease forwards;
+}
+
+.hero-main h1 {
+  font-size: clamp(2rem, 4.2vw, 3.1rem);
+  max-width: none;
+}
+
+.hero-main h1 em {
+  background: linear-gradient(100deg, #e6c878 0%, var(--gold) 45%, #a98bd6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-main .hero-eyebrow { margin: 1.25rem 0 0; }
+.hero-main .services-scroll { font-size: 1.6rem; }
+.hero-main .lead-magnet { margin: 2rem 0 0; }
+
+.lead-magnet-kicker {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 0.4rem;
+}
+
+/* ── PLACEHOLDER: PROOF STRIP ── */
+.proof-strip {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  border-top: 1px solid rgba(201, 168, 76, 0.08);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+}
+
+.proof-strip strong {
+  font-family: var(--mono);
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--gold);
+}
+
+.proof-strip p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+}
+
+/* ── PLACEHOLDER: TESTIMONIALS ── */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.testimonial-card {
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-left: 2px solid var(--gold-dim);
+}
+
+.testimonial-card blockquote {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.testimonial-card cite {
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+/* ── LATEST VIDEOS GRID ── */
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.videos-grid .video-card { flex: none; display: block; }
+.videos-footer { margin-top: 2rem; text-align: center; }
+
+/* ── CLOSING EMAIL CAPTURE ── */
+.newsletter-section .closing-sub {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 1.75rem;
+}
+
+.newsletter-section .subscribe-form {
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+/* ── COMPACT SINGLE-PAGE LAYOUT ── */
+section { padding: 4.5rem 2rem; }
+section.section-tight { padding-top: 3rem; padding-bottom: 3rem; }
+
+.hero {
+  min-height: 0;
+  padding: 7.5rem 2rem 3rem;
+}
+
+.hero-grid { gap: 3rem; }
+.hero-photo { max-width: 340px; }
+
+.hero-main h1 { font-size: clamp(2rem, 3.8vw, 2.9rem); }
+
+.hero-main .hero-sub {
+  max-width: 560px;
+  margin-top: 1.1rem;
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.hero-main .lead-magnet {
+  display: block;
+  margin: 1.75rem 0 0;
+  padding: 1.6rem 1.75rem 1.4rem;
+  opacity: 0;
+  animation: fadeUp 1s 0.9s ease forwards;
+}
+
+.lead-magnet h3 {
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 0.4rem;
+}
+
+.lead-magnet-desc {
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  margin-bottom: 1.1rem;
+}
+
+.subscribe-form .form-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr) auto;
+  gap: 0.5rem;
+}
+
+.subscribe-form .form-row input[type="text"],
+.subscribe-form .form-row input[type="email"] { margin-bottom: 0; }
+
+.subscribe-form .form-row .btn { padding: 0.8rem 1.4rem; white-space: nowrap; }
+
+.subscribe-msg { margin-top: 0.75rem; font-size: 0.85rem; }
+
+.form-note {
+  margin-top: 0.7rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* reCAPTCHA badge hidden; the required attribution text is shown under each form instead */
+.grecaptcha-badge { visibility: hidden; }
+
+.recaptcha-note {
+  margin-top: 0.35rem;
+  font-size: 0.68rem;
+  color: var(--text-dim);
+}
+
+.recaptcha-note a { color: var(--text-secondary); }
+
+.hero-secondary {
+  display: inline-block;
+  margin-top: 1.1rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.3);
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.hero-secondary:hover { color: var(--gold); border-color: var(--gold); }
+
+/* scrolling topic ticker */
+.ticker {
+  overflow: hidden;
+  border-top: 1px solid rgba(201, 168, 76, 0.08);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+  background: rgba(12, 11, 24, 0.6);
+  padding: 0.9rem 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 40s linear infinite;
+}
+
+.ticker-track span {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  padding: 0 1.75rem;
+  white-space: nowrap;
+}
+
+.ticker-track span::after {
+  content: '✦';
+  margin-left: 3.5rem;
+  color: rgba(201, 168, 76, 0.35);
+}
+
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+/* credibility strip */
+.cred-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  text-align: center;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.cred-item h3 {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+
+.cred-item p {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+/* centered section headings */
+.section-head { text-align: center; max-width: 680px; margin: 0 auto; }
+.section-head .section-title { margin-bottom: 0.75rem; }
+
+.section-sub {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* three service cards in a row */
+.services-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 2.5rem;
+  align-items: stretch;
+}
+
+.service-card { padding: 2rem 1.75rem; }
+.service-card p { flex: none; font-size: 0.86rem; }
+.service-card .service-includes { margin-bottom: 1rem; }
+.service-card .btn { margin-top: auto; }
+.service-card .service-note { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 0.6rem; }
+.service-card > .btn { margin-top: auto; }
+.service-card .service-note:last-of-type { margin-bottom: 1.5rem; }
+
+.service-card.featured {
+  border-color: rgba(201, 168, 76, 0.35);
+  box-shadow: 0 0 40px rgba(201, 168, 76, 0.06);
+}
+
+.service-badge {
+  position: absolute;
+  top: -0.7rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--bg-deep);
+  padding: 0.25rem 0.8rem;
+  white-space: nowrap;
+}
+
+/* staggered scroll reveals */
+.services-grid .reveal:nth-of-type(2), .cred-strip .reveal:nth-child(2), .videos-grid > :nth-child(2) { transition-delay: 0.1s; }
+.services-grid .reveal:nth-of-type(3), .cred-strip .reveal:nth-child(3), .videos-grid > :nth-child(3) { transition-delay: 0.2s; }
+.cred-strip .reveal:nth-child(4) { transition-delay: 0.3s; }
+
+/* closing capture */
+.closing-cta { padding-top: 3rem; }
+
+.closing-card {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 3rem 2.5rem;
+  background: linear-gradient(135deg, rgba(74, 111, 165, 0.08) 0%, rgba(107, 76, 154, 0.06) 50%, rgba(201, 168, 76, 0.05) 100%);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+.closing-card .closing-sub {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  max-width: 560px;
+  margin: 0 auto 1.5rem;
+}
+
+.closing-card .form-row input { text-align: left; }
+
+/* ── READABILITY: larger type scale ── */
+html { font-size: 17px; }
+
+.nav-links a { font-size: 0.9rem; }
+.section-label { font-size: 0.74rem; }
+
+.hero-pill { font-size: 1em; }
+.hero-main h1 { font-size: clamp(2.1rem, 3.9vw, 3rem); }
+.hero-main .hero-sub { font-size: 1.1rem; }
+.lead-magnet-kicker { font-size: 0.72rem; }
+.lead-magnet h3 { font-size: 1.55rem; }
+.lead-magnet-desc { font-size: 0.98rem; }
+.subscribe-form input[type="text"],
+.subscribe-form input[type="email"] { font-size: 0.95rem; }
+.btn { font-size: 0.86rem; }
+.form-note { font-size: 0.7rem; }
+.recaptcha-note { font-size: 0.76rem; }
+.hero-secondary { font-size: 0.95rem; }
+
+.section-sub { font-size: 1.05rem; }
+.service-tag { font-size: 0.7rem; }
+.service-card h3 { font-size: 1.5rem; }
+.service-card p { font-size: 0.98rem; line-height: 1.65; }
+.service-includes span { font-size: 0.93rem; }
+.service-card .service-note { font-size: 0.88rem; }
+.service-badge { font-size: 0.68rem; }
+
+.ticker-track span { font-size: 0.78rem; }
+.cred-item h3 { font-size: 0.74rem; }
+.cred-item p { font-size: 1.25rem; }
+
+.video-card-body h4 { font-size: 1.15rem; }
+.video-card-body span { font-size: 0.78rem; }
+
+.closing-card .closing-sub { font-size: 1.02rem; }
+.chart-tool-card p:not(.section-label) { font-size: 1rem; }
+footer .socials a { font-size: 0.88rem; }
+footer .copy { font-size: 0.8rem; }
+
+/* hero sized so the services start within the first screen */
+.hero { padding-top: 5.75rem; padding-bottom: 0.5rem; }
+.hero-grid { grid-template-columns: minmax(0, 2.4fr) minmax(0, 1fr); gap: 2rem; max-width: 1240px; }
+.hero-photo { max-width: 300px; }
+.hero-main h1 { font-size: clamp(2.1rem, 3.5vw, 2.65rem); }
+.hero-pill { margin-bottom: 1.1rem; }
+.hero-main .lead-magnet { margin-top: 1.4rem; padding: 1.35rem 1.6rem 1.15rem; }
+.lead-magnet h3 em { font-style: italic; color: var(--gold); }
+.lead-magnet-desc { margin-bottom: 0.9rem; }
+.form-note .recaptcha-note {
+  font-family: var(--sans);
+  letter-spacing: 0;
+  text-transform: none;
+  margin: 0;
+}
+
+/* services directly under the hero, chart tool last */
+#services { padding-top: 1.5rem; }
+.closing-cta { padding-bottom: 2rem; }
+.chart-tool-bottom { padding-top: 1rem; padding-bottom: 4rem; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .nav-links { display: none; }
   .mobile-toggle { display: block; }
+
+  .nav-links.show {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 1.5rem 2rem;
+    background: rgba(6, 5, 14, 0.97);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+  }
+
+  .hero { padding-top: 6.5rem; }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: "photo" "main";
+    gap: 2.5rem;
+    text-align: center;
+  }
+
+  .hero-photo { max-width: 190px; }
+
+  .testimonials-grid,
+  .videos-grid { grid-template-columns: 1fr; }
+
+  .chart-tool-card { grid-template-columns: 1fr; text-align: center; padding: 2.5rem; }
+  .chart-tool-card .btn { justify-self: center; }
 
   .lead-magnet {
     grid-template-columns: 1fr;
@@ -992,6 +1505,41 @@ footer .copy {
   .toroid-ring:nth-child(2) { inset: 15px; }
 
   .email-capture { flex-direction: column; }
+
+  .lead-magnet { padding: 1.75rem 1.25rem; }
+  .proof-strip { flex-direction: column; padding: 1.5rem; }
+
+  footer { flex-direction: column; gap: 1.25rem; text-align: center; }
+  footer .socials { flex-wrap: wrap; justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .nav-brand span { display: none; }
+  .hero-pill { font-size: 0.8rem; letter-spacing: 0.12em; }
+}
+
+/* compact layout — tablet & mobile */
+@media (max-width: 1000px) {
+  .services-grid { grid-template-columns: 1fr; max-width: 560px; margin-left: auto; margin-right: auto; }
+  .cred-strip { grid-template-columns: repeat(2, 1fr); gap: 1.75rem 1rem; }
+}
+
+@media (max-width: 900px) {
+  section { padding: 3.25rem 1.25rem; }
+  .hero { padding: 6rem 1.25rem 2.5rem; }
+  .hero-grid { gap: 1.75rem; }
+  .hero-main .lead-magnet { padding: 1.5rem 1.25rem; }
+  .subscribe-form .form-row { grid-template-columns: 1fr; }
+  .subscribe-form input[type="text"],
+  .subscribe-form input[type="email"] { font-size: 16px; } /* prevents iOS zoom on focus */
+  .closing-card { padding: 2.25rem 1.25rem; }
+  .chart-tool-card { padding: 2rem 1.25rem; }
+  .chart-tool-card .btn { width: 100%; padding-left: 1rem; padding-right: 1rem; }
+  .cred-strip { padding-top: 2.25rem; padding-bottom: 2.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
 }
 
 /* ── SCROLL ANIMATION ── */
@@ -1043,50 +1591,157 @@ footer .copy {
     <li><a href="#services">Services</a></li>
     <!-- <li><a href="#products">Digital Tools</a></li> -->
     <li><a href="#about">About</a></li>
-    <li><a href="#services" class="nav-cta">Book a Reading</a></li>
+    <li><a href="#signup" class="nav-cta">Get the Free Course</a></li>
   </ul>
   <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">☰</button>
 </nav>
 
 <!-- Hero -->
 <section class="hero">
-  <div class="toroid-container">
-    <div class="toroid-ring"></div>
-    <div class="toroid-ring"></div>
-    <div class="toroid-ring"></div>
-    <div class="toroid-ring"></div>
-    <div class="toroid-core"></div>
+<div class="hero-grid">
+  <div class="hero-photo">
+    <div class="toroid-container">
+      <div class="toroid-ring"></div>
+      <div class="toroid-ring"></div>
+      <div class="toroid-ring"></div>
+      <div class="toroid-ring"></div>
+      <div class="toroid-core"></div>
+    </div>
+    <img src="MeSmile-hero.png" alt="Adam David Wykle" width="560" height="560" fetchpriority="high">
   </div>
-  <h1><em>Be Reality</em> Through Modern Mysticism</h1>
-  <p class="hero-eyebrow">Plasma Cosmology · Esoteric Astrology · Consciousness Science</p>
-  <!-- <p class="hero-sub">I help spiritually awake, science-curious humans decode the fractal signature of their soul — using the language of science, field-based consciousness, fractals, and esoteric schools of thought.</p> -->
-  <!-- <div class="hero-actions">
-    <a href="Guide.pdf" class="btn btn-ghost">Free Guide →</a>
-  </div> -->
-<div class="services-scroll"><a href="#services" style="color: white; text-decoration: underline;">Available Services</a></div>
-<!-- Lead Magnet  -->
-<div class="lead-magnet reveal" style="margin-top: 1rem;">
-  <div class="lead-magnet-content">
-    <h3>Signup For Free Video Course &amp; Newsletter</h3>
-    <form id="subscribe-form">
-      <input type="text" name="firstname" placeholder="First Name">
-      <input type="email" name="email" placeholder="your@email.com">
-      <input type="text" name="hp" style="display:none">
-      <button type="submit" class="btn btn-gold" style="padding: 0.8rem 1.5rem; width: 100%; margin-top: 0.25rem;">Get Free Video</button>
-      <div id="recaptcha-subscribe"></div>
-      <p id="subscribe-msg" style="display:none; margin-top: 0.75rem; font-size: 0.85rem;"></p>
-    </form>
-  </div>
-  <div class="lead-magnet-visual">
-  <div class="magnet-preview-item"><span class="icon">◈</span> A clear, working definition of what consciousness is</div>
-  <div class="magnet-preview-item"><span class="icon">◈</span> Plasma, complex plasma, and the birth of atoms and cells</div>
-  <div class="magnet-preview-item"><span class="icon">◈</span> How cells, DNA, and auras process information</div>
-  <div class="magnet-preview-item"><span class="icon">◈</span> Why human thought may literally reshape reality's information field</div>
+  <div class="hero-main">
+    <a href="#services" class="hero-pill">Work With Me</a>
+    <h1>Computer Scientist Revealing Our Universe's <em>Spiritual System</em></h1>
+    <!-- <p class="hero-sub">Bridging computer science, plasma physics, and esoteric astrology to map how consciousness actually shapes reality.</p> -->
+    <!-- <p class="hero-sub">I help spiritually awake, science-curious humans decode the fractal signature of their soul — using the language of science, field-based consciousness, fractals, and esoteric schools of thought.</p> -->
+
+    <!-- Lead Magnet -->
+    <div class="lead-magnet" id="signup">
+      <h3><em>Free Video Course &amp; Newsletter</h3>
+      <p class="lead-magnet-desc">How Your Consciousness Is Fractal and How to Harness Its Power.</p>
+      <form id="subscribe-form" class="subscribe-form">
+        <div class="form-row">
+          <input type="text" name="firstname" placeholder="First name" aria-label="First name" autocomplete="given-name">
+          <input type="email" name="email" placeholder="your@email.com" aria-label="Email address" autocomplete="email">
+          <button type="submit" class="btn btn-gold">Get the Free Course</button>
+        </div>
+        <input type="text" name="hp" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="recaptcha-slot"></div>
+        <p class="subscribe-msg" style="display:none;"></p>
+      </form>
+      <!-- <p class="form-note"><span class="recaptcha-note">· Protected by reCAPTCHA · Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy</a> &amp; <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms</a> apply.</span></p> -->
+    </div>
   </div>
 </div>
 </section>
 
-<div class="divider" style="margin-top: 4rem;"></div>
+<!-- Scrolling topic ticker -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Plasma</span><span>Astrology</span><span>Science</span><span>Consciousness</span><span>Human Design</span><span>Kabbalah</span><span>Numerology</span><span>Theosophy</span><span>Fractals</span><span>Sound</span><span>EnergoSophy</span>
+    <span>Plasma</span><span>Astrology</span><span>Science</span><span>Consciousness</span><span>Human Design</span><span>Kabbalah</span><span>Numerology</span><span>Theosophy</span><span>Fractals</span><span>Sound</span><span>EnergoSophy</span>
+  </div>
+</div>
+
+<!-- Services -->
+<section id="services">
+  <div class="section-head">
+    <p class="section-label reveal">Services</p>
+    <h2 class="section-title reveal">Work With Me at <em>Your Depth</em></h2>
+    <p class="section-sub reveal">From entry-level chart decoding to deep, ongoing coaching containers.</p>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card reveal">
+      <span class="service-tag">Entry Point</span>
+      <h3>Soul-Centered Astrology Reading</h3>
+      <div class="service-price">$150</div>
+      <p>This is a 45+ minute recorded video that decodes the fractal plasmic signature you chose for this lifetime. I fuse traditional and esoteric astrology with cutting edge Plasma Physics to reveal:</p>
+      <div class="service-includes">
+        <span><span class="check">◈</span> Core life themes and karmic patterns</span>
+        <span><span class="check">◈</span> The inherited talents and lessons your soul intends to use</span>
+        <span><span class="check">◈</span> Insights into how karmic lessons were designed to be resolved</span>
+        <span><span class="check">◈</span> Best practices to advance spiritually in this lifetime</span>
+      </div>
+      <p class="service-note">You will receive a video link delivered to your inbox within two to five business days (guaranteed).</p>
+      <p class="service-note">Also available is a live 60-90 minute meeting to discuss findings and go over any questions. Select the available add-on and I will personally email you to setup a time to meet.</p>
+      <a href="https://ko-fi.com/c/7d79a14118" class="btn btn-ghost">Book Reading</a>
+    </div>
+
+    <!-- <div class="service-card featured reveal">
+      <span class="service-tag">Most Popular</span>
+      <h3>Full Soul Blueprint</h3>
+      <div class="service-price">$333</div>
+      <p>A 15–20 page illustrated PDF decoding your fractal signature — fusing Western and esoteric astrology, Human Design, numerology, and Ray analysis into a comprehensive soul map.</p>
+      <div class="service-includes">
+        <span><span class="check">◈</span> Illustrated PDF + video walkthrough</span>
+        <span><span class="check">◈</span> 12-month transit forecast</span>
+        <span><span class="check">◈</span> Human Design + Ray integration</span>
+        <span><span class="check">◈</span> Karmic pattern + hidden talent mapping</span>
+      </div>
+      <a href="https://ko-fi.com/c/c53289bab2" class="btn btn-gold">Get Your Blueprint</a>
+    </div> -->
+
+    <div class="service-card featured reveal">
+      <span class="service-badge">Deep Container</span>
+      <span class="service-tag">Ongoing Container</span>
+      <h3>Spiritual Alignment Coaching</h3>
+      <div class="service-price">$999</div>
+      <p>Five 1:1 sessions over 6–10 weeks for those ready to actively live their Soul Blueprint. We work with your energy field, real-world goals, and emergent transits to create grounded, lasting change.</p>
+      <div class="service-includes">
+        <span><span class="check">◈</span> 5 × 60–75 min Zoom sessions</span>
+        <span><span class="check">◈</span> Full Soul Blueprint included</span>
+        <span><span class="check">◈</span> Between-session guidance</span>
+        <span><span class="check">◈</span> Transit-aligned action design</span>
+      </div>
+      <a href="https://ko-fi.com/c/349e8e9ca5" class="btn btn-gold">Apply for Coaching</a>
+    </div>
+
+    <!-- Plasma Cosmology Consulting -->
+    <div class="service-card reveal">
+      <span class="service-tag">Researchers &amp; Creators</span>
+      <h3>Plasma Cosmology Consulting</h3>
+      <div class="service-price">From $500</div>
+      <p>Private sessions for those integrating plasma science, electromagnetic cosmology, or field-based consciousness frameworks into their own work. I bridge the technical and the esoteric — so your audience doesn't have to choose between them.</p>
+      <p class="service-note">Priced per session.</p>
+      <a href="mailto:Adam@AdamWykle.com" class="btn btn-ghost">Inquire</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═════════ PLACEHOLDER: TESTIMONIALS (hidden) ═════════
+     Sits directly below the service cards (services now open the page).
+     To enable: replace the quotes/names, delete any unused cards,
+     then remove the `hidden` attribute from the section below. -->
+<section class="testimonials section-tight" hidden>
+  <p class="section-label reveal">Kind Words</p>
+  <div class="testimonials-grid">
+    <figure class="testimonial-card reveal">
+      <blockquote>“Testimonial quote one.”</blockquote>
+      <cite>— Name, reading client</cite>
+    </figure>
+    <figure class="testimonial-card reveal">
+      <blockquote>“Testimonial quote two.”</blockquote>
+      <cite>— Name, coaching client</cite>
+    </figure>
+    <figure class="testimonial-card reveal">
+      <blockquote>“Testimonial quote three.”</blockquote>
+      <cite>— Name, consulting client</cite>
+    </figure>
+  </div>
+</section>
+<!-- ═════════ /PLACEHOLDER: TESTIMONIALS ═════════ -->
+
+<!-- ═════════ PLACEHOLDER: PROOF STRIP (hidden) ═════════
+     A thin strip for one quote OR one number.
+     To enable: fill in the text, delete the line you don't need,
+     then remove the `hidden` attribute from the div below. -->
+<div class="proof-strip" hidden>
+  <strong>000+</strong>
+  <p>“A short quote or stat goes here.” — Name</p>
+</div>
+<!-- ═════════ /PLACEHOLDER: PROOF STRIP ═════════ -->
 
 <!-- Framework -->
 <!-- <section id="framework">
@@ -1111,117 +1766,93 @@ footer .copy {
   </div>
 </section> -->
 
-<div class="divider"></div>
-
-<!-- Services -->
-<section id="services">
-  <p class="section-label reveal">Services</p>
-  <h2 class="section-title reveal">Work With Me at <em>Your Depth</em></h2>
-  <div class="services-grid">
-
-    <div class="service-card reveal">
-      <span class="service-tag">Entry Point</span>
-      <h3>Soul-Centered Astrology Reading</h3>
-      <div class="service-price">$150</div>
-      <p>This is a 45+ minute recorded video that decodes the fractal plasmic signature you chose for this lifetime. I fuse traditional and esoteric astrology with cutting edge Plasma Physics to reveal:</p>
-      <div class="service-includes">
-        <span><span class="check">◈</span> Core life themes and karmic patterns</span>
-        <span><span class="check">◈</span> The inherited talents and lessons your soul intends to use</span>
-        <span><span class="check">◈</span> Insights into how karmic lessons were designed to be resolved</span>
-        <span><span class="check">◈</span> Best practices to advance spiritually in this lifetime</span>
-      </div>
-      <p>You will receive a video link delivered to your inbox within two to five business days (guaranteed).</p>
-      <p>Also available is a live 60-90 minute meeting to discuss findings and go over any questions. Select the available add-on and I will personally email you to setup a time to meet.</p>
-      <a href="https://ko-fi.com/c/7d79a14118" class="btn btn-ghost">Book Reading</a>
-    </div>
-
-    <!-- <div class="service-card featured reveal">
-      <span class="service-tag">Most Popular</span>
-      <h3>Full Soul Blueprint</h3>
-      <div class="service-price">$333</div>
-      <p>A 15–20 page illustrated PDF decoding your fractal signature — fusing Western and esoteric astrology, Human Design, numerology, and Ray analysis into a comprehensive soul map.</p>
-      <div class="service-includes">
-        <span><span class="check">◈</span> Illustrated PDF + video walkthrough</span>
-        <span><span class="check">◈</span> 12-month transit forecast</span>
-        <span><span class="check">◈</span> Human Design + Ray integration</span>
-        <span><span class="check">◈</span> Karmic pattern + hidden talent mapping</span>
-      </div>
-      <a href="https://ko-fi.com/c/c53289bab2" class="btn btn-gold">Get Your Blueprint</a>
-    </div> -->
-
-    <div class="service-card reveal">
-      <span class="service-tag">Ongoing Container</span>
-      <h3>Spiritual Alignment Coaching</h3>
-      <div class="service-price">$999</div>
-      <p>Five 1:1 sessions over 6–10 weeks for those ready to actively live their Soul Blueprint. We work with your energy field, real-world goals, and emergent transits to create grounded, lasting change.</p>
-      <div class="service-includes">
-        <span><span class="check">◈</span> 5 × 60–75 min Zoom sessions</span>
-        <span><span class="check">◈</span> Full Soul Blueprint included</span>
-        <span><span class="check">◈</span> Between-session guidance</span>
-        <span><span class="check">◈</span> Transit-aligned action design</span>
-      </div>
-      <a href="https://ko-fi.com/c/349e8e9ca5" class="btn btn-ghost">Apply for Coaching</a>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-
-
-  <!-- Plasma Consulting Banner -->
-  <div class="consulting-banner reveal">
-    <div>
-      <span class="service-tag">For Researchers · Educators · Content Creators</span>
-      <h3>Plasma Cosmology Consulting</h3>
-      <p>Private sessions for those integrating plasma science, electromagnetic cosmology, or field-based consciousness frameworks into their own work. I bridge the technical and the esoteric — so your audience doesn't have to choose between them.</p>
-      <div class="consulting-clients">
-        <span>From $500 / session</span>
-      </div>
-    </div>
-    <a href="mailto:Adam@AdamWykle.com" class="btn btn-ghost">Inquire</a>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- About -->
-<section id="about">
+<!-- ═════════ PLACEHOLDER: ABOUT / ORIGIN STORY (hidden) ═════════
+     Pre-filled with your previous About section so nothing is lost.
+     Replaces the credibility strip below once you're happy with it.
+     To enable:
+       1. Trim the copy to 2–3 first-person sentences and pick the photo.
+       2. Remove the `hidden` attribute from the section below.
+       3. Move id="about" from the credibility strip onto this section
+          (the nav "About" link points to #about), then delete or comment
+          out the credibility strip. -->
+<section class="about-story" hidden>
   <p class="section-label reveal">About</p>
   <h2 class="section-title reveal">The Translator Between <em>Two Vocabularies</em></h2>
   <div class="about-grid reveal">
     <div class="about-image-area">
-      <img src="https://www.adamwykle.com/adam.png" alt="Adam David Wykle" style="width: 100%; height: auto; object-fit: cover;">
+      <img src="adam.png" alt="Adam David Wykle" loading="lazy">
     </div>
     <div class="about-text">
       <p>I spent years treating science and spirituality as separate languages before realizing they describe the same signal — just from different vantage points in the field.</p>
       <p>My background is in computer science. My obsession has always been how reality actually works. After a profound transformation in my 30s — loss, burnout, and a kind of perceptual rewiring I can only describe as initiation — I stopped compartmentalizing and started building the unified map.</p>
       <p>That map weaves plasma cosmology, Theosophy, esoteric astrology, quantum mechanics, and torsion physics into a single coherent framework. My role isn't to be your guru. It's to translate what you're already sensing into a language that makes it actionable.</p>
-      <div class="credentials">
-        <div class="credential">
-          <strong>Background</strong>
-          <span>Computer Science</span>
-        </div>
-        <div class="credential">
-          <strong>Frameworks</strong>
-          <span>Plasma · Theosophy · Esoteric Astrology</span>
-        </div>
-        <div class="credential">
-          <strong>Teaching Since</strong>
-          <span>2023</span>
-        </div>
-      </div>
     </div>
   </div>
 </section>
+<!-- ═════════ /PLACEHOLDER: ABOUT / ORIGIN STORY ═════════ -->
 
-<div class="divider"></div>
+<!-- Credibility strip (Background / Framework / Focus) — replace with the About section above once it's filled in -->
+<section id="about" class="cred-strip">
+  <div class="cred-item reveal">
+    <h3>Background</h3>
+    <p>Computer Science</p>
+  </div>
+  <div class="cred-item reveal">
+    <h3>Framework</h3>
+    <p>Plasma · Theosophy · Esoteric Astrology</p>
+  </div>
+  <div class="cred-item reveal">
+    <h3>Focus</h3>
+    <p>Translating what you already sense into something actionable</p>
+  </div>
+  <div class="cred-item reveal">
+    <h3>Teaching Since</h3>
+    <p>2023</p>
+  </div>
+</section>
 
 <!-- Latest Videos -->
 <section id="videos">
-  <p class="section-label reveal">Latest from the Channel</p>
-  <h2 class="section-title reveal">Modern Mysticism on <em>YouTube</em></h2>
-  <div class="videos-scroll" id="videos-scroll">
+  <div class="section-head">
+    <p class="section-label reveal">Latest Videos</p>
+    <h2 class="section-title reveal">Latest from <em>Fractal in Time</em></h2>
+  </div>
+  <div class="videos-grid" id="videos-scroll">
+  </div>
+  <div class="videos-footer">
+    <a href="https://www.youtube.com/channel/UCmK9DTHpjybx3lgx3fftzUg" target="_blank" rel="noopener" class="btn btn-ghost">Visit the Channel</a>
+  </div>
+</section>
+
+<!-- Closing email capture (second signup form — same Worker + reCAPTCHA flow as the hero form) -->
+<section class="closing-cta" id="start-here">
+  <div class="closing-card reveal">
+    <p class="section-label">Not Ready Yet?</p>
+    <h2 class="section-title">Start Here with <em>Fractal Consciousness</em></h2>
+    <p class="closing-sub">The free video course and newsletter: what consciousness is, how plasma builds atoms and cells, and how thought shapes reality's information field.</p>
+    <form class="subscribe-form" id="subscribe-form-2">
+      <div class="form-row">
+        <input type="text" name="firstname" placeholder="First name" aria-label="First name" autocomplete="given-name">
+        <input type="email" name="email" placeholder="your@email.com" aria-label="Email address" autocomplete="email">
+        <button type="submit" class="btn btn-gold">Get the Free Course</button>
+      </div>
+      <input type="text" name="hp" style="display:none" tabindex="-1" autocomplete="off">
+      <div class="recaptcha-slot"></div>
+      <p class="subscribe-msg" style="display:none;"></p>
+    </form>
+    <p class="form-note">Free · No spam · Unsubscribe anytime <span class="recaptcha-note">· Protected by reCAPTCHA · Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy</a> &amp; <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms</a> apply.</span></p>
+  </div>
+</section>
+
+<!-- Chart tool -->
+<section id="chart-tool" class="section-tight chart-tool-bottom">
+  <div class="chart-tool-card reveal">
+    <div>
+      <p class="section-label">Free Tool</p>
+      <h2 class="section-title">Calculate Your <em>Natal Chart</em></h2>
+      <p>Esoteric astrology, Human Design, Kabbalah and numerology from a single birth date, time and place.</p>
+    </div>
+    <a href="chart.html" class="btn btn-gold">Open the Chart Tool →</a>
   </div>
 </section>
 
@@ -1267,6 +1898,10 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
 });
 
+// Close the mobile menu after a link is tapped
+document.querySelectorAll('.nav-links a').forEach(a =>
+  a.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('show')));
+
 // Scroll reveal
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
@@ -1281,69 +1916,78 @@ reveals.forEach(el => observer.observe(el));
 </script>
 
 <script>
-// Subscribe form — single unified handler, no duplicate declarations
+// Subscribe forms (hero + closing) — one handler, one invisible reCAPTCHA widget per form
 window.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('subscribe-form');
-  const msg  = document.getElementById('subscribe-msg');
   const RECAPTCHA_SITE_KEY = '6Lc1DOkrAAAAAP-yCiUwHkjWpNX7SuAbioL6Y1km';
+  const WORKER_URL = 'https://dawn-bar-d75f.adam-40f.workers.dev/';
 
-  if (!form) return;
+  const subscribers = Array.from(document.querySelectorAll('.subscribe-form')).map(form => ({
+    form,
+    msg: form.querySelector('.subscribe-msg'),
+    slot: form.querySelector('.recaptcha-slot'),
+    widgetId: null,
+    pendingData: null
+  }));
 
-  let recaptchaWidgetId = null;
-  let pendingData = null;
+  if (!subscribers.length) return;
 
-  function renderRecaptcha() {
-    if (window.grecaptcha && recaptchaWidgetId === null) {
-      recaptchaWidgetId = grecaptcha.render('recaptcha-subscribe', {
+  function renderRecaptchas() {
+    subscribers.forEach(s => {
+      if (s.widgetId !== null) return;
+      s.widgetId = grecaptcha.render(s.slot, {
         sitekey: RECAPTCHA_SITE_KEY,
         size: 'invisible',
-        callback: onRecaptchaSuccess
+        callback: token => onRecaptchaSuccess(s, token)
       });
-    }
+    });
   }
 
   (function waitForRecaptcha(i = 0) {
-    if (window.grecaptcha && window.grecaptcha.render) return renderRecaptcha();
+    if (window.grecaptcha && window.grecaptcha.render) return renderRecaptchas();
     if (i < 50) setTimeout(() => waitForRecaptcha(i + 1), 100);
   })();
 
-  form.addEventListener('submit', e => {
-    e.preventDefault();
+  subscribers.forEach(s => {
+    const { form, msg } = s;
+    form.addEventListener('submit', e => {
+      e.preventDefault();
 
-    if (form.hp && form.hp.value) return;
+      if (form.hp && form.hp.value) return;
 
-    const delta = Date.now() - pageLoadTs;
-    if (delta < 2500) { alert('Bot detected'); return; }
+      const delta = Date.now() - pageLoadTs;
+      if (delta < 2500) { alert('Bot detected'); return; }
 
-    const firstname = form.firstname.value.trim();
-    const email = form.email.value.trim();
-    if (!email) {
-      msg.textContent = 'Please enter an email address.';
-      msg.style.display = 'block';
-      return;
-    }
+      const firstname = form.firstname.value.trim();
+      const email = form.email.value.trim();
+      if (!email) {
+        msg.textContent = 'Please enter an email address.';
+        msg.style.display = 'block';
+        return;
+      }
 
-    msg.textContent = '';
-    msg.style.display = 'none';
-    pendingData = { firstname, email };
+      msg.textContent = '';
+      msg.style.display = 'none';
+      s.pendingData = { firstname, email };
 
-    if (recaptchaWidgetId !== null) {
-      grecaptcha.execute(recaptchaWidgetId);
-    } else {
-      msg.textContent = 'reCAPTCHA not ready — please refresh.';
-      msg.style.display = 'block';
-    }
+      if (s.widgetId !== null) {
+        grecaptcha.execute(s.widgetId);
+      } else {
+        msg.textContent = 'reCAPTCHA not ready — please refresh.';
+        msg.style.display = 'block';
+      }
+    });
   });
 
-  async function onRecaptchaSuccess(token) {
-    if (!pendingData) return;
+  async function onRecaptchaSuccess(s, token) {
+    const { form, msg } = s;
+    if (!s.pendingData) return;
     try {
-      const res = await fetch('https://dawn-bar-d75f.adam-40f.workers.dev/', {
+      const res = await fetch(WORKER_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          firstname: pendingData.firstname,
-          email: pendingData.email,
+          firstname: s.pendingData.firstname,
+          email: s.pendingData.email,
           'g-recaptcha-response': token
         })
       });
@@ -1363,12 +2007,10 @@ window.addEventListener('DOMContentLoaded', () => {
     } finally {
       msg.style.display = 'block';
       form.reset();
-      pendingData = null;
-      try { grecaptcha.reset(recaptchaWidgetId); } catch (_) {}
+      s.pendingData = null;
+      try { grecaptcha.reset(s.widgetId); } catch (_) {}
     }
   }
-
-  window.onRecaptchaSuccess = onRecaptchaSuccess;
 });
 </script>
 
